@@ -1,2 +1,2 @@
 
-module.exports = require('./lib/cassie');
+module.exports = require('./lib/helenus');

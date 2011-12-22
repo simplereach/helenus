@@ -1,7 +1,8 @@
 
-# Cassie
+# Helenus
 
   NodeJS Bindings for Cassandra
+  This is very much work in progress, if you would like to contribute, please contact Russ Bradberry &lt;rbradberry@simplereach.com&gt;
   
 # installation
 
@@ -9,8 +10,8 @@
     
 # usage
 ```javascript
-  var cassie = require('cassie'),
-      pool = new cassie.ConnectionPool(['localhost:9160','localhost:9161']);
+  var helenus = require('helenus'),
+      pool = new helenus.ConnectionPool(['localhost:9160','localhost:9161']);
 
   pool.on('error', function(err){
     console.log('ERROR:' + err);
