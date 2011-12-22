@@ -1,0 +1,12 @@
+{
+    "name": "cassie"
+  , "version": "0.0.1"
+  , "description": "NodeJS Bindings for Cassandra"
+  , "keywords": []
+  , "author": "Russell Bradberry <rbradberry@gmail.com>"
+  , "dependencies": {
+    "thrift":"https://github.com/simplereach/node-thrift/tarball/master"
+  }
+  , "main": "index"
+  , "engines": { "node": "0.6.x" }
+}
