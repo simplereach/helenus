@@ -2,12 +2,36 @@
 # Cassie
 
   NodeJS Bindings for Cassandra
+  
+# installation
 
+    npm install cassie
+    
+# usage
+```javascript
+  var cassie = require('cassie'),
+      pool = new cassie.ConnectionPool(['localhost:9160','localhost:9161']);
+
+  pool.on('error', function(err){
+    console.log('ERROR:' + err);
+  });
+
+  //connect to the local machine
+  pool.connect('node_cassandra_test', function(err, keyspace){
+    if(err){
+      throw(err);
+    } else {    
+      keyspace.cf_one.insert('abcd', { 'column':'value' }, { ttl:1234, consistencyLevel:1 }, function(err){
+        //TODO: Be able to get fields        
+      });
+    }
+  });
+```
 ## License 
 
 (The MIT License)
 
-Copyright (c) 2011 Russell Bradberry &lt;rbradberry@gmail.com&gt;
+Copyright (c) 2011 SimpleReach &lt;rbradberry@simplereach.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
