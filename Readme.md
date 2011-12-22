@@ -2,6 +2,7 @@
 # Helenus
 
   NodeJS Bindings for Cassandra
+  
   This is very much work in progress, if you would like to contribute, please contact Russ Bradberry &lt;rbradberry@simplereach.com&gt;
   
 # installation
