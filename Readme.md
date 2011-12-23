@@ -2,13 +2,13 @@
 # Helenus
 
   NodeJS Bindings for Cassandra
-  
+
   This is very much work in progress, if you would like to contribute, please contact Russ Bradberry &lt;rbradberry@simplereach.com&gt;
-  
+
 # installation
 
-    npm install cassie
-    
+    npm install helenus
+
 # usage
 ```javascript
   var helenus = require('helenus'),
@@ -22,14 +22,14 @@
   pool.connect('node_cassandra_test', function(err, keyspace){
     if(err){
       throw(err);
-    } else {    
+    } else {
       keyspace.cf_one.insert('abcd', { 'column':'value' }, { ttl:1234, consistencyLevel:1 }, function(err){
-        //TODO: Be able to get fields        
+        //TODO: Be able to get fields
       });
     }
   });
 ```
-## License 
+## License
 
 (The MIT License)
 
