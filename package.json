@@ -5,7 +5,8 @@
   , "keywords": []
   , "author": "Russell Bradberry <rbradberry@gmail.com>"
   , "dependencies": {
-    "thrift":"https://github.com/simplereach/node-thrift/tarball/master"
+    "thrift":"https://github.com/simplereach/node-thrift/tarball/master",
+    "uuid-js":">0.5.2"
   }
   , "main": "index"
   , "engines": { "node": "0.6.x" }

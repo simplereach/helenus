@@ -14,6 +14,9 @@ pool.connect('node_cassandra_test', function(err, keyspace){
       console.log(err, something);
     });
     
+    keyspace.composite_test.insert('dddd', { '\x00\x05hello\x00':'1233' }, {}, function(err, something){
+      console.log(err, something);
+    });
     //keyspace.standard_test.set('abcd', { 'twiszzl':132 }, {}, function(err, something){
     //  console.log(err, something);
     //});
