@@ -46,7 +46,7 @@ namespace rb CassandraThrift
 #           for every edit that doesn't result in a change to major/minor.
 #
 # See the Semantic Versioning Specification (SemVer) http://semver.org.
-const string VERSION = "19.19.0"
+const string VERSION = "19.24.0"
 
 
 #
@@ -394,8 +394,6 @@ struct CfDef {
     5: optional string comparator_type="BytesType",
     6: optional string subcomparator_type,
     8: optional string comment,
-    9: optional double row_cache_size=0,
-    11: optional double key_cache_size=200000,
     12: optional double read_repair_chance=1.0,
     13: optional list<ColumnDef> column_metadata,
     14: optional i32 gc_grace_seconds,
@@ -403,17 +401,14 @@ struct CfDef {
     16: optional i32 id,
     17: optional i32 min_compaction_threshold,
     18: optional i32 max_compaction_threshold,
-    19: optional i32 row_cache_save_period_in_seconds,
-    20: optional i32 key_cache_save_period_in_seconds,
     24: optional bool replicate_on_write,
     25: optional double merge_shards_chance,
     26: optional string key_validation_class,
-    27: optional string row_cache_provider,
     28: optional binary key_alias,
     29: optional string compaction_strategy,
     30: optional map<string,string> compaction_strategy_options,
-    31: optional i32 row_cache_keys_to_save,
     32: optional map<string,string> compression_options,
+    33: optional double bloom_filter_fp_chance,
 }
 
 /* describes a keyspace. */
@@ -460,6 +455,12 @@ struct CqlResult {
     3: optional i32 num,
     4: optional CqlMetadata schema
 }
+
+struct CqlPreparedResult {
+    1: required i32 itemId,
+    2: required i32 count
+}
+
 
 service Cassandra {
   # auth methods
@@ -593,7 +594,7 @@ service Cassandra {
    some hosts are down.
   */
   void truncate(1:required string cfname)
-       throws (1: InvalidRequestException ire, 2: UnavailableException ue),
+       throws (1: InvalidRequestException ire, 2: UnavailableException ue, 3: TimedOutException te),
 
 
     
@@ -683,4 +684,27 @@ service Cassandra {
             2:UnavailableException ue,
             3:TimedOutException te,
             4:SchemaDisagreementException sde)
+            
+            
+  /**
+   * Prepare a CQL (Cassandra Query Language) statement by compiling and returning
+   * - the type of CQL statement
+   * - an id token of the compiled CQL stored on the server side.
+   * - a count of the discovered bound markers in the statement 
+   */
+  CqlPreparedResult prepare_cql_query(1:required binary query, 2:required Compression compression)
+    throws (1:InvalidRequestException ire)
+
+             
+  /**
+   * Executes a prepared CQL (Cassandra Query Language) statement by passing an id token and  a list of variables
+   * to bind and returns a CqlResult containing the results.
+   */
+  CqlResult execute_prepared_cql_query(1:required i32 itemId, 2:required list<string> values)
+    throws (1:InvalidRequestException ire,
+            2:UnavailableException ue,
+            3:TimedOutException te,
+            4:SchemaDisagreementException sde)
+           
+
 }
