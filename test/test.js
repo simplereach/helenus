@@ -6,19 +6,16 @@ pool.on('error', function(err){
 });
     
 //connect to the local machine
-pool.connect('node_cassandra_test', function(err, keyspace){
+pool.connect('helenus_test', function(err, keyspace){
   if(err){
     throw(err);
   } else {    
-    keyspace.composite_test.insert('abcd', { '\x00\x05hello\x00\x00\x05world\x00':'cccc' }, {}, function(err, something){
+    keyspace.test.insert('foo:bar', { 'hello:world':'cccc' }, {}, function(err, something){
       console.log(err, something);
     });
     
-    keyspace.composite_test.insert('dddd', { '\x00\x05hello\x00':'1233' }, {}, function(err, something){
+    keyspace.composite_test.insert('1325541869796:bar', { '1325541869796:world':132 }, {}, function(err, something){
       console.log(err, something);
     });
-    //keyspace.standard_test.set('abcd', { 'twiszzl':132 }, {}, function(err, something){
-    //  console.log(err, something);
-    //});
   }
 });
