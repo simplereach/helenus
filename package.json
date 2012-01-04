@@ -2,10 +2,10 @@
     "name": "helenus"
   , "version": "0.1.0"
   , "description": "NodeJS Bindings for Cassandra"
-  , "keywords": []
+  , "keywords": ["cassandra"]
   , "author": "Russell Bradberry <rbradberry@gmail.com>"
   , "dependencies": {
-    "thrift":"git://github.com/simplereach/node-thrift.git",
+    "helenus-thrift":"0.7.1",
     "uuid-js":">0.5.2"
   }
   , "main": "index"
