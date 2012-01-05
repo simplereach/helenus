@@ -26,14 +26,15 @@ pool.connect(function(err, keyspace){
           fields = "*",
           options = [fields, 'standard_test', 'key1'];
       
-      pool.cql(cql, options, function(err, results){
+      pool.cql(cql, options, { gzip:true }, function(err, results){
         if(err){
           throw(err);
         }
         
-        results[0].forEach(function(name, value, timestamp, ttl){
-          console.log(name, value, timestamp, ttl);
-        });
+        console.log(results)
+        //results[0].forEach(function(name, value, timestamp, ttl){
+        //  console.log(name, value, timestamp, ttl);
+        //});
         
         pool.close();
       });
