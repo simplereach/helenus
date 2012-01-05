@@ -96,7 +96,7 @@ that match the slice
 
     results.forEach(function(row){
       //gets all columns that start with a, b, c, or d
-      console.log(row.slice('a','e'));
+      console.log(row.nameSlice('a','e'));
     });
 
 ## License
