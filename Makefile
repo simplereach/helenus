@@ -1,5 +1,9 @@
+NODE_PATH="./node_modules/whiskey/bin/"
 
 test:
-	@echo "populate me"
+	whiskey --real-time --scope-leaks --tests test/suite.js
 
-.PHONY: test
+cov:
+	node_modules/whiskey/bin/whiskey --coverage --tests test/suite.js
+
+.PHONY: test cov
