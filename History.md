@@ -11,3 +11,9 @@
   * More Robust Connection Pooling
   * Respond with JS errors, not TException objects
   * Added proper serialization/deserialization support for all types
+  
+0.1.1 / 2012-01-06
+==================
+
+  * Fixed issue with the deserialization of column names in insepct
+    
