@@ -6,29 +6,28 @@ var config = {
   timeout    : 3000
 };
 
-var helenus, pool;    
+var helenus;
 
 /**
  * Tests connecting to the server using the system keyspace
  * also ensures the connection is available for the other tests
  */
-exports.setUp = function(test, assert) {
-  helenus = require('../');
-  pool = new helenus.ConnectionPool(config);
+exports.setUp = function(test, assert){
+  helenus = require('helenus');
+  exports.connection = new helenus.ConnectionPool(config);
   
   //connect to the local machine
-  pool.connect(function(err, keyspace){
-    assert.ifError(err, 'askdhgdfsj');
+  exports.connection.connect(function(err, keyspace){
+    assert.ifError(err);
     test.finish();
-  });
+  });  
 };
 
-//exports['test create keyspace']
 
 /**
  * Closes the connection and tests it doesn't throw.
  */
 exports.tearDown = function(test, assert){  
-  assert.doesNotThrow(function(){ pool.close(); });
+  assert.doesNotThrow(function(){ exports.connection.close(); });
   test.finish();
 };

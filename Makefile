@@ -1,9 +1,9 @@
-NODE_PATH="./node_modules/whiskey/bin/"
+TEST_FILES=$(wildcard test/*.js)
 
 test:
-	whiskey --real-time --scope-leaks --tests test/suite.js
+	node_modules/whiskey/bin/whiskey --real-time --scope-leaks --tests "$(TEST_FILES)"
 
 cov:
-	node_modules/whiskey/bin/whiskey --coverage --tests test/suite.js
+	NODE_PATH=lib-cov/ node_modules/whiskey/bin/whiskey --coverage --tests "$(TEST_FILES)"
 
 .PHONY: test cov
