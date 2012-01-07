@@ -14,6 +14,8 @@ var helenus;
  */
 exports.setUp = function(test, assert){
   helenus = require('helenus');
+  
+  //export our connection for use in the other tests
   exports.connection = new helenus.ConnectionPool(config);
   
   //connect to the local machine
