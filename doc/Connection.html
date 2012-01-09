@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>JSDoc: Class: Connection</title>
+	
+	<script src="http://shjs.sourceforge.net/sh_main.min.js"> </script>
+    <script src="http://shjs.sourceforge.net/lang/sh_javascript.min.js"> </script>
+    
+    <link type="text/css" rel="stylesheet" href="styles/node-dark.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Class: Connection</h1>
+    
+    
+    
+    <section>
+     
+    <header>
+        <h2>Connection</h2>
+        
+    </header>  
+    
+    <article>
+        <div class="container-overview">
+        <dt>
+    <h4 class="name" id="Connection"><span class="type-signature"></span>new Connection</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        The Cassandra Connection
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The options for the connection defaults to:
+     {
+       port: 9160,
+       host: 'localhost'
+       user: null,
+       password: null,
+       keyspace: null,
+       timeout: 1000
+     }</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 66</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            <h3 class="subsection-title">Members</h3>
+            
+            <dl>
+<dt>
+    <h4 class="name" id="_client"><span class="type-signature"></span>_client<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        Thrift Client
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 140</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="_connection"><span class="type-signature"></span>_connection<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        Thrift Connection
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 122</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="host"><span class="type-signature"></span>host<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        The host to connect to
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 81</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="keyspace"><span class="type-signature"></span>keyspace<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        The keyspace to authenticate to
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 101</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="password"><span class="type-signature"></span>password<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        The password to connect with
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 96</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="port"><span class="type-signature"></span>port<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        The port to connect to
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 76</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="ready"><span class="type-signature"></span>ready<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        Ready state of the client
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 106</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="timeout"><span class="type-signature"></span>timeout<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        The timeout for the connection
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 86</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="user"><span class="type-signature"></span>user<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        The username to authenticate with
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 91</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="DEFAULT_HOST"><span class="type-signature">&lt;private, static> </span>DEFAULT_HOST<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        Default host
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 29</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="DEFAULT_PORT"><span class="type-signature">&lt;private, static> </span>DEFAULT_PORT<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        Default port for cassandra
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 22</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="DEFAULT_TIMEOUT"><span class="type-signature">&lt;private, static> </span>DEFAULT_TIMEOUT<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        Default Timeout
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 36</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+</dl>
+            
+        
+        
+        
+            
+            <h3 class="subsection-title">Methods</h3>
+            
+            <dl><dt>
+    <h4 class="name" id="authenticate"><span class="type-signature"></span>authenticate</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Authenticates the user
+    </p>
+    
+    
+    
+    
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 213</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="close"><span class="type-signature"></span>close</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Closes the connection to the server
+    </p>
+    
+    
+    
+    
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 383</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="connect"><span class="type-signature"></span>connect</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Connects to the cassandra cluster
+    </p>
+    
+    
+    
+    
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 113</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="cql"><span class="type-signature"></span>cql</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Executes a CQL Query Against the DB.
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>cmd</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">A string representation of the query: 'select %s, %s from MyCf where key=%s'</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>args0...argsN</code></td>
+            
+            
+            <td class="type">
+            arguments
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">An Array of arguments for the string ['arg0', 'arg1', 'arg2']</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The callback function for the results</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 271</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="createKeyspace"><span class="type-signature"></span>createKeyspace</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Creates a keyspace
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>keyspace</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The name of the keyspace to create</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Keyspace options</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The callback to invoke once complete</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 321</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="dropKeyspace"><span class="type-signature"></span>dropKeyspace</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Drops a keyspace
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The keyspace name</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 362</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="execute"><span class="type-signature"></span>execute</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Executes a command via the thrift connection
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>command</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The command to execute
+additional params are supplied to the command to be executed</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 238</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="use"><span class="type-signature"></span>use</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Sets the current keyspace
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>keyspace</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The keyspace to use</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 188</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="createError"><span class="type-signature">&lt;private, static> </span>createError</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Creates a JS Error from a Cassndra Error
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>err</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The cassandra error eg: { name:'Exception', why:'Some Reason' }</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 44</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="NOOP"><span class="type-signature">&lt;private, static> </span>NOOP</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        A No-Op function for default callbacks
+    </p>
+    
+    
+    
+    
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/connection.js, line 15</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+</dl>
+            
+        
+        
+        
+        
+        
+    </article>
+    
+    </section>  
+    
+</div>
+
+<nav>
+    <h3>Classes</h3><ul><li><a href="ColumnFamily.html">ColumnFamily</a></li><li><a href="Connection.html">Connection</a></li><li><a href="Deserializers.html">Deserializers</a></li><li><a href="Helenus.html">Helenus</a></li><li><a href="Keyspace.html">Keyspace</a></li><li><a href="Marshal.html">Marshal</a></li><li><a href="Pool.html">Pool</a></li><li><a href="Row.html">Row</a></li><li><a href="Serializers.html">Serializers</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Mon Jan 09 2012 11:36:23 GMT-0500 (EST)
+</footer>
+
+<script> sh_highlightDocument(); </script>
+</body>
+</html>
