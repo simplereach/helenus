@@ -1,6 +1,6 @@
 {
     "name": "helenus"
-  , "version": "0.1.1"
+  , "version": "0.1.2"
   , "description": "NodeJS Bindings for Cassandra"
   , "keywords": ["cassandra"]
   , "author": "Russell Bradberry <rbradberry@gmail.com>"
@@ -9,7 +9,8 @@
       "uuid-js":">0.5.2"
     }
   , "devDependencies": { 
-      "whiskey": "*" 
+        "whiskey": "*"
+      , "JSDoc": "git://github.com/micmath/jsdoc.git"
     }
   , "scripts": {
        "test": "make test"
