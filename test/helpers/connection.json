@@ -1,0 +1,7 @@
+{
+  "host"       : "localhost:9160",
+  "keyspace"   : "system",
+  "user"       : "test",
+  "password"   : "test1233",
+  "timeout"    : 3000 
+}
