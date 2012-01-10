@@ -15,5 +15,16 @@
 0.1.1 / 2012-01-06
 ==================
 
-  * Fixed issue with the deserialization of column names in insepct
+  * Fixed issue with the deserialization of column names in inspect
+  
+0.1.2 / 2012-01-09
+==================
+  
+  * Better in-line documentation
+  * Added JSDoc HTML documentation
+  * Added keyspace object for referencing a keyspace
+  * Added ability to create keyspaces
+  * Added ability to drop keyspaces
+  * Made ConnectionPool act more like connection
+  
     
