@@ -64,7 +64,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 7</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 17</li></ul></dd>
 	
     
     
@@ -133,7 +133,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 27</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 37</li></ul></dd>
 	
     
     
@@ -178,7 +178,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 12</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 22</li></ul></dd>
 	
     
     
@@ -228,7 +228,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 22</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 32</li></ul></dd>
 	
     
     
@@ -273,7 +273,52 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 17</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 27</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+<dt>
+    <h4 class="name" id="NOOP"><span class="type-signature">&lt;private, static, constant> </span>NOOP<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        A No-Operation default for callbacks
+    </p>
+    
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 11</li></ul></dd>
 	
     
     
@@ -295,6 +340,138 @@
             <h3 class="subsection-title">Methods</h3>
             
             <dl><dt>
+    <h4 class="name" id="createColumnFamily"><span class="type-signature"></span>createColumnFamily</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Creates a column family with options
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The name of the column family to create</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The options for the columns family</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The callback to invoke once the column family has been created</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 101</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
     <h4 class="name" id="describe"><span class="type-signature"></span>describe</h4>
     
     
@@ -370,7 +547,121 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 62</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 72</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="dropColumnFamily"><span class="type-signature"></span>dropColumnFamily</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Drops a column family
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The name of the column family to drop</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The callback to invoke once the column family has been created</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 141</li></ul></dd>
 	
     
     
@@ -484,7 +775,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 35</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/keyspace.js, line 45</li></ul></dd>
 	
     
     
@@ -518,13 +809,13 @@
 </div>
 
 <nav>
-    <h3>Classes</h3><ul><li><a href="ColumnFamily.html">ColumnFamily</a></li><li><a href="Connection.html">Connection</a></li><li><a href="Deserializers.html">Deserializers</a></li><li><a href="Helenus.html">Helenus</a></li><li><a href="Keyspace.html">Keyspace</a></li><li><a href="Marshal.html">Marshal</a></li><li><a href="Pool.html">Pool</a></li><li><a href="Row.html">Row</a></li><li><a href="Serializers.html">Serializers</a></li></ul>
+    <h3>Classes</h3><ul><li><a href="Column.html">Column</a></li><li><a href="ColumnFamily.html">ColumnFamily</a></li><li><a href="Connection.html">Connection</a></li><li><a href="Deserializers.html">Deserializers</a></li><li><a href="Helenus.html">Helenus</a></li><li><a href="Keyspace.html">Keyspace</a></li><li><a href="Marshal.html">Marshal</a></li><li><a href="Pool.html">Pool</a></li><li><a href="Row.html">Row</a></li><li><a href="Serializers.html">Serializers</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Mon Jan 09 2012 11:36:23 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Tue Jan 10 2012 12:56:10 GMT-0500 (EST)
 </footer>
 
 <script> sh_highlightDocument(); </script>
