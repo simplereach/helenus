@@ -1,0 +1,15 @@
+{  
+  "keyspace"     : "helenus_test_keyspace",
+  "cf_standard"  : "cf_standard_test",
+  "cf_standard_options"   : {
+    "key_validation_class"     : "UTF8Type",
+    "comparator_type"          : "UTF8Type",
+    "default_validation_class" : "UTF8Type"
+  },
+  "standard_row_key" : "standard_row_1",
+  "standard_insert_values" : {
+    "one" : "a",
+    "two" : "b",
+    "three" : "c"
+  }
+}

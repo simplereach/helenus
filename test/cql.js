@@ -1,4 +1,4 @@
-var poolConfig = require('./helpers/pool'), Helenus, conn,
+var poolConfig = require('./helpers/connection'), Helenus, conn,
     config = require('./helpers/cql');
 
 var CQLTest = {
