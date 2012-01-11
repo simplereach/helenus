@@ -26,5 +26,8 @@
   * Added ability to create keyspaces
   * Added ability to drop keyspaces
   * Made ConnectionPool act more like connection
+  * Added ability to create column families
+  * Added ability to drop column families
+  * Added ability to get a row, or part of a row
   
     
