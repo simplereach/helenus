@@ -5,7 +5,7 @@
   , "keywords": ["cassandra"]
   , "author": "Russell Bradberry <rbradberry@gmail.com>"
   , "dependencies": {
-    "helenus-thrift":"0.7.1",
+    "helenus-thrift":"0.7.2",
       "uuid-js":">0.5.2"
     }
   , "devDependencies": { 
