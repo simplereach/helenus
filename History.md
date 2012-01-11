@@ -30,4 +30,5 @@
   * Added ability to drop column families
   * Added ability to get a row, or part of a row
   
-    
+0.1.3 / 2012-01-13
+==================
