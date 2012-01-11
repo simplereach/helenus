@@ -3,16 +3,27 @@
 
   NodeJS Bindings for Cassandra
 
-  Currently the driver has full CQL support and we are currently adding
-  support for additional "non-cql" commands.
+  Currently the driver has full CQL support and a growing support for thrift (non-cql) commands.
 
-  This is very much work in progress, if you would like to contribute, please contact Russ Bradberry &lt;rbradberry@simplereach.com&gt;
+  If you would like to contribute, please contact Russ Bradberry &lt;rbradberry@simplereach.com&gt;
 
 ## Installation
 
     npm install helenus
+    
+## Running Tests
+
+  Ensure cassandra is running on localhost:9160.
+  
+    make test
+    
+  For coverage
+  
+    make test-cov
 
 ## Usage
+
+## CQL
 
 ```javascript
   var helenus = require('helenus'),
@@ -25,6 +36,8 @@
       });
 
   //if you don't listen for error, it will bubble up to `process.uncaughtException`
+  //pools act just like connection objects, so you dont have to worry about api
+  //differences when using either the pool or the connection
   pool.on('error', function(err){
     console.error(err.name, err.message);
   });
@@ -35,10 +48,6 @@
     if(err){
       throw(err);
     } else {
-      //keyspace is the object for interacting the the specific column families
-      //in the keyspace, it is accessed like this: `keyspace.cf_one.insert(...)`
-      //or `keyspace.cf_two.get(...)`, **this is currently being built out**
-
       //to use cql, access the pool object once connected
       //the first argument is the CQL string, the second is an `Array` of items
       //to interpolate into the format string, the last is the callback
@@ -51,6 +60,60 @@
     }
   });
 ```
+
+## Thrift
+
+If you do not want to use CQL, you can make calls using the thrift driver
+
+```javascript
+  pool.connect(function(err, keyspace){
+    if(err){
+      throw(err);
+    } else {    
+      keyspace.get('my_cf', function(err, cf){
+        if(err){
+          throw(err);
+        }
+        
+        cf.insert('foo', {'bar':'baz'}, function(err){
+          if(err){
+            throw(err);
+          }
+          
+          cf.get('foo', function(err, row){
+            if(err){
+              throw(err);
+            }
+            
+            row.get('bar').value // => baz  
+          });          
+        });
+      });
+    }
+  });
+```
+
+### Thrift Support
+
+Currently Helenus supports the following command for the thrift side of the driver:
+
+  * connection.createKeyspace
+  * connection.dropKeyspace
+  * keyspace.createColumnFamily
+  * keyspace.dropColumnFamily
+  * columnFamily.insert
+  * columnFamily.get
+  
+The following support is going to be added in later releases:
+
+  * columnFamily.delete
+  * columnFamily.rowCount
+  * columnFamily.columnCount
+  * columnfamily.increment
+  * columnFamily.truncate
+  * SuperColumns
+  * CounterColumns
+  * Better composite support
 
 ## Row
 
@@ -98,6 +161,19 @@ that match the slice
       //gets all columns that start with a, b, c, or d
       console.log(row.nameSlice('a','e'));
     });
+
+## Column
+
+Columns are returned as objects with the following structure:
+
+```javascript
+  {
+    name: 'Foo',       //The column name
+    value: 'bar',      //The column value
+    timestamp: Date(), //The date object of the timestamp for the column
+    ttl: 123456        //The ttl (in milliseconds) for the columns
+  }
+```
 
 ## License
 
