@@ -2,6 +2,7 @@
 # Helenus
 
   NodeJS Bindings for Cassandra
+  
   Currently the driver has full CQL support and a growing support for thrift (non-cql) commands.
   If you would like to contribute, please contact Russ Bradberry &lt;rbradberry@simplereach.com&gt;
 
