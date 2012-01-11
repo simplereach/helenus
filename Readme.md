@@ -68,27 +68,33 @@ If you do not want to use CQL, you can make calls using the thrift driver
   pool.connect(function(err, keyspace){
     if(err){
       throw(err);
-    } else {    
-      keyspace.get('my_cf', function(err, cf){
+    } 
+    
+    //first retreive the column family from the server
+    //helenus will cache column families it has already seen
+    keyspace.get('my_cf', function(err, cf){
+      if(err){
+        throw(err);
+      }
+      
+      //insert something into the column family
+      cf.insert('foo', {'bar':'baz'}, function(err){
         if(err){
           throw(err);
         }
         
-        cf.insert('foo', {'bar':'baz'}, function(err){
+        //get what we just put in
+        //the driver will return a Helenus.Row object just like CQL
+        cf.get('foo', function(err, row){
           if(err){
             throw(err);
           }
           
-          cf.get('foo', function(err, row){
-            if(err){
-              throw(err);
-            }
-            
-            row.get('bar').value // => baz  
-          });          
-        });
+          row.get('bar').value // => baz  
+        });          
       });
-    }
+    });
+
   });
 ```
 
