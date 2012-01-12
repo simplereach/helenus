@@ -1,6 +1,7 @@
 {  
   "keyspace"     : "helenus_test_keyspace",
   "cf_standard"  : "cf_standard_test",
+  "cf_standard_composite"  : "cf_standard_composite_test",
   "cf_invalid"   : "cf_invalid_test",
   "cf_error"     : "<!`~;/?}]|\\-",
   "cf_standard_options"   : {
@@ -21,6 +22,11 @@
       { "name" : "boolean-test", "validation_class" : "BooleanType" },
       { "name" : "uuid-test", "validation_class" : "UUIDType" }
     ]
+  },
+  "cf_standard_composite_options"   : {
+    "key_validation_class"     : "CompositeType(UTF8Type, UUIDType)",
+    "comparator_type"          : "CompositeType(LongType, DateType)",
+    "default_validation_class" : "UTF8Type"
   },
   "standard_row_key" : "standard_row_1",
   "standard_insert_values" : {

@@ -1,6 +1,6 @@
 var config = require('./helpers/thrift'),
     system = require('./helpers/connection'),
-    Helenus, conn, ks, cf_standard, row_standard;
+    Helenus, conn, ks, cf_standard, row_standard, cf_composite;
 
 module.exports = {
   'setUp':function(test, assert){
@@ -33,14 +33,21 @@ module.exports = {
     });
   },
 
-  'test standard keyspace.createColumnFamily':function(test, assert){
+  'test keyspace.createColumnFamily':function(test, assert){
     ks.createColumnFamily(config.cf_standard, config.cf_standard_options, function(err){
       assert.ifError(err);
       test.finish();
     });
   },
+  
+  'test keyspace.createColumnFamily with composite type':function(test, assert){
+    ks.createColumnFamily(config.cf_standard_composite, config.cf_standard_composite_options, function(err){
+      assert.ifError(err);
+      test.finish();
+    });
+  },
 
-  'test standard keyspace.get':function(test, assert){
+  'test keyspace.get':function(test, assert){
     ks.get(config.cf_standard, function(err, columnFamily){
       assert.ifError(err);
       assert.ok(columnFamily instanceof Helenus.ColumnFamily);
@@ -48,7 +55,16 @@ module.exports = {
     });
   },
   
-  'test standard keyspace.get from cache':function(test, assert){
+  'test keyspace.get composite':function(test, assert){
+    ks.get(config.cf_standard_composite, function(err, columnFamily){
+      assert.ifError(err);
+      assert.ok(columnFamily instanceof Helenus.ColumnFamily);
+      cf_composite = columnFamily;
+      test.finish();
+    });
+  },
+  
+  'test keyspace.get from cache':function(test, assert){
     ks.get(config.cf_standard, function(err, columnFamily){
       assert.ifError(err);
       assert.ok(columnFamily instanceof Helenus.ColumnFamily);
@@ -57,7 +73,7 @@ module.exports = {
     });
   },
   
-  'test standard keyspace.get invalid cf':function(test, assert){
+  'test keyspace.get invalid cf':function(test, assert){
     ks.get(config.cf_invalid, function(err, columnFamily){
       assert.ok(err instanceof Error);
       assert.ok(err.name === 'HelenusNotFoundError');
@@ -86,6 +102,18 @@ module.exports = {
       test.finish();
     });
   },
+  
+  'test standard cf.insert into composite cf':function(test, assert){
+    var values = [
+      new Helenus.Column([12345678912345, new Date(1326400762701)], 'some value')
+    ],
+    key = [ 'åbcd', new Helenus.UUID('e491d6ac-b124-4795-9ab3-c8a0cf92615c') ];
+    
+    cf_composite.insert(key, values, function(err, results){
+      assert.ifError(err);
+      test.finish();
+    });
+  },
 
   'test standard cf.get':function(test, assert){        
     cf_standard.get(config.standard_row_key, function(err, row){
@@ -98,6 +126,17 @@ module.exports = {
       assert.ok(row.get('three').value === 'c');
       assert.ok(row.get('four').value === '');
       row_standard = row;
+      test.finish();
+    });  
+  },
+  
+  'test standard cf.get for composite column family':function(test, assert){        
+    var key = [ 'åbcd', new Helenus.UUID('e491d6ac-b124-4795-9ab3-c8a0cf92615c') ];
+    
+    cf_composite.get(key, function(err, row){
+      assert.ifError(err);
+      assert.ok(row instanceof Helenus.Row);
+      assert.ok(row.get([12345678912345, new Date(1326400762701)]).value === 'some value');
       test.finish();
     });  
   },
