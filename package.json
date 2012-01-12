@@ -6,7 +6,7 @@
   , "author": "Russell Bradberry <rbradberry@gmail.com>"
   , "dependencies": {
     "helenus-thrift":"0.7.2",
-      "uuid-js":">0.5.2"
+      "node-uuid":"1.3.3"
     }
   , "devDependencies": { 
         "whiskey": "*"
