@@ -2,7 +2,7 @@ var config = require('./helpers/thrift'),
     system = require('./helpers/connection'),
     Helenus, conn, ks, cf_standard;
 
-var ConnectionPoolTest = {
+module.exports = {
   'setUp':function(test, assert){
     Helenus = require('helenus');
     conn = new Helenus.ConnectionPool(system);
@@ -56,23 +56,42 @@ var ConnectionPoolTest = {
     });
   },
 
-  'test standard cf.get':function(test, assert){    
-    var columns = Object.keys(config.standard_insert_values),
-        i = 0, len = columns.length;
-    
-    cf_standard.get(config.standard_row_key, 'one', function(err, row){
+  'test standard cf.get':function(test, assert){        
+    cf_standard.get(config.standard_row_key, function(err, row){
       assert.ifError(err);
       assert.ok(row instanceof Helenus.Row);
-      assert.ok(row.count === len);
+      assert.ok(row.count === 4);
       assert.ok(row.key === config.standard_row_key);
-      for(; i < len; i += 1){
-        assert.ok( row.get(columns[i]).value === config.standard_insert_values[columns[i]] );
-      }
+      assert.ok(row.get('one').value === 'a');
+      assert.ok(row.get('two').value === 'b');
+      assert.ok(row.get('three').value === 'c');
+      assert.ok(row.get('four').value === '');
       
       test.finish();
     });  
   },
 
+  'test standard cf.get with options':function(test, assert){    
+    cf_standard.get(config.standard_row_key, config.standard_get_options, function(err, row){
+      assert.ifError(err);
+      assert.ok(row instanceof Helenus.Row);
+      assert.ok(row.count === 1);
+      assert.ok(row.key === config.standard_row_key);
+      assert.ok(row.get('one').value === 'a');
+      
+      test.finish();
+    });
+  },
+  
+  'test standard cf.get with error':function(test, assert){    
+    cf_standard.get(config.standard_row_key, config.standard_get_options_error, function(err, row){
+      assert.ok(err instanceof Error);
+      assert.ok(err.name === 'HelenusInvalidRequestException');
+      assert.ok(err.message === 'range finish must come after start in the order of traversal');
+      test.finish();
+    });
+  },
+  
   'test keyspace.dropColumnFamily':function(test, assert){
     ks.dropColumnFamily(config.cf_standard, function(err){
       assert.ifError(err);
@@ -96,4 +115,3 @@ var ConnectionPoolTest = {
     test.finish();
   }
 };
-module.exports = ConnectionPoolTest;

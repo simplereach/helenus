@@ -8,8 +8,21 @@
   },
   "standard_row_key" : "standard_row_1",
   "standard_insert_values" : {
-    "one" : "a",
-    "two" : "b",
-    "three" : "c"
+    "one"   : "a",
+    "two"   : "b",
+    "three" : "c",
+    "four"  : null
+  },
+  "standard_get_options" : {
+    "start"    : "s",
+    "end"      : "a",
+    "max"      : 1,
+    "reversed" : true
+  },
+  "standard_get_options_error" : {
+    "start"    : "a",
+    "end"      : "z",
+    "max"      : 1,
+    "reversed" : true
   }
 }
