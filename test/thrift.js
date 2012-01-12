@@ -227,7 +227,7 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('timeuuid-test');      
+        var col = row.get('timeuuid-test');
         assert.ok(col.value instanceof Helenus.TimeUUID);
         assert.ok(col.value.hex.length === 36);
         test.finish();
