@@ -30,7 +30,7 @@
   * Added ability to drop column families
   * Added ability to get a row, or part of a row
   
-0.1.3 / 2012-01-13
+0.1.3 / 2012-01-11
 ==================
 
   * Better code coverage
@@ -38,3 +38,11 @@
   * Bug Fixes in serialization/deserialization
   * Tests for serialization/deserialization
   * Support for non default column values in column families
+  
+0.2.0 / 2012-01-12
+==================
+
+  * Added more test coverage
+  * Added support for composite columns
+  * Added support for composite keys
+  * Fixed some deserialization issues
