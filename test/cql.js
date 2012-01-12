@@ -1,7 +1,7 @@
 var poolConfig = require('./helpers/connection'), Helenus, conn,
     config = require('./helpers/cql');
 
-var CQLTest = {
+module.exports = {
   'setUp':function(test, assert){
     Helenus = require('helenus');
     conn = new Helenus.ConnectionPool(poolConfig);
@@ -131,5 +131,3 @@ var CQLTest = {
     test.finish();
   }
 };
-
-module.exports = CQLTest;

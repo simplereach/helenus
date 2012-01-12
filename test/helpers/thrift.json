@@ -1,10 +1,26 @@
 {  
   "keyspace"     : "helenus_test_keyspace",
   "cf_standard"  : "cf_standard_test",
+  "cf_invalid"   : "cf_invalid_test",
+  "cf_error"     : "<!`~;/?}]|\\-",
   "cf_standard_options"   : {
     "key_validation_class"     : "UTF8Type",
     "comparator_type"          : "UTF8Type",
-    "default_validation_class" : "UTF8Type"
+    "default_validation_class" : "UTF8Type",
+    "columns" : [
+      { "name" : "bytes-test", "validation_class" : "BytesType" },
+      { "name" : "long-test", "validation_class" : "LongType" },
+      { "name" : "integer-test", "validation_class" : "IntegerType" },
+      { "name" : "utf8-test", "validation_class" : "UTF8Type" },
+      { "name" : "ascii-test", "validation_class" : "AsciiType" },
+      { "name" : "lexicaluuid-test", "validation_class" : "LexicalUUIDType" },
+      { "name" : "timeuuid-test", "validation_class" : "TimeUUIDType" },
+      { "name" : "float-test", "validation_class" : "FloatType" },
+      { "name" : "double-test", "validation_class" : "DoubleType" },
+      { "name" : "date-test", "validation_class" : "DateType" },
+      { "name" : "boolean-test", "validation_class" : "BooleanType" },
+      { "name" : "uuid-test", "validation_class" : "UUIDType" }
+    ]
   },
   "standard_row_key" : "standard_row_1",
   "standard_insert_values" : {
