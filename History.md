@@ -32,3 +32,9 @@
   
 0.1.3 / 2012-01-13
 ==================
+
+  * Better code coverage
+  * Better documentation
+  * Bug Fixes in serialization/deserialization
+  * Tests for serialization/deserialization
+  * Support for non default column values in column families
