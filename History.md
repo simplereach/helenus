@@ -46,3 +46,8 @@
   * Added support for composite columns
   * Added support for composite keys
   * Fixed some deserialization issues
+  
+0.2.1 / 2012-01-13
+==================
+
+  * Fixed a buffer overflow issue when encoding numbers as UTF8
