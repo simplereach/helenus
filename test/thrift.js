@@ -153,6 +153,18 @@ module.exports = {
     });
   },
   
+  'test standard cf.get with columns names':function(test, assert){    
+    cf_standard.get(config.standard_row_key, config.standard_get_names_options, function(err, row){
+      assert.ifError(err);
+      assert.ok(row instanceof Helenus.Row);
+      assert.ok(row.count === 2);
+      assert.ok(row.key === config.standard_row_key);
+      assert.ok(row.get('one').value === 'a');
+      assert.ok(row.get('three').value === 'c');
+      test.finish();
+    });
+  },
+  
   'test standard cf.get with error':function(test, assert){    
     cf_standard.get(config.standard_row_key, config.standard_get_options_error, function(err, row){
       assert.ok(err instanceof Error);

@@ -41,6 +41,9 @@
     "max"      : 1,
     "reversed" : true
   },
+  "standard_get_names_options" : {
+    "columns"  : ["one","three"]
+  },
   "standard_get_options_error" : {
     "start"    : "a",
     "end"      : "z",

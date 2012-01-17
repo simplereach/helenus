@@ -1577,7 +1577,7 @@
                 
                     <p id='t338' class='stm run'>&nbsp;&nbsp;if(options.gzip&nbsp;===&nbsp;true){<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t339' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;zlib.deflateRaw(cql,&nbsp;function(err,&nbsp;cqlz){<span class='strut'>&nbsp;</span></p>
+                    <p id='t339' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;zlib.deflate(cql,&nbsp;function(err,&nbsp;cqlz){<span class='strut'>&nbsp;</span></p>
                 
                     <p id='t340' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.execute('execute_cql_query',&nbsp;cqlz,&nbsp;ttype.Compression.GZIP,&nbsp;onReturn);<span class='strut'>&nbsp;</span></p>
                 
