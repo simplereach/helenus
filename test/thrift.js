@@ -165,6 +165,18 @@ module.exports = {
     });
   },
   
+  'test composite cf.get with columns names':function(test, assert){    
+    var key = [ 'åbcd', new Helenus.UUID('e491d6ac-b124-4795-9ab3-c8a0cf92615c') ],
+        cols = [[12345678912345, new Date(1326400762701)]];
+    
+    cf_composite.get(key, {columns: cols}, function(err, row){
+      assert.ifError(err);
+      assert.ok(row instanceof Helenus.Row);
+      assert.ok(row.get([12345678912345, new Date(1326400762701)]).value === 'some value');
+      test.finish();
+    });
+  },
+  
   'test standard cf.get with error':function(test, assert){    
     cf_standard.get(config.standard_row_key, config.standard_get_options_error, function(err, row){
       assert.ok(err instanceof Error);
