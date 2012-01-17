@@ -51,3 +51,8 @@
 ==================
 
   * Fixed a buffer overflow issue when encoding numbers as UTF8
+  
+0.2.2 / 2012-01-16
+==================
+
+  * Added ability to specify column names in "get"
