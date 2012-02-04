@@ -25,9 +25,9 @@
         <img id='keyboard_icon' src='keybd_closed.png'>
         <h2 class='stats'>
              statements
-            <span class=' shortkey_r' onclick='coverage.toggle_lines(this, "run")'>62 hits</span>
+            <span class=' shortkey_r' onclick='coverage.toggle_lines(this, "run")'>65 hits</span>
             <span class=' shortkey_m' onclick='coverage.toggle_lines(this, "mis")'>0 missing</span>
-            <span class=' shortkey_x' onclick='coverage.toggle_lines(this, "exc")'>62 lines</span>
+            <span class=' shortkey_x' onclick='coverage.toggle_lines(this, "exc")'>65 lines</span>
         </h2>
     </div>
 </div>
@@ -364,17 +364,17 @@
                 
                     <p id='n153' class='stm run'><a href='#n153'>153</a></p>
                 
-                    <p id='n154' class='pln'><a href='#n154'>154</a></p>
+                    <p id='n154' class='stm run'><a href='#n154'>154</a></p>
                 
                     <p id='n155' class='stm run'><a href='#n155'>155</a></p>
                 
                     <p id='n156' class='pln'><a href='#n156'>156</a></p>
                 
-                    <p id='n157' class='pln'><a href='#n157'>157</a></p>
+                    <p id='n157' class='stm run'><a href='#n157'>157</a></p>
                 
                     <p id='n158' class='pln'><a href='#n158'>158</a></p>
                 
-                    <p id='n159' class='pln'><a href='#n159'>159</a></p>
+                    <p id='n159' class='stm run'><a href='#n159'>159</a></p>
                 
                     <p id='n160' class='pln'><a href='#n160'>160</a></p>
                 
@@ -384,17 +384,17 @@
                 
                     <p id='n163' class='pln'><a href='#n163'>163</a></p>
                 
-                    <p id='n164' class='stm run'><a href='#n164'>164</a></p>
+                    <p id='n164' class='pln'><a href='#n164'>164</a></p>
                 
-                    <p id='n165' class='stm run'><a href='#n165'>165</a></p>
+                    <p id='n165' class='pln'><a href='#n165'>165</a></p>
                 
-                    <p id='n166' class='stm run'><a href='#n166'>166</a></p>
+                    <p id='n166' class='pln'><a href='#n166'>166</a></p>
                 
                     <p id='n167' class='stm run'><a href='#n167'>167</a></p>
                 
-                    <p id='n168' class='pln'><a href='#n168'>168</a></p>
+                    <p id='n168' class='stm run'><a href='#n168'>168</a></p>
                 
-                    <p id='n169' class='pln'><a href='#n169'>169</a></p>
+                    <p id='n169' class='stm run'><a href='#n169'>169</a></p>
                 
                     <p id='n170' class='stm run'><a href='#n170'>170</a></p>
                 
@@ -406,13 +406,19 @@
                 
                     <p id='n174' class='pln'><a href='#n174'>174</a></p>
                 
-                    <p id='n175' class='stm run'><a href='#n175'>175</a></p>
+                    <p id='n175' class='pln'><a href='#n175'>175</a></p>
                 
-                    <p id='n176' class='pln'><a href='#n176'>176</a></p>
+                    <p id='n176' class='stm run'><a href='#n176'>176</a></p>
                 
                     <p id='n177' class='pln'><a href='#n177'>177</a></p>
                 
                     <p id='n178' class='stm run'><a href='#n178'>178</a></p>
+                
+                    <p id='n179' class='pln'><a href='#n179'>179</a></p>
+                
+                    <p id='n180' class='pln'><a href='#n180'>180</a></p>
+                
+                    <p id='n181' class='stm run'><a href='#n181'>181</a></p>
                 
             </td>
             <td class='text' valign='top'>
@@ -721,57 +727,63 @@
                 
                     <p id='t152' class='stm run'>&nbsp;&nbsp;if(Array.isArray(options.columns)){<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t153' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;predicate.column_names&nbsp;=&nbsp;options.columns;<span class='strut'>&nbsp;</span></p>
+                    <p id='t153' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;cols&nbsp;=&nbsp;[],&nbsp;i&nbsp;=&nbsp;0,&nbsp;len&nbsp;=&nbsp;options.columns.length;<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t154' class='pln'>&nbsp;&nbsp;}&nbsp;else&nbsp;{<span class='strut'>&nbsp;</span></p>
+                    <p id='t154' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;for(;&nbsp;i&nbsp;&lt;&nbsp;len;&nbsp;i&nbsp;+=&nbsp;1){<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t155' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;predicate.slice_range&nbsp;=&nbsp;new&nbsp;ttype.SliceRange({<span class='strut'>&nbsp;</span></p>
+                    <p id='t155' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cols.push(&nbsp;this.columnMarshaller.serialize(options.columns[i])&nbsp;);<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t156' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start:options.start,<span class='strut'>&nbsp;</span></p>
+                    <p id='t156' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t157' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish:options.end,<span class='strut'>&nbsp;</span></p>
+                    <p id='t157' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;predicate.column_names&nbsp;=&nbsp;cols;&nbsp;&nbsp;&nbsp;&nbsp;<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t158' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reversed:options.reversed,<span class='strut'>&nbsp;</span></p>
+                    <p id='t158' class='pln'>&nbsp;&nbsp;}&nbsp;else&nbsp;{<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t159' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count:options.max<span class='strut'>&nbsp;</span></p>
+                    <p id='t159' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;predicate.slice_range&nbsp;=&nbsp;new&nbsp;ttype.SliceRange({<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t160' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;});<span class='strut'>&nbsp;</span></p>
+                    <p id='t160' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start:options.start,<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t161' class='pln'>&nbsp;&nbsp;}<span class='strut'>&nbsp;</span></p>
+                    <p id='t161' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish:options.end,<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t162' class='pln'>&nbsp;&nbsp;<span class='strut'>&nbsp;</span></p>
+                    <p id='t162' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reversed:options.reversed,<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t163' class='pln'><span class='strut'>&nbsp;</span></p>
+                    <p id='t163' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count:options.max<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t164' class='stm run'>&nbsp;&nbsp;function&nbsp;onComplete(err,&nbsp;val){<span class='strut'>&nbsp;</span></p>
+                    <p id='t164' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;});<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t165' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;if(err){<span class='strut'>&nbsp;</span></p>
+                    <p id='t165' class='pln'>&nbsp;&nbsp;}<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t166' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callback(err);<span class='strut'>&nbsp;</span></p>
+                    <p id='t166' class='pln'>&nbsp;&nbsp;<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t167' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<span class='strut'>&nbsp;</span></p>
+                    <p id='t167' class='stm run'>&nbsp;&nbsp;function&nbsp;onComplete(err,&nbsp;val){<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t168' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;}<span class='strut'>&nbsp;</span></p>
+                    <p id='t168' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;if(err){<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t169' class='pln'><span class='strut'>&nbsp;</span></p>
+                    <p id='t169' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callback(err);<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t170' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;callback(null,&nbsp;Row.fromThrift(key,&nbsp;val,&nbsp;self));<span class='strut'>&nbsp;</span></p>
+                    <p id='t170' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t171' class='pln'>&nbsp;&nbsp;}<span class='strut'>&nbsp;</span></p>
+                    <p id='t171' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;}<span class='strut'>&nbsp;</span></p>
                 
                     <p id='t172' class='pln'><span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t173' class='stm run'>&nbsp;&nbsp;var&nbsp;marshalledKey&nbsp;=&nbsp;this.keyMarshaller.serialize(key).toString('binary');<span class='strut'>&nbsp;</span></p>
+                    <p id='t173' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;callback(null,&nbsp;Row.fromThrift(key,&nbsp;val,&nbsp;self));<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t174' class='pln'><span class='strut'>&nbsp;</span></p>
+                    <p id='t174' class='pln'>&nbsp;&nbsp;}<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t175' class='stm run'>&nbsp;&nbsp;this.connection.execute('get_slice',&nbsp;marshalledKey,&nbsp;parent,&nbsp;predicate,&nbsp;consistency,&nbsp;onComplete);<span class='strut'>&nbsp;</span></p>
+                    <p id='t175' class='pln'><span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t176' class='pln'>};<span class='strut'>&nbsp;</span></p>
+                    <p id='t176' class='stm run'>&nbsp;&nbsp;var&nbsp;marshalledKey&nbsp;=&nbsp;this.keyMarshaller.serialize(key).toString('binary');<span class='strut'>&nbsp;</span></p>
                 
                     <p id='t177' class='pln'><span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t178' class='stm run'>module.exports&nbsp;=&nbsp;ColumnFamily;<span class='strut'>&nbsp;</span></p>
+                    <p id='t178' class='stm run'>&nbsp;&nbsp;this.connection.execute('get_slice',&nbsp;marshalledKey,&nbsp;parent,&nbsp;predicate,&nbsp;consistency,&nbsp;onComplete);<span class='strut'>&nbsp;</span></p>
+                
+                    <p id='t179' class='pln'>};<span class='strut'>&nbsp;</span></p>
+                
+                    <p id='t180' class='pln'><span class='strut'>&nbsp;</span></p>
+                
+                    <p id='t181' class='stm run'>module.exports&nbsp;=&nbsp;ColumnFamily;<span class='strut'>&nbsp;</span></p>
                 
             </td>
         </tr>
