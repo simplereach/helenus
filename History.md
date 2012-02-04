@@ -56,3 +56,8 @@
 ==================
 
   * Added ability to specify column names in "get"
+
+0.2.3 / 2012-02-04
+==================
+
+  * Fix issue in binary serialization, issue #1
