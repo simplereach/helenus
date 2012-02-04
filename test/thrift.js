@@ -125,6 +125,7 @@ module.exports = {
       assert.ok(row.get('two').value === 'b');
       assert.ok(row.get('three').value === 'c');
       assert.ok(row.get('four').value === '');
+
       row_standard = row;
       test.finish();
     });  
@@ -188,7 +189,7 @@ module.exports = {
   
   'test standard cf with BytestType':function(test, assert){
     var key = config.standard_row_key + '-bytes',
-        opts = { 'bytes-test' : 'BEEFCAFE' };
+        opts = { 'bytes-test' : new Buffer([0, 0xFF, 0x20]) };
         
     cf_standard.insert(key, opts, function(err){
       assert.ifError(err);
@@ -196,7 +197,7 @@ module.exports = {
         assert.ifError(err);
         var col = row.get('bytes-test');        
         assert.ok(col.value instanceof Buffer);
-        assert.ok(col.value.toString() === 'BEEFCAFE');
+        assert.ok(col.value.toString('hex') === opts['bytes-test'].toString('hex'));
         test.finish();
       });      
     });
