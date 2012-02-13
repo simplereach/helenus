@@ -61,3 +61,10 @@
 ==================
 
   * Fix issue in binary serialization, issue #1
+
+
+0.2.4 / 2012-02-04
+==================
+
+  * Added binary support for strings in the serializer
+  * Some serializer optimizations
