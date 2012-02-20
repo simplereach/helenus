@@ -108,6 +108,7 @@ Currently Helenus supports the following command for the thrift side of the driv
   * keyspace.dropColumnFamily
   * columnFamily.insert
   * columnFamily.get
+  * columnFamily.getIndexed
   
 The following support is going to be added in later releases:
 

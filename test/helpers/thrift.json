@@ -20,7 +20,8 @@
       { "name" : "double-test", "validation_class" : "DoubleType" },
       { "name" : "date-test", "validation_class" : "DateType" },
       { "name" : "boolean-test", "validation_class" : "BooleanType" },
-      { "name" : "uuid-test", "validation_class" : "UUIDType" }
+      { "name" : "uuid-test", "validation_class" : "UUIDType" },
+      { "name" : "index-test", "validation_class" : "UTF8Type", "index_type":0 }
     ]
   },
   "cf_standard_composite_options"   : {

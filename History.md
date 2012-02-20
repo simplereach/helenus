@@ -68,3 +68,8 @@
 
   * Added binary support for strings in the serializer
   * Some serializer optimizations
+
+0.3.0 / 2012-02-20
+==================
+
+  * Added getIndexed to ColumnFamily to get an array of rows by indexed columns

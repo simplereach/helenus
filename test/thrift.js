@@ -73,6 +73,15 @@ module.exports = {
     });
   },
   
+  'test keyspace.get from index':function(test, assert){
+    ks.get(config.cf_standard, function(err, columnFamily){
+      assert.ifError(err);
+      assert.ok(columnFamily instanceof Helenus.ColumnFamily);
+      cf_standard = columnFamily;
+      test.finish();
+    });
+  },
+  
   'test keyspace.get invalid cf':function(test, assert){
     ks.get(config.cf_invalid, function(err, columnFamily){
       assert.ok(err instanceof Error);
@@ -81,20 +90,6 @@ module.exports = {
       test.finish();
     });
   },
-  
-  /**
-  As per JIRA: CASSANDRA-3728 (https://issues.apache.org/jira/browse/CASSANDRA-3728)
-  There is no validation on column names, so no error will ever be returned. Once this
-  issue has been resolved, we can include this test
-  'test standard keyspace.get error':function(test, assert){
-
-    
-    ks.get(config.cf_error, function(err, columnFamily){
-      assert.ifError(err);
-      test.finish();
-    });
-  },
-  **/
       
   'test standard cf.insert':function(test, assert){
     cf_standard.insert(config.standard_row_key, config.standard_insert_values, function(err, results){
@@ -115,7 +110,7 @@ module.exports = {
     });
   },
 
-  'test standard cf.get':function(test, assert){        
+  'test standard cf.get':function(test, assert){
     cf_standard.get(config.standard_row_key, function(err, row){
       assert.ifError(err);
       assert.ok(row instanceof Helenus.Row);
@@ -128,10 +123,10 @@ module.exports = {
 
       row_standard = row;
       test.finish();
-    });  
+    });
   },
   
-  'test standard cf.get for composite column family':function(test, assert){        
+  'test standard cf.get for composite column family':function(test, assert){
     var key = [ 'åbcd', new Helenus.UUID('e491d6ac-b124-4795-9ab3-c8a0cf92615c') ];
     
     cf_composite.get(key, function(err, row){
@@ -139,10 +134,10 @@ module.exports = {
       assert.ok(row instanceof Helenus.Row);
       assert.ok(row.get([12345678912345, new Date(1326400762701)]).value === 'some value');
       test.finish();
-    });  
+    });
   },
 
-  'test standard cf.get with options':function(test, assert){    
+  'test standard cf.get with options':function(test, assert){
     cf_standard.get(config.standard_row_key, config.standard_get_options, function(err, row){
       assert.ifError(err);
       assert.ok(row instanceof Helenus.Row);
@@ -154,7 +149,7 @@ module.exports = {
     });
   },
   
-  'test standard cf.get with columns names':function(test, assert){    
+  'test standard cf.get with columns names':function(test, assert){
     cf_standard.get(config.standard_row_key, config.standard_get_names_options, function(err, row){
       assert.ifError(err);
       assert.ok(row instanceof Helenus.Row);
@@ -166,7 +161,7 @@ module.exports = {
     });
   },
   
-  'test composite cf.get with columns names':function(test, assert){    
+  'test composite cf.get with columns names':function(test, assert){
     var key = [ 'åbcd', new Helenus.UUID('e491d6ac-b124-4795-9ab3-c8a0cf92615c') ],
         cols = [[12345678912345, new Date(1326400762701)]];
     
@@ -178,12 +173,31 @@ module.exports = {
     });
   },
   
-  'test standard cf.get with error':function(test, assert){    
+  'test standard cf.get with error':function(test, assert){
     cf_standard.get(config.standard_row_key, config.standard_get_options_error, function(err, row){
       assert.ok(err instanceof Error);
       assert.ok(err.name === 'HelenusInvalidRequestException');
       assert.ok(err.message === 'range finish must come after start in the order of traversal');
       test.finish();
+    });
+  },
+
+  'test standard cf with Index':function(test, assert){
+    var key = config.standard_row_key + '-utf8',
+        query = { fields: [{ column:'index-test', operator:'EQ', value:'åbcd'}] },
+        opts = { 'index-test' : 'åbcd' };
+        
+    cf_standard.insert(key, opts, function(err){
+      assert.ifError(err);
+      cf_standard.getIndexed(query, function(err, rows){
+        assert.ifError(err);
+        assert.ok(Array.isArray(rows));
+        assert.ok(rows.length === 1);
+        var col = rows[0].get('index-test');
+        assert.ok(typeof col.value === 'string');
+        assert.ok(col.value === 'åbcd');
+        test.finish();
+      });
     });
   },
   
@@ -195,11 +209,11 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('bytes-test');        
+        var col = row.get('bytes-test');
         assert.ok(col.value instanceof Buffer);
         assert.ok(col.value.toString('hex') === opts['bytes-test'].toString('hex'));
         test.finish();
-      });      
+      });
     });
   },
   
@@ -211,11 +225,11 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('long-test'); 
+        var col = row.get('long-test');
         assert.ok(typeof col.value === 'number');
         assert.ok(col.value === 123456789012345);
         test.finish();
-      });      
+      });
     });
   },
   
@@ -227,11 +241,11 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('integer-test');        
+        var col = row.get('integer-test');
         assert.ok(typeof col.value === 'number');
         assert.ok(col.value === 1234);
         test.finish();
-      });      
+      });
     });
   },
   
@@ -243,11 +257,11 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('utf8-test');        
+        var col = row.get('utf8-test');
         assert.ok(typeof col.value === 'string');
         assert.ok(col.value === 'åbcd');
         test.finish();
-      });      
+      });
     });
   },
   
@@ -259,11 +273,11 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('ascii-test');        
+        var col = row.get('ascii-test');
         assert.ok(typeof col.value === 'string');
         assert.ok(col.value === 'abcd');
         test.finish();
-      });      
+      });
     });
   },
   
@@ -275,11 +289,11 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('lexicaluuid-test');      
+        var col = row.get('lexicaluuid-test');
         assert.ok(col.value instanceof Helenus.UUID);
         assert.ok(col.value.hex.length === 36);
         test.finish();
-      });      
+      });
     });
   },
   
@@ -295,7 +309,7 @@ module.exports = {
         assert.ok(col.value instanceof Helenus.TimeUUID);
         assert.ok(col.value.hex.length === 36);
         test.finish();
-      });      
+      });
     });
   },
   
@@ -307,11 +321,11 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('float-test');        
+        var col = row.get('float-test');
         assert.ok(typeof col.value === 'number');
         assert.ok(col.value === 1234.1234130859375);
         test.finish();
-      });      
+      });
     });
   },
   
@@ -323,11 +337,11 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('double-test');        
+        var col = row.get('double-test');
         assert.ok(typeof col.value === 'number');
         assert.ok(col.value === 123456789012345.1234);
         test.finish();
-      });      
+      });
     });
   },
   
@@ -339,11 +353,11 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('date-test');    
+        var col = row.get('date-test');
         assert.ok(col.value instanceof Date);
         assert.ok(col.value.getTime() === 1326400762701);
         test.finish();
-      });      
+      });
     });
   },
   
@@ -355,11 +369,11 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('boolean-test');    
+        var col = row.get('boolean-test');
         assert.ok(typeof col.value === 'boolean');
         assert.ok(col.value === true);
         test.finish();
-      });      
+      });
     });
   },
   
@@ -371,11 +385,11 @@ module.exports = {
       assert.ifError(err);
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
-        var col = row.get('uuid-test');      
+        var col = row.get('uuid-test');
         assert.ok(col.value instanceof Helenus.UUID);
         assert.ok(col.value.hex.length === 36);
         test.finish();
-      });      
+      });
     });
   },
   
@@ -411,7 +425,7 @@ module.exports = {
       '0': { name:'four', value:'' },
       '1': { name:'one',  value:'a' },
       '2': { name:'three',value:'c' },
-      '3': { name:'two',  value:'b' },  
+      '3': { name:'two',  value:'b' }
     };
         
     row_standard.forEach(function(name, value, timestamp, ttl){
@@ -419,7 +433,7 @@ module.exports = {
       assert.ok(vals[i].value === value);
       assert.ok(timestamp instanceof Date);
       assert.ok(ttl === null);
-      i += 1;  
+      i += 1;
     });
     
     test.finish();
