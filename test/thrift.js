@@ -47,6 +47,13 @@ module.exports = {
     });
   },
 
+  'test keyspace.createSuperColumnFamily':function(test, assert){
+    ks.createColumnFamily(config.cf_supercolumn, config.cf_supercolumn_options, function(err){
+      assert.ifError(err);
+      test.finish();
+    });
+  },
+
   'test keyspace.get':function(test, assert){
     ks.get(config.cf_standard, function(err, columnFamily){
       assert.ifError(err);
@@ -60,6 +67,15 @@ module.exports = {
       assert.ifError(err);
       assert.ok(columnFamily instanceof Helenus.ColumnFamily);
       cf_composite = columnFamily;
+      test.finish();
+    });
+  },
+
+  'test keyspace.get supercolumn':function(test, assert){
+    ks.get(config.cf_supercolumn, function(err, columnFamily){
+      assert.ifError(err);
+      assert.ok(columnFamily instanceof Helenus.ColumnFamily);
+      assert.ok(columnFamily.isSuper === true);
       test.finish();
     });
   },
