@@ -58,6 +58,7 @@ module.exports = {
     ks.get(config.cf_standard, function(err, columnFamily){
       assert.ifError(err);
       assert.ok(columnFamily instanceof Helenus.ColumnFamily);
+      assert.ok(columnFamily.isSuper === false);
       test.finish();
     });
   },
