@@ -73,3 +73,8 @@
 ==================
 
   * Added getIndexed to ColumnFamily to get an array of rows by indexed columns
+
+0.3.1 / 2012-03-06
+==================
+
+  * Updated Helenus-Thrift driver to properly decode 64 bit integers
