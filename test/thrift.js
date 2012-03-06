@@ -138,6 +138,12 @@ module.exports = {
       assert.ok(row.get('three').value === 'c');
       assert.ok(row.get('four').value === '');
 
+      var ts = new Date().getTime();
+      //ensure the timestamp is within 1 second
+      //test to ensure issue #4 doesn't happen again
+      assert.ok(row.get('one').timestamp <= ts);
+      assert.ok(row.get('one').timestamp >= ts - 1000);
+
       row_standard = row;
       test.finish();
     });
