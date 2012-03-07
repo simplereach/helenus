@@ -1,6 +1,6 @@
 var config = require('./helpers/thrift'),
     system = require('./helpers/connection'),
-    Helenus, conn, ks, cf_standard, cf_composite, cf_super, row_standard;
+    Helenus, conn, ks, cf_standard, row_standard, cf_composite;
 
 module.exports = {
   'setUp':function(test, assert){
@@ -77,7 +77,6 @@ module.exports = {
       assert.ifError(err);
       assert.ok(columnFamily instanceof Helenus.ColumnFamily);
       assert.ok(columnFamily.isSuper === true);
-      cf_super = columnFamily
       test.finish();
     });
   },
@@ -123,14 +122,6 @@ module.exports = {
     key = [ 'åbcd', new Helenus.UUID('e491d6ac-b124-4795-9ab3-c8a0cf92615c') ];
     
     cf_composite.insert(key, values, function(err, results){
-      assert.ifError(err);
-      test.finish();
-    });
-  },
-
-  'test supercolumn cf.insert':function(test, assert){
-    var values = {'Boulder':{'Latitude': 40.015, 'Longitude':-105.27}};
-    cf_super.insert('CO', values, function(err, results){
       assert.ifError(err);
       test.finish();
     });
