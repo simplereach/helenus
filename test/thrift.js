@@ -466,7 +466,6 @@ module.exports = {
     cf_standard.remove(config.standard_row_key, 'one', function(err){
       assert.ifError(err);
       cf_standard.get(config.standard_row_key, function(err, row){
-        console.log(row);
         assert.ifError(err);
         assert.ok(row.count === 3);
       });
