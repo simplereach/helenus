@@ -463,7 +463,7 @@ module.exports = {
   },
 
   'test standard cf remove column':function(test, assert) {
-    cf_standard.remove(config.standard_row_key, 'one', function(err){
+    cf_standard.remove(config.standard_row_key, 'one', {timestamp:new Date()}, function(err){
       assert.ifError(err);
       cf_standard.get(config.standard_row_key, function(err, row){
         assert.ifError(err);
@@ -474,7 +474,7 @@ module.exports = {
   },
 
   'test standard cf remove row':function(test, assert) {
-    cf_standard.remove(config.standard_row_key, function(err){
+    cf_standard.remove(config.standard_row_key, {timestamp:new Date()}, function(err){
       assert.ifError(err);
       cf_standard.get(config.standard_row_key, function(err, row){
         assert.ifError(err);
