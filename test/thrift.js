@@ -461,6 +461,28 @@ module.exports = {
     
     test.finish();
   },
+
+  'test standard cf remove column':function(test, assert) {
+    cf_standard.remove(config.standard_row_key, 'one', {timestamp:new Date()}, function(err){
+      assert.ifError(err);
+      cf_standard.get(config.standard_row_key, function(err, row){
+        assert.ifError(err);
+        assert.ok(row.count === 3);
+      });
+      test.finish();
+    });
+  },
+
+  'test standard cf remove row':function(test, assert) {
+    cf_standard.remove(config.standard_row_key, {timestamp:new Date()}, function(err){
+      assert.ifError(err);
+      cf_standard.get(config.standard_row_key, function(err, row){
+        assert.ifError(err);
+        assert.ok(row.count === 0);
+      });
+      test.finish();
+    });
+  },
   
   'test keyspace.dropColumnFamily':function(test, assert){
     ks.dropColumnFamily(config.cf_standard, function(err){
