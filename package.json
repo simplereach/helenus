@@ -4,16 +4,20 @@
   , "description": "NodeJS Bindings for Cassandra"
   , "keywords": ["cassandra"]
   , "author": "Russell Bradberry <rbradberry@gmail.com>"
-  , "dependencies": {
-    "helenus-thrift":"0.7.3",
-      "node-uuid":"1.3.3"
+  , "homepage": "https://github.com/simplereach/helenus"
+  , "repository": {
+      "url": "git://github.com/simplereach/helenus.git"
     }
-  , "devDependencies": { 
-        "whiskey": "git://github.com/cloudkick/whiskey.git#b3c5bc23e30c95e46083bc7628c2557c1c15ec95"
-      , "JSDoc": "git://github.com/micmath/jsdoc.git"
+  , "dependencies": {
+      "helenus-thrift": "0.7.3"
+    , "node-uuid": "1.3.3"
+    }
+  , "devDependencies": {
+      "whiskey": "git://github.com/cloudkick/whiskey.git#b3c5bc23e30c95e46083bc7628c2557c1c15ec95"
+    , "JSDoc": "git://github.com/micmath/jsdoc.git"
     }
   , "scripts": {
-       "test": "make test"
+      "test": "make test"
     }
   , "main": "index"
   , "engines": { "node": "0.6.x" }
