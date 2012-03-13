@@ -109,10 +109,10 @@ Currently Helenus supports the following command for the thrift side of the driv
   * columnFamily.insert
   * columnFamily.get
   * columnFamily.getIndexed
+  * columnFamily.remove
   
 The following support is going to be added in later releases:
 
-  * columnFamily.delete
   * columnFamily.rowCount
   * columnFamily.columnCount
   * columnfamily.increment
@@ -180,6 +180,10 @@ Columns are returned as objects with the following structure:
     ttl: 123456        //The ttl (in milliseconds) for the columns
   }
 ```
+
+## Contributors
+
+Russell Bradberry, Matthias Eder
 
 ## License
 
