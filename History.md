@@ -78,3 +78,8 @@
 ==================
 
   * Updated Helenus-Thrift driver to properly decode 64 bit integers
+
+0.3.2 / 2012-03-13
+==================
+
+  * Added ability to remove columns and rows [ #7 Matthias Eder ]
