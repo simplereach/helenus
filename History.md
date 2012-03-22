@@ -83,3 +83,10 @@
 ==================
 
   * Added ability to remove columns and rows [ #7 Matthias Eder ]
+
+0.3.3 / 2012-03-22
+==================
+
+  * Added durability to the connection pool [ #12 ]
+  * Fixed CQL Injection Vulnerability [ #11 ]
+  * Added ability to use ? style variable replacement in CQL [ #11 ]
