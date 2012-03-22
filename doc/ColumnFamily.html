@@ -104,7 +104,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 86</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 168</li></ul></dd>
 	
     
     
@@ -358,7 +358,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 165</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 271</li></ul></dd>
 	
     
     
@@ -508,7 +508,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 214</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 320</li></ul></dd>
 	
     
     
@@ -658,7 +658,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 120</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 200</li></ul></dd>
 	
     
     
@@ -674,6 +674,315 @@
     
     
     
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="remove"><span class="type-signature"></span>remove</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Remove a single row or column
+This function uses a variable-length paramter list.  Which parameters
+are passed depends on which column path should be used for the
+removal and whether this column family is a super column or not.
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The key for this row (required)</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>column</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The column name (optional)</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>subcolumn</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The subcolumn name (optional)</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The thrift options for this operation (optional)</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The callback to call once complete (optional)</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 244</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+</dd>
+<dt>
+    <h4 class="name" id="columnParent"><span class="type-signature">&lt;private, static> </span>columnParent</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Returns a column parent
+When calculating the column parent of a standard column family,
+the parent is simply the column family name.  When dealing with
+super columns on the other hand, an optional name parameter may
+be provided.
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>cf</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">A reference to the ColumnFamily</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The name of the column (optional)</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 43</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+<div class="param-desc">
+    a Thrift ColumnParent object
+</div>
+
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+		<span class="param-type">Object</span> 
+		
+	</dd>
+</dl>
+
     
     
 
@@ -754,7 +1063,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 37</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 119</li></ul></dd>
 	
     
     
@@ -830,7 +1139,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 59</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 141</li></ul></dd>
 	
     
     
@@ -922,6 +1231,125 @@
     
 
 </dd>
+<dt>
+    <h4 class="name" id="normalizeParameters"><span class="type-signature">&lt;private, static> </span>normalizeParameters</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        A convenience method to normalize the standard parameters used by
+a thrift operation. The parameter list must contain a `key` parameter
+as it's first item.  The `column`, `subcolumn`, `options`, and
+`callback` parameters are optional.
+    </p>
+    
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>list</code></td>
+            
+            
+            <td class="type">
+            Array
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The list of parameters</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    <dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>./lib/column_family.js, line 92</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+<div class="param-desc">
+    a normalized version of the provided parameter values
+</div>
+
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+		<span class="param-type">Object</span> 
+		
+	</dd>
+</dl>
+
+    
+    
+
+</dd>
 </dl>
             
         
@@ -942,7 +1370,7 @@
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Mon Feb 20 2012 14:17:33 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Thu Mar 22 2012 17:43:38 GMT-0400 (EDT)
 </footer>
 
 <script> sh_highlightDocument(); </script>
