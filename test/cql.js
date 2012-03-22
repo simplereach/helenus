@@ -8,7 +8,7 @@ module.exports = {
     
     conn.connect(function(err){
       assert.ifError(err);
-      test.finish();     
+      test.finish();
     });
   },
   
@@ -50,7 +50,7 @@ module.exports = {
     //just wait to see if anything bad happens
     setTimeout(function(){
       test.finish();
-    }, 100);    
+    }, 100);
   },
   
   'test cql select':function(test, assert){
@@ -59,6 +59,19 @@ module.exports = {
       assert.ok(res.length === 1);
       assert.ok(res[0] instanceof Helenus.Row);
       assert.ok(res[0].get('foo').value === 'bar');
+      test.finish();
+    });
+  },
+
+  'test cql select with bad user input':function(test, assert){
+    var select = "SELECT foo FROM cql_test WHERE KEY='%s'";
+
+    conn.cql(select, ["'foobar"], function(err, res){
+      assert.ifError(err);
+      assert.ok(res.length === 1);
+      assert.ok(res[0] instanceof Helenus.Row);
+      assert.ok(res[0].key === "'foobar");
+      assert.ok(res[0].count === 0);
       test.finish();
     });
   },
@@ -74,8 +87,8 @@ module.exports = {
   },
   
   'test cql error':function(test, assert){
-    conn.cql(config['error#cql'], function(err, res){      
-      assert.ok(err instanceof Error);      
+    conn.cql(config['error#cql'], function(err, res){
+      assert.ok(err instanceof Error);
       assert.ok(res === undefined);
       assert.ok(err.name === 'HelenusInvalidRequestException');
       assert.ok(err.message.length > 0);
