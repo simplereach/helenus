@@ -64,7 +64,7 @@ module.exports = {
   },
 
   'test cql select with bad user input':function(test, assert){
-    var select = "SELECT foo FROM cql_test WHERE KEY='%s'";
+    var select = "SELECT foo FROM cql_test WHERE KEY='?'";
 
     conn.cql(select, ["'foobar"], function(err, res){
       assert.ifError(err);
