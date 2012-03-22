@@ -52,10 +52,13 @@
       //to interpolate into the format string, the last is the callback
       //for formatting specific see `http://nodejs.org/docs/latest/api/util.html#util.format`
       //results is an array of row objects
-      
+
       pool.cql("SELECT '%s' FROM '%s' WHERE key='%s'", ['col','cf_one','key123'], function(err, results){
         console.log(err, results);
       }); 
+
+      //NOTE:
+      //you can also use the ? as a placeholder. eg: "SELECT ? FROM '?' WHERE key='?'"
     }
   });
 ```
