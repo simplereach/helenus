@@ -90,3 +90,8 @@
   * Added durability to the connection pool [ #12 ]
   * Fixed CQL Injection Vulnerability [ #11 ]
   * Added ability to use ? style variable replacement in CQL [ #11 ]
+
+0.3.4 / 2012-03-25
+==================
+
+  * fixed issue with keys not marshalling when using indexed queries
