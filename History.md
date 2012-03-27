@@ -95,3 +95,8 @@
 ==================
 
   * fixed issue with keys not marshalling when using indexed queries
+
+0.3.5 / 2012-03-27
+==================
+
+  * fixed inconsistency in the consistency of the naming of the consistency level variables
