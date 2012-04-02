@@ -1,4 +1,4 @@
-compile: Cassandra.js cassandra_types.js
+compile: Cassandra.js cassandra_types.js clean_compile
 
 gen-nodejs:
 	thrift --gen js:node cassandra.thrift
