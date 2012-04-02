@@ -186,9 +186,9 @@ Columns are returned as objects with the following structure:
 
 ## Contributors
 
-Russell Bradberry <@devdazed>
-Matthias Eder <@matthiase>
-Christoph Tavan <@ctavan>
+* Russell Bradberry - @devdazed
+* Matthias Eder - @matthiase
+* Christoph Tavan - @ctavan
 
 ## License
 
