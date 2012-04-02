@@ -100,3 +100,9 @@
 ==================
 
   * fixed inconsistency in the consistency of the naming of the consistency level variables
+
+0.3.6 / 2012-04-02
+==================
+
+  * Set default strategy_options in createKeyspace [ @ctavan #14 ]
+  * Moved JSDoc Repo [ @ctavan #13 ]
