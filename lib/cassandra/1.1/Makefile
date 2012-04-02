@@ -17,4 +17,4 @@ clean_compile:
 clean: clean_compile
 	rm Cassandra.js cassandra_types.js
 
-.PHONY: clean
+.PHONY: clean clean_compile
