@@ -36,6 +36,7 @@
         user       : 'test',
         password   : 'test1233',
         timeout    : 3000
+        //cqlVersion : '3.0.0' // specify this if you're using Cassandra 1.1
       });
 
   //if you don't listen for error, it will bubble up to `process.uncaughtException`
