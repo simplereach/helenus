@@ -68,7 +68,7 @@
      output.writeFieldEnd();
    }
 -  if (this.op) {
-+  if (this.op !== null || this.op !== undefined) {
++  if (this.op !== null && this.op !== undefined) {
      output.writeFieldBegin('op', Thrift.Type.I32, 2);
      output.writeI32(this.op);
      output.writeFieldEnd();
@@ -77,13 +77,13 @@
      output.writeFieldEnd();
    }
 -  if (this.start_key) {
-+  if (this.start_key !== null || this.start_key !== undefined) {
++  if (this.start_key !== null && this.start_key !== undefined) {
      output.writeFieldBegin('start_key', Thrift.Type.STRING, 2);
      output.writeString(this.start_key);
      output.writeFieldEnd();
    }
 -  if (this.count) {
-+  if (this.count !== null || this.count !== undefined) {
++  if (this.count !== null && this.count !== undefined) {
      output.writeFieldBegin('count', Thrift.Type.I32, 3);
      output.writeI32(this.count);
      output.writeFieldEnd();
