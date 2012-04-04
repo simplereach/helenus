@@ -1,0 +1,16 @@
+{
+  "create_ks#cql" : "CREATE KEYSPACE helenus_cql3_test WITH strategy_class=SimpleStrategy AND strategy_options:replication_factor=1",
+  "use#cql"       : "USE helenus_cql3_test",
+  "create_cf#cql" : "CREATE COLUMNFAMILY cql_test (id text, foo text, PRIMARY KEY (id))",
+  "drop_ks#cql"   : "DROP KEYSPACE helenus_cql3_test",
+  "drop_cf#cql"   : "DROP COLUMNFAMILY cql_test",
+  "update#cql"    : "UPDATE cql_test SET foo='bar' WHERE id='foobar'",
+  "select#cql"    : "SELECT foo FROM cql_test WHERE id='foobar'",
+  "count#cql"     : "SELECT COUNT(1) FROM cql_test WHERE id='foobar'",
+  "countstar#cql" : "SELECT COUNT(*) FROM cql_test WHERE id='foobar'",
+  "delete#cql"    : "DELETE FROM cql_test WHERE id='foobar'",
+  "select2#cql"   : "SELECT * FROM %s WHERE id='%s'",
+  "select2#vals"  : ["cql_test", "foobar"],
+  "prepare#cql"   : "SELECT * FROM ? WHERE KEY = ?",
+  "error#cql"     : "SOME INVALID CQL"
+}

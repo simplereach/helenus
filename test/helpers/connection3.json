@@ -1,0 +1,8 @@
+{
+  "hosts"      : ["localhost:9160"],
+  "keyspace"   : "system",
+  "user"       : "test",
+  "password"   : "test1233",
+  "timeout"    : 3000,
+  "cqlVersion" : "3.0.0"
+}
