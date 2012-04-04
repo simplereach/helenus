@@ -1,9 +1,10 @@
-var poolConfig = require('./helpers/connection3'), Helenus, conn,
+var poolConfig = require('./helpers/connection'), Helenus, conn,
     config = require('./helpers/cql3');
 
 module.exports = {
   'setUp':function(test, assert){
     Helenus = require('helenus');
+    poolConfig.cqlVersion = '3.0.0';
     conn = new Helenus.ConnectionPool(poolConfig);
     
     conn.connect(function(err){
