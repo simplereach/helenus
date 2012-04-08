@@ -1,6 +1,19 @@
 var poolConfig = require('./helpers/connection'), Helenus, conn,
     config = require('./helpers/cql3');
 
+// CQL3 introduces 4 different types of ColumnFamilies, see:
+// https://issues.apache.org/jira/secure/attachment/12511286/create_cf_syntaxes.txt
+
+function testResultless(query){
+  return function(test, assert){
+    conn.cql(query, function(err, res){
+      assert.ifError(err);
+      assert.ok(res === undefined);
+      test.finish();
+    });
+  };
+}
+
 module.exports = {
   'setUp':function(test, assert){
     Helenus = require('helenus');
@@ -13,40 +26,13 @@ module.exports = {
     });
   },
 
-  'test cql create keyspace':function(test, assert){
-     conn.cql(config['create_ks#cql'], function(err, res){
-       assert.ifError(err);
-       assert.ok(res === undefined);
-       test.finish();
-     });
-  },
+  'test cql create keyspace':testResultless(config['create_ks#cql']),
+  'test cql use keyspace':testResultless(config['use#cql']),
 
-  'test cql use keyspace':function(test, assert){
-     conn.cql(config['use#cql'], function(err, res){
-       assert.ifError(err);
-       assert.ok(res === undefined);
-       test.finish();
-     });
-  },
-
-  'test cql create column family':function(test, assert){
-     conn.cql(config['create_cf#cql'], function(err, res){
-       assert.ifError(err);
-       assert.ok(res === undefined);
-       test.finish();
-     });
-  },
-
-  'test cql update':function(test, assert){
-    conn.cql(config['update#cql'], function(err, res){
-      assert.ifError(err);
-      assert.ok(res === undefined);
-      test.finish();
-    });
-  },
-
-  'test cql update with no callback':function(test, assert){
-    conn.cql(config['update#cql']);
+  'test cql static CF create column family':testResultless(config['static_create_cf#cql']),
+  'test cql static CF update':testResultless(config['static_update#cql']),
+  'test cql static CF update with no callback':function(test, assert){
+    conn.cql(config['static_update#cql']);
 
     //just wait to see if anything bad happens
     setTimeout(function(){
@@ -54,8 +40,8 @@ module.exports = {
     }, 100);
   },
 
-  'test cql select':function(test, assert){
-    conn.cql(config['select#cql'], function(err, res){
+  'test cql static CF select':function(test, assert){
+    conn.cql(config['static_select#cql'], function(err, res){
       assert.ifError(err);
       assert.ok(res.length === 1);
       assert.ok(res[0] instanceof Helenus.Row);
@@ -64,7 +50,7 @@ module.exports = {
     });
   },
 
-  'test cql select with bad user input':function(test, assert){
+  'test cql static CF select with bad user input':function(test, assert){
     var select = "SELECT foo FROM cql_test WHERE id='?'";
 
     conn.cql(select, ["'foobar"], function(err, res){
@@ -77,8 +63,8 @@ module.exports = {
     });
   },
 
-  'test cql count':function(test, assert){
-    conn.cql(config['count#cql'], function(err, res){
+  'test cql static CF count':function(test, assert){
+    conn.cql(config['static_count#cql'], function(err, res){
       assert.ifError(err);
       assert.ok(res.length === 1);
       assert.ok(res[0] instanceof Helenus.Row);
@@ -87,7 +73,7 @@ module.exports = {
     });
   },
 
-  'test cql error':function(test, assert){
+  'test cql static CF error':function(test, assert){
     conn.cql(config['error#cql'], function(err, res){
       assert.ok(err instanceof Error);
       assert.ok(res === undefined);
@@ -97,8 +83,8 @@ module.exports = {
     });
   },
 
-  'test cql count with gzip':function(test, assert){
-    conn.cql(config['count#cql'], {gzip:true}, function(err, res){
+  'test cql static CF count with gzip':function(test, assert){
+    conn.cql(config['static_count#cql'], {gzip:true}, function(err, res){
       assert.ifError(err);
       assert.ok(res.length === 1);
       assert.ok(res[0] instanceof Helenus.Row);
@@ -107,8 +93,8 @@ module.exports = {
     });
   },
 
-  'test cql delete':function(test, assert){
-    conn.cql(config['delete#cql'], function(err, res){
+  'test cql static CF delete':function(test, assert){
+    conn.cql(config['static_delete#cql'], function(err, res){
       assert.ifError(err);
       assert.strictEqual(res, undefined);
       // after the delete check that all the columns have been deleted,
@@ -121,7 +107,7 @@ module.exports = {
       // More specifically: We're expecting that there's a column 'id' with
       // the value 'foobar' (that's the row ghost) and a column 'foo' with
       // the value null (that's the column ghost).
-      conn.cql(config['select2#cql'], config['select2#vals'], function(err, res){
+      conn.cql(config['static_select2#cql'], config['static_select2#vals'], function(err, res){
         assert.ifError(err);
         assert.strictEqual(res.length, 1);
         var row = res[0];
@@ -134,21 +120,9 @@ module.exports = {
     });
   },
 
-  'test cql drop column family':function(test, assert){
-    conn.cql(config['drop_cf#cql'], function(err, res){
-       assert.ifError(err);
-       assert.ok(res === undefined);
-       test.finish();
-    });
-  },
+  'test cql static CF drop static column family':testResultless(config['static_drop_cf#cql']),
 
-  'test cql drop keyspace':function(test, assert){
-    conn.cql(config['drop_ks#cql'], function(err, res){
-       assert.ifError(err);
-       assert.ok(res === undefined);
-       test.finish();
-    });
-  },
+  'test cql drop keyspace':testResultless(config['drop_ks#cql']),
 
   'tearDown':function(test, assert){
     conn.close();
