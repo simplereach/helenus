@@ -6,13 +6,13 @@ module.exports = {
     Helenus = require('helenus');
     poolConfig.cqlVersion = '3.0.0';
     conn = new Helenus.ConnectionPool(poolConfig);
-    
+
     conn.connect(function(err){
       assert.ifError(err);
       test.finish();
     });
   },
-  
+
   'test cql create keyspace':function(test, assert){
      conn.cql(config['create_ks#cql'], function(err, res){
        assert.ifError(err);
@@ -20,7 +20,7 @@ module.exports = {
        test.finish();
      });
   },
-  
+
   'test cql use keyspace':function(test, assert){
      conn.cql(config['use#cql'], function(err, res){
        assert.ifError(err);
@@ -28,7 +28,7 @@ module.exports = {
        test.finish();
      });
   },
-  
+
   'test cql create column family':function(test, assert){
      conn.cql(config['create_cf#cql'], function(err, res){
        assert.ifError(err);
@@ -36,7 +36,7 @@ module.exports = {
        test.finish();
      });
   },
-  
+
   'test cql update':function(test, assert){
     conn.cql(config['update#cql'], function(err, res){
       assert.ifError(err);
@@ -44,16 +44,16 @@ module.exports = {
       test.finish();
     });
   },
-  
+
   'test cql update with no callback':function(test, assert){
     conn.cql(config['update#cql']);
-    
+
     //just wait to see if anything bad happens
     setTimeout(function(){
       test.finish();
     }, 100);
   },
-  
+
   'test cql select':function(test, assert){
     conn.cql(config['select#cql'], function(err, res){
       assert.ifError(err);
@@ -86,7 +86,7 @@ module.exports = {
       test.finish();
     });
   },
-  
+
   'test cql error':function(test, assert){
     conn.cql(config['error#cql'], function(err, res){
       assert.ok(err instanceof Error);
@@ -96,7 +96,7 @@ module.exports = {
       test.finish();
     });
   },
-  
+
   'test cql count with gzip':function(test, assert){
     conn.cql(config['count#cql'], {gzip:true}, function(err, res){
       assert.ifError(err);
@@ -106,7 +106,7 @@ module.exports = {
       test.finish();
     });
   },
-  
+
   'test cql delete':function(test, assert){
     conn.cql(config['delete#cql'], function(err, res){
       assert.ifError(err);
@@ -141,7 +141,7 @@ module.exports = {
        test.finish();
     });
   },
-  
+
   'test cql drop keyspace':function(test, assert){
     conn.cql(config['drop_ks#cql'], function(err, res){
        assert.ifError(err);
@@ -149,7 +149,7 @@ module.exports = {
        test.finish();
     });
   },
-  
+
   'tearDown':function(test, assert){
     conn.close();
     test.finish();
