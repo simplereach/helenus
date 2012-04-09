@@ -4,13 +4,15 @@ var poolConfig = require('./helpers/connection'), Helenus, conn,
 // CQL3 introduces 4 different types of ColumnFamilies, see:
 // https://issues.apache.org/jira/secure/attachment/12511286/create_cf_syntaxes.txt
 
-function testResultless(query){
+function testResultless(){
+  var args = Array.prototype.slice.call(arguments);
   return function(test, assert){
-    conn.cql(query, function(err, res){
+    args.push(function(err, res){
       assert.ifError(err);
       assert.ok(res === undefined);
       test.finish();
     });
+    conn.cql.apply(conn, args);
   };
 }
 
@@ -121,6 +123,35 @@ module.exports = {
   },
 
   'test cql static CF drop static column family':testResultless(config['static_drop_cf#cql']),
+
+  'test cql dynamic CF create column family':testResultless(config['dynamic_create_cf#cql']),
+  'test cql dynamic CF update 1':testResultless(config['dynamic_update#cql'], config['dynamic_update#vals1']),
+  'test cql dynamic CF update 2':testResultless(config['dynamic_update#cql'], config['dynamic_update#vals2']),
+  'test cql dynamic CF update 3':testResultless(config['dynamic_update#cql'], config['dynamic_update#vals3']),
+
+  'test cql dynamic CF select by row':function(test, assert){
+    conn.cql(config['dynamic_select1#cql'], function(err, res){
+      assert.ifError(err);
+      assert.strictEqual(res.length, 2);
+      assert.ok(res[0] instanceof Helenus.Row);
+      assert.ok(res[1] instanceof Helenus.Row);
+      assert.strictEqual(res[0].get('ts').value.getTime(), new Date('2012-03-01').getTime());
+      assert.strictEqual(res[1].get('ts').value.getTime(), new Date('2012-03-02').getTime());
+      test.finish();
+    });
+  },
+  'test cql dynamic CF by row and column':function(test, assert){
+    conn.cql(config['dynamic_select2#cql'], function(err, res){
+      assert.ifError(err);
+      assert.strictEqual(res.length, 1);
+      assert.ok(res[0] instanceof Helenus.Row);
+      assert.strictEqual(res[0].length, 3);
+      assert.strictEqual(res[0].get('userid').value, 10);
+      assert.strictEqual(res[0].get('url').value, 'www.foo.com');
+      assert.strictEqual(res[0].get('ts').value.getTime(), new Date('2012-03-02').getTime());
+      test.finish();
+    });
+  },
 
   'test cql drop keyspace':testResultless(config['drop_ks#cql']),
 

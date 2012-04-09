@@ -13,6 +13,14 @@
   "static_select2#cql"   : "SELECT * FROM %s WHERE id='%s'",
   "static_select2#vals"  : ["cql_test", "foobar"],
 
+  "dynamic_create_cf#cql" : "CREATE COLUMNFAMILY clicks (userid int, url text, ts timestamp, PRIMARY KEY (userid, url)) WITH COMPACT STORAGE",
+  "dynamic_update#cql"    : "UPDATE clicks SET ts = '?' WHERE userid = ? AND url = '?'",
+  "dynamic_update#vals1"  : ["2012-03-01+0000", 10, "www.example.com"],
+  "dynamic_update#vals2"  : ["2012-03-01+0000", 10, "www.foo.com"],
+  "dynamic_update#vals3"  : ["2012-03-02+0000", 10, "www.foo.com"],
+  "dynamic_select1#cql"   : "SELECT ts FROM clicks WHERE userid = '10'",
+  "dynamic_select2#cql"   : "SELECT userid, url, ts FROM clicks WHERE userid = 10 AND url = 'www.foo.com'",
+
   "prepare#cql"   : "SELECT * FROM ? WHERE KEY = ?",
   "error#cql"     : "SOME INVALID CQL"
 }
