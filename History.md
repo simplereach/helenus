@@ -112,3 +112,4 @@
 
   * Replace ? with %s globally [ @ctavan #18 ]
   * Store date-time in milliseconds rather than microseconds [ @ctavan #19 ]
+  * Pool without keyspace but with close event [ @ctvan #17 ]
