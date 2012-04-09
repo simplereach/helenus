@@ -5,11 +5,30 @@ var config = require('./helpers/thrift'),
 module.exports = {
   'setUp':function(test, assert){
     Helenus = require('helenus');
-    conn = new Helenus.ConnectionPool(system);
     test.finish();
   },
 
-  'test pool.connect':function(test, assert){
+  'test pool.connect without keyspace':function(test, assert){
+    conn = new Helenus.ConnectionPool(system);
+    conn.connect(function(err, keyspace){
+      assert.ifError(err);
+      assert.strictEqual(keyspace, undefined);
+      test.finish();
+    });
+  },
+
+  'test pool.close without keyspace':function(test, assert){
+    conn.on('close', function(){
+      test.finish();
+    });
+    assert.doesNotThrow(function(){
+      conn.close();
+    });
+  },
+
+  'test pool.connect with keyspace':function(test, assert){
+    system.keyspace = 'system';
+    conn = new Helenus.ConnectionPool(system);
     conn.connect(function(err, keyspace){
       assert.ifError(err);
       assert.ok(keyspace.definition.name === 'system');
@@ -499,8 +518,12 @@ module.exports = {
   },
 
   'test pool.close':function(test, assert){
-    assert.doesNotThrow(function(){ conn.close(); });
-    test.finish();
+    conn.on('close', function(){
+      test.finish();
+    });
+    assert.doesNotThrow(function(){
+      conn.close();
+    });
   },
 
   'tearDown':function(test, assert){
