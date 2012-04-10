@@ -14,5 +14,4 @@ script:
 
 notifications:
   email: false
-  irc:
-    - "irc.freenode.net#libuv"
+  irc: false
