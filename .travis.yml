@@ -5,8 +5,10 @@ node_js:
 before_script:
   - "curl -LO http://apache.mirrors.pair.com/cassandra/1.0.9/apache-cassandra-1.0.9-bin.tar.gz"
   - "tar xzf apache-cassandra-1.0.9-bin.tar.gz"
-  - "mkdir -p /var/log/cassandra"
-  - "mkdir -p /var/lib/cassandra"
+  - "sudo mkdir -p /var/log/cassandra"
+  - "sudo chown -R `whoami` /var/log/cassandra"
+  - "sudo mkdir -p /var/lib/cassandra"
+  - "sudo chown -R `whoami` /var/lib/cassandra"
   - "apache-cassandra-1.0.9/bin/cassandra"
 
 script:
