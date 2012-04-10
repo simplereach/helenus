@@ -1,9 +1,8 @@
 language: node_js
 node_js:
-  - 0.6
+  - 0.7
 
 before_script:
-  - "sudo sed -i '' -e 's/127\.0\.1\.1/127\.0\.1\.1 local2/' /etc/hosts"
   - "curl -LO http://apache.mirrors.pair.com/cassandra/1.0.9/apache-cassandra-1.0.9-bin.tar.gz"
   - "tar xzf apache-cassandra-1.0.9-bin.tar.gz"
   - "sudo mkdir -p /var/log/cassandra"
