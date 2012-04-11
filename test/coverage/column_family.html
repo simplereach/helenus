@@ -1217,7 +1217,7 @@
                 
                     <p id='t211' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mutations&nbsp;=&nbsp;[],&nbsp;batch&nbsp;=&nbsp;{},<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t212' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consistency&nbsp;=&nbsp;options.consistency&nbsp;||&nbsp;DEFAULT_WRITE_CONSISTENCY;<span class='strut'>&nbsp;</span></p>
+                    <p id='t212' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consistency&nbsp;=&nbsp;options.consistency&nbsp;||&nbsp;options.consistencyLevel&nbsp;||&nbsp;DEFAULT_WRITE_CONSISTENCY;<span class='strut'>&nbsp;</span></p>
                 
                     <p id='t213' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;<span class='strut'>&nbsp;</span></p>
                 
@@ -1299,7 +1299,7 @@
                 
                     <p id='t252' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timestamp&nbsp;=&nbsp;args.options.timestamp&nbsp;||&nbsp;new&nbsp;Date(),<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t253' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consistency&nbsp;=&nbsp;args.options.consistency&nbsp;||&nbsp;DEFAULT_WRITE_CONSISTENCY;<span class='strut'>&nbsp;</span></p>
+                    <p id='t253' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consistency&nbsp;=&nbsp;args.options.consistency&nbsp;||&nbsp;args.options.consistencyLevel&nbsp;||&nbsp;DEFAULT_WRITE_CONSISTENCY;<span class='strut'>&nbsp;</span></p>
                 
                     <p id='t254' class='pln'><span class='strut'>&nbsp;</span></p>
                 
@@ -1353,7 +1353,7 @@
                 
                     <p id='t279' class='stm run'>&nbsp;&nbsp;var&nbsp;self&nbsp;=&nbsp;this,<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t280' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consistency&nbsp;=&nbsp;options.consistencyLevel&nbsp;||&nbsp;DEFAULT_READ_CONSISTENCY,<span class='strut'>&nbsp;</span></p>
+                    <p id='t280' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consistency&nbsp;=&nbsp;options.consistency&nbsp;||&nbsp;options.consistencyLevel&nbsp;||&nbsp;DEFAULT_READ_CONSISTENCY,<span class='strut'>&nbsp;</span></p>
                 
                     <p id='t281' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;marshalledKey&nbsp;=&nbsp;this.keyMarshaller.serialize(key).toString('binary'),<span class='strut'>&nbsp;</span></p>
                 
@@ -1453,7 +1453,7 @@
                 
                     <p id='t329' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;0,&nbsp;len&nbsp;=&nbsp;query.fields.length,&nbsp;field,&nbsp;valueMarshaller,<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t330' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consistency&nbsp;=&nbsp;options.consistencyLevel&nbsp;||&nbsp;DEFAULT_READ_CONSISTENCY,<span class='strut'>&nbsp;</span></p>
+                    <p id='t330' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consistency&nbsp;=&nbsp;options.consistency&nbsp;||&nbsp;options.consistencyLevel&nbsp;||&nbsp;DEFAULT_READ_CONSISTENCY,<span class='strut'>&nbsp;</span></p>
                 
                     <p id='t331' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;predicate&nbsp;=&nbsp;getSlicePredicate(options,&nbsp;this.columnMarshaller);<span class='strut'>&nbsp;</span></p>
                 
@@ -1511,7 +1511,7 @@
                 
                     <p id='t358' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;row&nbsp;=&nbsp;val[i];<span class='strut'>&nbsp;</span></p>
                 
-                    <p id='t359' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results.push(Row.fromThrift(row.key,&nbsp;row.columns,&nbsp;self));<span class='strut'>&nbsp;</span></p>
+                    <p id='t359' class='stm run'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results.push(Row.fromThrift(self.keyMarshaller.deserialize(row.key),&nbsp;row.columns,&nbsp;self));<span class='strut'>&nbsp;</span></p>
                 
                     <p id='t360' class='pln'>&nbsp;&nbsp;&nbsp;&nbsp;}<span class='strut'>&nbsp;</span></p>
                 
