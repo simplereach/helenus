@@ -18,4 +18,4 @@ script:
 
 notifications:
   email: false
-  campfire: Engineering:11309e7089dae384a5bb98e5cabdb9b12ceb2147
+  campfire: false
