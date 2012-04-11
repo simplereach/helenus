@@ -10,7 +10,7 @@ before_script:
   - "sudo mkdir -p /var/lib/cassandra"
   - "sudo chown -R `whoami` /var/lib/cassandra"
 
-  - "apache-cassandra-1.0.9/bin/cassandra -f"
+  - "apache-cassandra-1.0.9/bin/cassandra -f &"
 
 script:
   - "make test"
