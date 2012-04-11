@@ -1,5 +1,6 @@
 var poolConfig = require('./helpers/connection'), Helenus, conn,
-    config = require('./helpers/cql3');
+    config = require('./helpers/cql3'),
+    canSelectCqlVersion = require('./helpers/can_select_cql_version');
 
 // CQL3 introduces 4 different types of ColumnFamilies, see:
 // https://issues.apache.org/jira/secure/attachment/12511286/create_cf_syntaxes.txt
@@ -29,11 +30,21 @@ module.exports = {
   'setUp':function(test, assert){
     Helenus = require('helenus');
     poolConfig.cqlVersion = '3.0.0';
-    conn = new Helenus.ConnectionPool(poolConfig);
 
-    conn.connect(function(err){
-      assert.ifError(err);
-      test.finish();
+    function connect(){
+      conn = new Helenus.ConnectionPool(poolConfig);
+      conn.connect(function(err){
+        assert.ifError(err);
+        test.finish();
+      });
+    }
+
+    canSelectCqlVersion(poolConfig, function(canSelect){
+      if (!canSelect){
+        console.error('set_cql_version not supported, skipping CQL3 tests');
+        process.exit();
+      }
+      connect();
     });
   },
 
