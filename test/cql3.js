@@ -119,7 +119,6 @@ module.exports = {
   'test cql dynamic CF update 1':testResultless(config['dynamic_update#cql'], config['dynamic_update#vals1']),
   'test cql dynamic CF update 2':testResultless(config['dynamic_update#cql'], config['dynamic_update#vals2']),
   'test cql dynamic CF update 3':testResultless(config['dynamic_update#cql'], config['dynamic_update#vals3']),
-
   'test cql dynamic CF select by row':testCql(config['dynamic_select1#cql'], function(test, assert, err, res){
     assert.strictEqual(res.length, 2);
     assert.ok(res[0] instanceof Helenus.Row);
@@ -133,6 +132,31 @@ module.exports = {
     assert.strictEqual(res[0].length, 3);
     assert.strictEqual(res[0].get('userid').value, 10);
     assert.strictEqual(res[0].get('url').value, 'www.foo.com');
+    assert.strictEqual(res[0].get('ts').value.getTime(), new Date('2012-03-02').getTime());
+  }),
+
+  'test cql dense composite CF create column family':testResultless(config['dense_create_cf#cql']),
+  'test cql dense composite CF update 1':testResultless(config['dense_update#cql'], config['dense_update#vals1']),
+  'test cql dense composite CF update 2':testResultless(config['dense_update#cql'], config['dense_update#vals2']),
+  'test cql dense composite CF update 3':testResultless(config['dense_update#cql'], config['dense_update#vals3']),
+  'test cql dense composite CF select by row':testCql(config['dense_select1#cql'], function(test, assert, err, res){
+    assert.strictEqual(res.length, 2);
+    assert.ok(res[0] instanceof Helenus.Row);
+    assert.ok(res[1] instanceof Helenus.Row);
+    assert.strictEqual(res[0].length, 2);
+    assert.strictEqual(res[0].get('ts').value.getTime(), new Date('2012-03-02').getTime());
+    assert.strictEqual(res[0].get('port').value, 1337);
+    assert.strictEqual(res[1].length, 2);
+    assert.strictEqual(res[1].get('ts').value.getTime(), new Date('2012-03-01').getTime());
+    assert.strictEqual(res[1].get('port').value, 8080);
+  }),
+  'test cql dense composite CF by row and column':testCql(config['dense_select2#cql'], function(test, assert, err, res){
+    assert.strictEqual(res.length, 1);
+    assert.ok(res[0] instanceof Helenus.Row);
+    assert.strictEqual(res[0].length, 4);
+    assert.strictEqual(res[0].get('userid').value, 10);
+    assert.strictEqual(res[0].get('ip').value, '192.168.1.1');
+    assert.strictEqual(res[0].get('port').value, 1337);
     assert.strictEqual(res[0].get('ts').value.getTime(), new Date('2012-03-02').getTime());
   }),
 
