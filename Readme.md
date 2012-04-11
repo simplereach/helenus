@@ -2,22 +2,26 @@
 # Helenus
 
   NodeJS Bindings for Cassandra
-  
+
   Currently the driver has full CQL support and a growing support for thrift (non-cql) commands.
   If you would like to contribute, please contact Russ Bradberry &lt;rbradberry@simplereach.com&gt;
+
+### Build Status
+
+  [![Build Status](https://secure.travis-ci.org/simplereach/helenus.png)](http://travis-ci.org/simplereach/helenus)
 
 ## Installation
 
     npm install helenus
-    
+
 ## Running Tests
 
   Ensure cassandra is running on localhost:9160.
-  
+
     make test
-    
+
   For coverage
-  
+
     make test-cov
 
 ## Usage
@@ -55,7 +59,7 @@
 
       pool.cql("SELECT '%s' FROM '%s' WHERE key='%s'", ['col','cf_one','key123'], function(err, results){
         console.log(err, results);
-      }); 
+      });
 
       //NOTE:
       //you can also use the ? as a placeholder. eg: "SELECT ? FROM '?' WHERE key='?'"
@@ -71,30 +75,30 @@ If you do not want to use CQL, you can make calls using the thrift driver
   pool.connect(function(err, keyspace){
     if(err){
       throw(err);
-    } 
-    
+    }
+
     //first retreive the column family from the server
     //helenus will cache column families it has already seen
     keyspace.get('my_cf', function(err, cf){
       if(err){
         throw(err);
       }
-      
+
       //insert something into the column family
       cf.insert('foo', {'bar':'baz'}, function(err){
         if(err){
           throw(err);
         }
-        
+
         //get what we just put in
         //the driver will return a Helenus.Row object just like CQL
         cf.get('foo', function(err, row){
           if(err){
             throw(err);
           }
-          
-          row.get('bar').value // => baz  
-        });          
+
+          row.get('bar').value // => baz
+        });
       });
     });
 
@@ -113,7 +117,7 @@ Currently Helenus supports the following command for the thrift side of the driv
   * columnFamily.get
   * columnFamily.getIndexed
   * columnFamily.remove
-  
+
 The following support is going to be added in later releases:
 
   * columnFamily.rowCount
@@ -126,7 +130,7 @@ The following support is going to be added in later releases:
 
 ## Row
 
-The Helenus Row object acts like an array but contains some helper methods to 
+The Helenus Row object acts like an array but contains some helper methods to
 make your life a bit easier when dealing with dynamic columns in Cassandra
 
 ### row.count
@@ -141,7 +145,7 @@ This will return the column at index N
       //gets the 5th column of each row
       console.log(row[5]);
     });
-    
+
 ### row.get(name)
 
 This will return the column with a specific name
@@ -153,7 +157,7 @@ This will return the column with a specific name
 
 ### row.slice(start, finish)
 
-Slices columns in the row based on their numeric index, this allows you to get 
+Slices columns in the row based on their numeric index, this allows you to get
 columns x through y, it returns a Helenus row object of columns that match the slice.
 
     results.forEach(function(row){
