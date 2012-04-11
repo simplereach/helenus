@@ -11,6 +11,7 @@ before_script:
   - "sudo chown -R `whoami` /var/lib/cassandra"
 
   - "apache-cassandra-1.0.9/bin/cassandra -f &"
+  - "sleep 10"
 
 script:
   - "make test"
