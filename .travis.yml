@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 0.7
+  - 0.6
 
 before_script:
   - "curl -LO http://apache.mirrors.pair.com/cassandra/1.0.9/apache-cassandra-1.0.9-bin.tar.gz"
