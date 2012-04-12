@@ -1,14 +1,26 @@
 var poolConfig = require('./helpers/connection'), Helenus, conn,
-    config = require('./helpers/cql');
+    config = require('./helpers/cql2'),
+    canSelectCqlVersion = require('./helpers/can_select_cql_version');
 
 module.exports = {
   'setUp':function(test, assert){
     Helenus = require('helenus');
-    conn = new Helenus.ConnectionPool(poolConfig);
-    
-    conn.connect(function(err){
-      assert.ifError(err);
-      test.finish();
+    poolConfig.cqlVersion = '2.0.0';
+
+    function connect(){
+      conn = new Helenus.ConnectionPool(poolConfig);
+      conn.connect(function(err){
+        assert.ifError(err);
+        test.finish();
+      });
+    }
+
+    canSelectCqlVersion(poolConfig, function(canSelect){
+      if (!canSelect){
+        console.error('set_cql_version not supported, unsetting cqlVersion');
+        delete poolConfig.cqlVersion;
+      }
+      connect();
     });
   },
   

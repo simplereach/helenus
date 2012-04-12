@@ -4,6 +4,9 @@
   , "description": "NodeJS Bindings for Cassandra"
   , "keywords": ["cassandra"]
   , "author": "Russell Bradberry <rbradberry@gmail.com>"
+  , "contributors": [
+      "Christoph Tavan <dev@tavan.de>"
+    ]
   , "homepage": "https://github.com/simplereach/helenus"
   , "repository": {
       "url": "git://github.com/simplereach/helenus.git"
