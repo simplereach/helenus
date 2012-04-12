@@ -113,3 +113,10 @@
   * Replace ? with %s globally [ @ctavan #18 ]
   * Store date-time in milliseconds rather than microseconds [ @ctavan #19 ]
   * Pool without keyspace but with close event [ @ctvan #17 ]
+
+0.4.0 / 2012-04-12
+==================
+
+  * Add CQL 3 Support [ @ctavan #15 ]
+  * Fixed issue in tombstone column deserialization [ @devdazed #33 ]
+  * Added support for Int32Type and DecimalType [ @ctavan #23 ]
