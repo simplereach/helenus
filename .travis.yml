@@ -3,18 +3,15 @@ node_js:
   - 0.6
 
 before_script:
-  - "curl -LO http://apache.mirrors.pair.com/cassandra/1.0.9/apache-cassandra-1.0.9-bin.tar.gz"
-  - "tar xzf apache-cassandra-1.0.9-bin.tar.gz"
-  - "sudo mkdir -p /var/log/cassandra"
-  - "sudo chown -R `whoami` /var/log/cassandra"
-  - "sudo mkdir -p /var/lib/cassandra"
-  - "sudo chown -R `whoami` /var/lib/cassandra"
-
-  - "apache-cassandra-1.0.9/bin/cassandra -f &"
-  - "sleep 10"
+  - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_1.0.9_all.deb
+  - sudo apt-get remove -y --purge cassandra
+  - sudo rm -rf /var/log/cassandra
+  - sudo rm -rf /var/lib/cassandra
+  - sudo dpkg -i cassandra_1.0.9_all.deb
+  - until nc -z localhost 9160; do sleep 1; done
 
 script:
-  - "make test"
+  - make test
 
 notifications:
   email: false
