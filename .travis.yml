@@ -13,8 +13,8 @@ before_install:
   - sudo rm -rf /var/lib/cassandra
 
 install:
-  - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_$CASSANDRA_VERSION_all.deb
-  - sudo dpkg -i cassandra_$CASSANDRA_VERSION_all.deb
+  - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_${CASSANDRA_VERSION}_all.deb
+  - sudo dpkg -i cassandra_${CASSANDRA_VERSION}_all.deb
 
 after_install:
   - until nc -z localhost 9160; do sleep 1; done
