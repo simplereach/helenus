@@ -120,3 +120,11 @@
   * Add CQL 3 Support [ @ctavan #15 ]
   * Fixed issue in tombstone column deserialization [ @devdazed #33 ]
   * Added support for Int32Type and DecimalType [ @ctavan #23 ]
+
+0.5.0 / 2012-04-20
+==================
+
+  * Use debian packages for Travis-CI [ @ctavan #40 ]
+  * Stop Cassandra after tests in Travis-CI [ @ctavan #41 ]
+  * Add support for ColumnFamily.truncate [ @devdazed #28 ]
+  * Add better CQL escaping and parameterization [ @devdazed #36, #39 ]

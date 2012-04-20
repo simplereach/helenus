@@ -118,13 +118,13 @@ Currently Helenus supports the following command for the thrift side of the driv
   * columnFamily.get
   * columnFamily.getIndexed
   * columnFamily.remove
+  * columnFamily.truncate
 
 The following support is going to be added in later releases:
 
   * columnFamily.rowCount
   * columnFamily.columnCount
   * columnfamily.increment
-  * columnFamily.truncate
   * SuperColumns
   * CounterColumns
   * Better composite support
