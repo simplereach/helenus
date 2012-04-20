@@ -7,17 +7,12 @@ env:
   - CASSANDRA_VERSION=1.0.9
   - CASSANDRA_VERSION=1.1.0~rc1
 
-before_install:
+before_script:
   - sudo apt-get remove -y --purge cassandra
   - sudo rm -rf /var/log/cassandra
   - sudo rm -rf /var/lib/cassandra
-
-install:
   - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_${CASSANDRA_VERSION}_all.deb
   - sudo dpkg -i cassandra_${CASSANDRA_VERSION}_all.deb
-
-after_install:
-  - npm install
   - until nc -z localhost 9160; do sleep 1; done
 
 script:
