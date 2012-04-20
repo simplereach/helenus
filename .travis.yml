@@ -17,6 +17,7 @@ install:
   - sudo dpkg -i cassandra_${CASSANDRA_VERSION}_all.deb
 
 after_install:
+  - npm install
   - until nc -z localhost 9160; do sleep 1; done
 
 script:
