@@ -503,6 +503,13 @@ module.exports = {
     });
   },
 
+  'test standard cf truncate': function(test, assert){
+    cf_standard.truncate(function(err){
+      assert.ifError(err);
+      test.finish();
+    });
+  },
+
   'test keyspace.dropColumnFamily':function(test, assert){
     ks.dropColumnFamily(config.cf_standard, function(err){
       assert.ifError(err);
