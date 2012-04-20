@@ -3,12 +3,20 @@ node_js:
   - 0.6
   - 0.7
 
-before_script:
-  - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_1.0.9_all.deb
+env:
+  - CASSANDRA_VERSION=1.0.9
+  - CASSANDRA_VERSION=1.1.0~rc1
+
+before_install:
   - sudo apt-get remove -y --purge cassandra
   - sudo rm -rf /var/log/cassandra
   - sudo rm -rf /var/lib/cassandra
-  - sudo dpkg -i cassandra_1.0.9_all.deb
+
+install:
+  - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_$CASSANDRA_VERSION_all.deb
+  - sudo dpkg -i cassandra_$CASSANDRA_VERSION_all.deb
+
+after_install:
   - until nc -z localhost 9160; do sleep 1; done
 
 script:
@@ -16,6 +24,11 @@ script:
 
 after_script:
   - sudo service cassandra stop
+
+matrix:
+  allow_failures:
+    - env: CASSANDRA_VERSION=1.1.0~rc1
+    - node_js: 0.7
 
 notifications:
   email: false
