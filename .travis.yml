@@ -13,6 +13,9 @@ before_script:
 script:
   - make test
 
+after_script:
+  - sudo service cassandra stop
+
 notifications:
   email: false
   campfire: false
