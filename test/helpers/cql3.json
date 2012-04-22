@@ -10,8 +10,8 @@
   "static_count#cql"     : "SELECT COUNT(1) FROM cql_test WHERE id='foobar'",
   "static_countstar#cql" : "SELECT COUNT(*) FROM cql_test WHERE id='foobar'",
   "static_delete#cql"    : "DELETE FROM cql_test WHERE id='foobar'",
-  "static_select2#cql"   : "SELECT * FROM %s WHERE id='%s'",
-  "static_select2#vals"  : ["cql_test", "foobar"],
+  "static_select2#cql"   : "SELECT * FROM cql_test WHERE id='%s'",
+  "static_select2#vals"  : ["foobar"],
 
   "dynamic_create_cf#cql" : "CREATE COLUMNFAMILY clicks (userid int, url text, ts timestamp, PRIMARY KEY (userid, url)) WITH COMPACT STORAGE",
   "dynamic_update#cql"    : "UPDATE clicks SET ts = '?' WHERE userid = ? AND url = '?'",

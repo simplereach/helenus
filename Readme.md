@@ -58,12 +58,14 @@
       //for formatting specific see `http://nodejs.org/docs/latest/api/util.html#util.format`
       //results is an array of row objects
 
-      pool.cql("SELECT '%s' FROM '%s' WHERE key='%s'", ['col','cf_one','key123'], function(err, results){
+      pool.cql("SELECT '%s' FROM cf_one WHERE key='%s'", ['col','key123'], function(err, results){
         console.log(err, results);
       });
 
       //NOTE:
-      //you can also use the ? as a placeholder. eg: "SELECT ? FROM '?' WHERE key='?'"
+      //- You can also use ? as a placeholder. eg: "SELECT ? FROM cf_one WHERE key = ?"
+      //- You can always skip quotes around placeholders, they are added automatically.
+      //- You cannot use placeholders for ColumnFamily names.
     }
   });
 ```
