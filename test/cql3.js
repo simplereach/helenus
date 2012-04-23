@@ -176,24 +176,19 @@ module.exports = {
   'test cql sparse composite CF update 2':testResultless(config['sparse_update#cql'], config['sparse_update#vals2']),
   'test cql sparse composite CF update 3':testResultless(config['sparse_update#cql'], config['sparse_update#vals3']),
   'test cql sparse composite CF select by row':testCql(config['sparse_select1#cql'], function(test, assert, err, res){
-    assert.strictEqual(res.length, 2);
+    assert.strictEqual(res.length, 1);
     assert.ok(res[0] instanceof Helenus.Row);
-    assert.ok(res[1] instanceof Helenus.Row);
     assert.strictEqual(res[0].length, 3);
-    assert.strictEqual(res[0].get('posted_at').value.getTime(), new Date('2012-03-01').getTime());
-    assert.strictEqual(res[0].get('body').value, 'body text 1');
-    assert.strictEqual(res[0].get('posted_by').value, 'author1');
-    assert.strictEqual(res[1].length, 3);
-    assert.strictEqual(res[1].get('posted_at').value.getTime(), new Date('2012-03-02').getTime());
-    assert.strictEqual(res[1].get('body').value, 'body text 3');
-    assert.strictEqual(res[1].get('posted_by').value, 'author3');
+    assert.strictEqual(res[0].get('posted_at').value.getTime(), new Date('2012-03-02').getTime());
+    assert.strictEqual(res[0].get('body').value, 'body text 3');
+    assert.strictEqual(res[0].get('posted_by').value, 'author3');
   }),
   'test cql sparse composite CF by row and column':testCql(config['sparse_select2#cql'], function(test, assert, err, res){
     assert.strictEqual(res.length, 1);
     assert.ok(res[0] instanceof Helenus.Row);
     assert.strictEqual(res[0].length, 2);
-    assert.strictEqual(res[0].get('body').value, 'body text 3');
-    assert.strictEqual(res[0].get('posted_by').value, 'author3');
+    assert.strictEqual(res[0].get('body').value, 'body text 1');
+    assert.strictEqual(res[0].get('posted_by').value, 'author1');
   }),
 
   'test cql drop keyspace':testResultless(config['drop_ks#cql']),

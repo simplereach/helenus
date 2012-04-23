@@ -24,11 +24,6 @@ script:
 after_script:
   - sudo service cassandra stop
 
-matrix:
-  allow_failures:
-    - env: CASSANDRA_VERSION=1.1.0~rc1
-    - node_js: 0.7
-
 notifications:
   email: false
   campfire: false
