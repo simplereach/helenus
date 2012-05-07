@@ -36,7 +36,7 @@
         user       : 'test',
         password   : 'test1233',
         timeout    : 3000
-        //cqlVersion : '3.0.0' // specify this if you're using Cassandra 1.1
+        //cqlVersion : '3.0.0' // specify this if you're using Cassandra 1.1 and want to use CQL 3
       });
 
   //if you don't listen for error, it will bubble up to `process.uncaughtException`
@@ -58,14 +58,13 @@
       //for formatting specific see `http://nodejs.org/docs/latest/api/util.html#util.format`
       //results is an array of row objects
 
-      pool.cql("SELECT '%s' FROM cf_one WHERE key='%s'", ['col','key123'], function(err, results){
+      pool.cql("SELECT col FROM cf_one WHERE key = ?", ['key123'], function(err, results){
         console.log(err, results);
       });
 
       //NOTE:
-      //- You can also use ? as a placeholder. eg: "SELECT ? FROM cf_one WHERE key = ?"
       //- You can always skip quotes around placeholders, they are added automatically.
-      //- You cannot use placeholders for ColumnFamily names.
+      //- In CQL 3 you cannot use placeholders for ColumnFamily names or Column names.
     }
   });
 ```
