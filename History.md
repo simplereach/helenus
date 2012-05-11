@@ -133,3 +133,8 @@
 ==================
 
   * Set column timestamps in microseconds
+
+0.5.2 / 2012-05-11
+==================
+
+  * Removed unneeded escaping
