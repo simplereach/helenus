@@ -1,4 +1,3 @@
-
 # Helenus
 
   NodeJS Bindings for Cassandra
