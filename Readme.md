@@ -156,6 +156,19 @@ This will return the column with a specific name
       console.log(row.get('foo'));
     });
 
+### row.forEach()
+
+This is wrapper function of Array.forEach which return name,value,ts,ttl of column from row as callback params.
+
+    results.foreach(function(row){
+      //all row of result
+      row.forEach(function(name,value,ts,tttl){
+        //all column of row
+        console.log(name,value,ts,ttl);
+      });
+    
+    });
+    
 ### row.slice(start, finish)
 
 Slices columns in the row based on their numeric index, this allows you to get
