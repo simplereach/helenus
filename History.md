@@ -138,3 +138,8 @@
 ==================
 
   * Removed unneeded escaping
+
+0.5.3 / 2012-05-15
+==================
+
+  * Fix incorrect CQL setting after restarting dropped connection [ @devdazed #49 ]
