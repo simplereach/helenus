@@ -1,6 +1,6 @@
 var config = require('./helpers/thrift'),
     system = require('./helpers/connection'),
-    Helenus, conn, ks, cf_standard, row_standard, cf_composite;
+    Helenus, conn, ks, cf_standard, row_standard, cf_composite, cf_counter;
 
 module.exports = {
   'setUp':function(test, assert){
@@ -73,6 +73,13 @@ module.exports = {
     });
   },
 
+  'test keyspace.createCounterFamily':function(test, assert){
+    ks.createColumnFamily(config.cf_counter, config.cf_counter_options, function(err){
+      assert.ifError(err);
+      test.finish();
+    });
+  },
+
   'test keyspace.get':function(test, assert){
     ks.get(config.cf_standard, function(err, columnFamily){
       assert.ifError(err);
@@ -96,6 +103,16 @@ module.exports = {
       assert.ifError(err);
       assert.ok(columnFamily instanceof Helenus.ColumnFamily);
       assert.ok(columnFamily.isSuper === true);
+      test.finish();
+    });
+  },
+
+  'test keyspace.get counter':function(test, assert){
+    ks.get(config.cf_counter, function(err, columnFamily){
+      assert.ifError(err);
+      assert.ok(columnFamily instanceof Helenus.ColumnFamily);
+      assert.ok(columnFamily.isCounter === true);
+      cf_counter = columnFamily;
       test.finish();
     });
   },
@@ -143,6 +160,16 @@ module.exports = {
     cf_composite.insert(key, values, function(err, results){
       assert.ifError(err);
       test.finish();
+    });
+  },
+
+  'test counter cf.incr':function(test, assert){
+    var column = '1234',
+        key = 'åbcd';
+
+    cf_counter.incr(key, column, 1337, function (err, results){
+        assert.ifError(err);
+        test.finish();
     });
   },
 
@@ -212,6 +239,18 @@ module.exports = {
       assert.ifError(err);
       assert.ok(row instanceof Helenus.Row);
       assert.ok(row.get([12345678912345, new Date(1326400762701)]).value === 'some value');
+      test.finish();
+    });
+  },
+
+  'test counter cf.get with columns names':function(test, assert){
+    var key  = 'åbcd',
+        cols = ['1234'];
+
+    cf_counter.get(key, {columns : cols}, function(err, row){
+      assert.ifError(err);
+      assert.ok(row instanceof Helenus.Row);
+      assert.ok(row.get('1234').value === 1337);
       test.finish();
     });
   },
