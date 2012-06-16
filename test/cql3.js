@@ -145,6 +145,14 @@ module.exports = {
     assert.strictEqual(res[0].get('url').value, 'www.foo.com');
     assert.strictEqual(res[0].get('ts').value.getTime(), new Date('2012-03-02').getTime());
   }),
+  'test cql dynamic CF by row and column with fields':testCql(config['dynamic_select3#cql'], [], config['dynamic_select3#vals'], {}, function(test, assert, err, res){
+    assert.strictEqual(res.length, 1);
+    assert.ok(res[0] instanceof Helenus.Row);
+    assert.strictEqual(res[0].length, 3);
+    assert.strictEqual(res[0].get('userid').value, 10);
+    assert.strictEqual(res[0].get('url').value, 'www.foo.com');
+    assert.strictEqual(res[0].get('ts').value.getTime(), new Date('2012-03-02').getTime());
+  }),
 
   'test cql dense composite CF create column family':testResultless(config['dense_create_cf#cql']),
   'test cql dense composite CF update 1':testResultless(config['dense_update#cql'], config['dense_update#vals1']),
