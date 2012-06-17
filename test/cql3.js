@@ -14,7 +14,12 @@ function testCql(){
       tests(test, assert, err, res);
       test.finish();
     });
-    conn.cql.apply(conn, args);
+    try {
+      conn.cql.apply(conn, args);
+    } catch(e) {
+      tests(test, assert, e);
+      test.finish()
+    }
   };
 }
 
@@ -69,10 +74,11 @@ module.exports = {
   }),
 
   'test cql static CF select with bad user input':testCql("SELECT foo FROM cql_test WHERE id='?'", ["'foobar"], function(test, assert, err, res){
-    assert.ok(res.length === 1);
-    assert.ok(res[0] instanceof Helenus.Row);
-    assert.ok(res[0].key === "'foobar");
-    assert.ok(res[0].count === 0);
+    assert.ok(res.length === 0);
+  }),
+
+  'test cql static CF select with bad double-quote user input':testCql("SELECT foo FROM cql_test WHERE id=#", ['"foobar'], function(test, assert, err, res){
+    assert.ok(err.stack);
   }),
 
   'test cql static CF count':testCql(config['static_count#cql'], function(test, assert, err, res){
