@@ -2,3 +2,4 @@
 node_modules
 *.sock
 lib-cov/
+npm-debug.log
