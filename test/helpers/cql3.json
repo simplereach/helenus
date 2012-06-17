@@ -20,6 +20,8 @@
   "dynamic_update#vals3"  : ["2012-03-02+0000", 10, "www.foo.com"],
   "dynamic_select1#cql"   : "SELECT ts FROM clicks WHERE userid = '10'",
   "dynamic_select2#cql"   : "SELECT userid, url, ts FROM clicks WHERE userid = 10 AND url = 'www.foo.com'",
+  "dynamic_select3#cql"    : "SELECT :field1, :field2, ts FROM clicks WHERE :field1 = :field1_val: AND :field2 = :field2_val:",
+  "dynamic_select3#vals"   : {"field1": "userid", "field2": "url", "field1_val": 10, "field2_val": "www.foo.com"},
 
   "dense_create_cf#cql" : "CREATE TABLE connections (userid int, ip text, port int, ts timestamp, PRIMARY KEY (userid, ip, port)) WITH COMPACT STORAGE",
   "dense_update#cql"    : "UPDATE connections SET ts = '?' WHERE userid = ? AND ip = '?' AND port = ?",
