@@ -1,6 +1,6 @@
 {
     "name": "helenus"
-  , "version": "0.5.3"
+  , "version": "0.5.4"
   , "description": "NodeJS Bindings for Cassandra"
   , "keywords": ["cassandra"]
   , "author": "Russell Bradberry <rbradberry@gmail.com>"
@@ -23,5 +23,5 @@
       "test": "make test"
     }
   , "main": "index"
-  , "engines": { "node": "0.6.x | 0.7.x" }
+  , "engines": { "node": "0.6.x | 0.8.x" }
 }
