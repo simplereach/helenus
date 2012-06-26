@@ -72,6 +72,7 @@ module.exports = {
   }),
 
   'test cql static CF select with bad user input':testCql("SELECT foo FROM cql_test WHERE id='?'", ["'foobar"], function(test, assert, err, res){
+    console.log(err, res)
     assert.ok(res.length === 1);
     assert.ok(res[0] instanceof Helenus.Row);
     assert.ok(res[0].key === "'foobar");
