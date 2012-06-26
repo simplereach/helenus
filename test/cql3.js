@@ -105,7 +105,7 @@ module.exports = {
       //As of 1.1.1 the ghosts no longer exist
       conn.cql(config['static_select2#cql'], config['static_select2#vals'], function(err, res){
         assert.ifError(err);
-        assert.strictEqual(res, undefined);
+        assert.ok(res.length === 0);
         test.finish();
       });
     });
