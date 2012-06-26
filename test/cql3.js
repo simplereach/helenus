@@ -8,18 +8,21 @@ var poolConfig = require('./helpers/connection'), Helenus, conn,
 function testCql(){
   var args = Array.prototype.slice.call(arguments);
   var tests = args.pop();
+
   return function(test, assert){
     args.push(function(err, res){
       assert.ifError(err);
       tests(test, assert, err, res);
       test.finish();
     });
+
     conn.cql.apply(conn, args);
   };
 }
 
 function testResultless(){
   var args = Array.prototype.slice.call(arguments);
+
   args.push(function(test, assert, err, res) {
     assert.ok(res === undefined);
   });
@@ -101,24 +104,11 @@ module.exports = {
     conn.cql(config['static_delete#cql'], function(err, res){
       assert.ifError(err);
       assert.strictEqual(res, undefined);
-      // after the delete check that all the columns have been deleted,
-      // we cant use a count here because the row will still remain until compaction occurs
-      // see http://www.datastax.com/docs/1.0/dml/about_writes#about-deletes
-      //
-      // Since CQL 3.0.0 not only row keys remain as ghosts, but since they
-      // are named now and treated the same way as column keys, also column
-      // keys remain as ghosts. We can only check that they are all null.
-      // More specifically: We're expecting that there's a column 'id' with
-      // the value 'foobar' (that's the row ghost) and a column 'foo' with
-      // the value null (that's the column ghost).
+      //this test will fail on C* 1.1.0 as they returned ghosts in the CQL query
+      //As of 1.1.1 the ghosts no longer exist
       conn.cql(config['static_select2#cql'], config['static_select2#vals'], function(err, res){
         assert.ifError(err);
-        assert.strictEqual(res.length, 1);
-        var row = res[0];
-        assert.ok(row instanceof Helenus.Row);
-        assert.strictEqual(row.count, 2);
-        assert.strictEqual(row.get('id').value, 'foobar');
-        assert.strictEqual(row.get('foo').value, null);
+        assert.strictEqual(res.length, 0);
         test.finish();
       });
     });
