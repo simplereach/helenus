@@ -7,6 +7,7 @@
   "static_drop_cf#cql"   : "DROP COLUMNFAMILY cql_test",
   "static_update#cql"    : "UPDATE cql_test SET foo='bar' WHERE id='foobar'",
   "static_select#cql"    : "SELECT foo FROM cql_test WHERE id='foobar'",
+  "static_select*#cql"   : "SELECT * FROM cql_test WHERE id='foobar'",
   "static_count#cql"     : "SELECT COUNT(1) FROM cql_test WHERE id='foobar'",
   "static_countstar#cql" : "SELECT COUNT(*) FROM cql_test WHERE id='foobar'",
   "static_delete#cql"    : "DELETE FROM cql_test WHERE id='foobar'",
