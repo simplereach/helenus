@@ -75,6 +75,16 @@ module.exports = {
     });
   },
 
+  'test cql select *': function(test, assert){
+    conn.cql(config['select*#cql'], function (err, res){
+      assert.ifError(err);
+      assert.ok(res.length === 1);
+      assert.ok(res[0] instanceof Helenus.Row);
+      assert.ok(res[0].get('foo').value === 'bar');
+      test.finish();
+    });
+  },
+
   'test cql select with bad user input':function(test, assert){
     var select = "SELECT foo FROM cql_test WHERE KEY='?'";
 

@@ -6,6 +6,7 @@
   "drop_cf#cql"   : "DROP COLUMNFAMILY cql_test",
   "update#cql"    : "UPDATE cql_test SET foo='bar' WHERE KEY='foobar'",
   "select#cql"    : "SELECT foo FROM cql_test WHERE KEY='foobar'",
+  "select*#cql"   : "SELECT * FROM cql_test WHERE KEY='foobar'",
   "count#cql"     : "SELECT COUNT(*) FROM cql_test WHERE KEY='foobar'",
   "delete#cql"    : "DELETE FROM cql_test WHERE KEY='foobar'",
   "select2#cql"   : "SELECT * FROM cql_test WHERE KEY='%s'",
