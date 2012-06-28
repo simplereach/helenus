@@ -1,11 +1,11 @@
 language: node_js
 node_js:
   - 0.6
-  - 0.7
+  - 0.8
 
 env:
-  - CASSANDRA_VERSION=1.0.9
-  - CASSANDRA_VERSION=1.1.0
+  - CASSANDRA_VERSION=1.0.10
+  - CASSANDRA_VERSION=1.1.1
 
 before_install:
   - sudo apt-get remove -y --purge cassandra
