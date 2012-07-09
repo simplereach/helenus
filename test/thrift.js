@@ -532,6 +532,19 @@ module.exports = {
     });
   },
 
+  'test composite cf remove column':function(test, assert) {
+    var key = [ 'åbcd', new Helenus.UUID('e491d6ac-b124-4795-9ab3-c8a0cf92615c') ],
+        col = [12345678912345, new Date(1326400762701)];
+    cf_standard.remove(key, col, {timestamp:new Date()}, function(err){
+      assert.ifError(err);
+      cf_standard.get(key, function(err, row){
+        assert.ifError(err);
+        assert.ok(row.count === 0);
+      });
+      test.finish();
+    });
+  },
+
   'test standard cf remove row':function(test, assert) {
     cf_standard.remove(config.standard_row_key, {timestamp:new Date()}, function(err){
       assert.ifError(err);
