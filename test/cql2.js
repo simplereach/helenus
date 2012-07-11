@@ -48,6 +48,14 @@ module.exports = {
      });
   },
 
+  'test cql create counter column family':function(test, assert){
+     conn.cql(config['create_counter_cf#cql'], function (err, res){
+       assert.ifError(err);
+       assert.ok(res === undefined);
+       test.finish();
+     });
+  },
+
   'test cql update':function(test, assert){
     conn.cql(config['update#cql'], function(err, res){
       assert.ifError(err);
@@ -63,6 +71,14 @@ module.exports = {
     setTimeout(function(){
       test.finish();
     }, 100);
+  },
+
+  'test cql incr':function(test, assert){
+    conn.cql(config['incr#cql'], function(err, res){
+      assert.ifError(err);
+      assert.ok(res === undefined);
+      test.finish();
+    });
   },
 
   'test cql select':function(test, assert){
@@ -82,6 +98,29 @@ module.exports = {
       assert.ok(res[0] instanceof Helenus.Row);
       assert.ok(res[0].get('foo').value === 'bar');
       test.finish();
+    });
+  },
+
+  'test cql select counter':function(test, assert){
+    conn.cql(config['select_counter#cql'], function(err, res){
+      assert.ifError(err);
+      assert.ok(res.length === 1);
+      assert.ok(res[0] instanceof Helenus.Row);
+      assert.ok(res[0].get('foo').value === 10);
+      test.finish();
+    });
+  },
+
+  'test cql incr and select':function(test, assert){
+    conn.cql(config['incr#cql'], function(err, res){
+      assert.ifError(err);
+      conn.cql(config['select_counter#cql'], function(err, res){
+        assert.ifError(err);
+        assert.ok(res.length === 1);
+        assert.ok(res[0] instanceof Helenus.Row);
+        assert.ok(res[0].get('foo').value === 20);
+        test.finish();
+      });
     });
   },
 
