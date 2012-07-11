@@ -55,6 +55,7 @@ module.exports = {
   'test cql use keyspace':testResultless(config['use#cql']),
 
   'test cql static CF create column family':testResultless(config['static_create_cf#cql']),
+  'test cql static count CF create column family':testResultless(config['static_create_cnt_cf#cql']),
   'test cql static CF update':testResultless(config['static_update#cql']),
   'test cql static CF update with no callback':function(test, assert){
     conn.cql(config['static_update#cql']);
@@ -64,6 +65,8 @@ module.exports = {
       test.finish();
     }, 100);
   },
+
+  'test cql static counter CF update':testResultless(config['static_update_cnt#cql']),
 
   'test cql static CF select':testCql(config['static_select#cql'], function(test, assert, err, res){
     assert.ok(res.length === 1);
@@ -76,6 +79,26 @@ module.exports = {
     assert.ok(res[0] instanceof Helenus.Row);
     assert.ok(res[0].get('foo').value === 'bar');
   }),
+
+  'test cql static counter CF select':testCql(config['static_select_cnt#cql'], function(test, assert, err, res){
+      assert.ok(res.length === 1);
+      assert.ok(res[0] instanceof Helenus.Row);
+      assert.ok(res[0].get('cnt').value === 10);
+  }),
+
+  'test cql static counter CF incr and select':function(test, assert){
+    conn.cql(config['static_update_cnt#cql'], function(err, res){
+      assert.ifError(err);
+
+      conn.cql(config['static_select_cnt#cql'], function(err, res){
+        assert.ifError(err);
+        assert.ok(res.length === 1);
+        assert.ok(res[0] instanceof Helenus.Row);
+        assert.ok(res[0].get('cnt').value === 20);
+        test.finish();
+      });
+    });
+  },
 
   'test cql static CF select with bad user input':testCql("SELECT foo FROM cql_test WHERE id='?'", ["'foobar"], function(test, assert, err, res){
     assert.ok(res.length === 0);
