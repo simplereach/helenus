@@ -143,3 +143,18 @@
 ==================
 
   * Fix incorrect CQL setting after restarting dropped connection [ @devdazed #49 ]
+
+0.5.4 / 2012-06-26
+==================
+
+  * Update to work with node v0.8+ [ @devdazed ]
+  * Removed checks for ghosst in ranges for C* 1.1.1 [ @devdazed ]
+  * Added Increment for CounterColumns [ @calvinfo #54 ]
+  * Added TTL Option for Inserts [ @calvinfo #52 ]
+
+0.5.5 / 2012-07-11
+==================
+
+  * Fixed issue with removing composites [ @calvinfo #59 ]
+  * Added tests for Composite Removal [ @calvinfo #60 ]
+  * Fix and Test for Counter Columns not returning Numbers in CQL [ @calvinfo #62 ]
