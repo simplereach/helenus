@@ -160,7 +160,7 @@ This will return the column with a specific name
 
 This is wrapper function of Array.forEach which return name,value,ts,ttl of column from row as callback params.
 
-    results.foreach(function(row){
+    results.forEach(function(row){
       //all row of result
       row.forEach(function(name,value,ts,ttl){
         //all column of row
