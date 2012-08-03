@@ -158,3 +158,8 @@
   * Fixed issue with removing composites [ @calvinfo #59 ]
   * Added tests for Composite Removal [ @calvinfo #60 ]
   * Fix and Test for Counter Columns not returning Numbers in CQL [ @calvinfo #62 ]
+
+0.5.6 / 2012-08-03
+==================
+
+  * Fixed issue with serializatoin of start / end in range queries [ @devdazed ]
