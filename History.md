@@ -163,3 +163,8 @@
 ==================
 
   * Fixed issue with serializatoin of start / end in range queries [ @devdazed ]
+
+0.5.7 / 2012-08-26
+==================
+
+  * Fixed issue with deserialization of ReversedType in CQL [ @devdazed #67 ]

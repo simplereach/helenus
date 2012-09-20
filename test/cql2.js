@@ -56,8 +56,24 @@ module.exports = {
      });
   },
 
+  'test cql create reversed column family':function(test, assert){
+     conn.cql(config['create_reversed_cf#cql'], function (err, res){
+       assert.ifError(err);
+       assert.ok(res === undefined);
+       test.finish();
+     });
+  },
+
   'test cql update':function(test, assert){
     conn.cql(config['update#cql'], function(err, res){
+      assert.ifError(err);
+      assert.ok(res === undefined);
+      test.finish();
+    });
+  },
+
+  'test cql update reversed':function(test, assert){
+    conn.cql(config['update_reversed#cql'], function(err, res){
       assert.ifError(err);
       assert.ok(res === undefined);
       test.finish();
@@ -87,6 +103,17 @@ module.exports = {
       assert.ok(res.length === 1);
       assert.ok(res[0] instanceof Helenus.Row);
       assert.ok(res[0].get('foo').value === 'bar');
+      test.finish();
+    });
+  },
+
+  'test cql select reversed':function(test, assert){
+    conn.cql(config['select_reversed#cql'], function(err, res){
+      assert.ifError(err);
+      assert.ok(res.length === 1);
+      assert.ok(res[0] instanceof Helenus.Row);
+      assert.ok(res[0].get('foo').value === 'bar');
+
       test.finish();
     });
   },
