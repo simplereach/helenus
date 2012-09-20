@@ -1,5 +1,6 @@
 var config = require('./helpers/thrift'),
     system = require('./helpers/connection'),
+    badSystem = require('./helpers/bad_connection'),
     Helenus, conn, ks, cf_standard, row_standard, cf_composite, cf_counter;
 
 module.exports = {
@@ -33,6 +34,22 @@ module.exports = {
       assert.ifError(err);
       assert.ok(keyspace.definition.name === 'system');
       test.finish();
+    });
+  },
+
+  'test bad pool connect':function(test, assert) {
+    var badConn = new Helenus.ConnectionPool(badSystem);
+    // Add error handler to avoid uncaught exception.
+    badConn.on('error', function (err) { assert.isDefined(err); });
+    badConn.connect(function(err, keyspace) {
+       assert.isDefined(err);
+       badConn.createKeyspace(config.keyspace, function(err){
+          assert.isDefined(err);
+          badConn.dropKeyspace(config.keyspace, function(err){
+            assert.isDefined(err);
+            test.finish();
+          });
+       });
     });
   },
 

@@ -1,4 +1,5 @@
-var poolConfig = require('./helpers/connection'), Helenus, conn,
+var poolConfig = require('./helpers/connection'),
+    badConfig = require('./helpers/bad_connection'), Helenus, conn,
     config = require('./helpers/cql3'),
     canSelectCqlVersion = require('./helpers/can_select_cql_version');
 
@@ -49,6 +50,19 @@ module.exports = {
       }
       connect();
     });
+  },
+
+  'test a bad connection will return an error':function(test, assert){
+     var badConn = new Helenus.ConnectionPool(badConfig);
+     // Add error handler to avoid uncaught exception.
+     badConn.on('error', function (err) { assert.isDefined(err); });
+     badConn.connect(function(err) {
+        assert.isDefined(err);
+        badConn.cql(config['create_ks#cql'], function(err, res){
+           assert.isDefined(err);
+           test.finish();
+         });
+     });
   },
 
   'test cql create keyspace':testResultless(config['create_ks#cql']),
