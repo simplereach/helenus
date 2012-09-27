@@ -9,13 +9,14 @@ env:
 
 before_install:
   - sudo apt-get remove -y --purge cassandra
+  - sudo apt-get install libjna-java
+  - sudo apt-get install python-support
+  - sudo rm -rf /etc/security/limits.d/cassandra.conf
   - sudo rm -rf /var/log/cassandra
   - sudo rm -rf /var/lib/cassandra
 
 install:
   - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_${CASSANDRA_VERSION}_all.deb
-  - sudo rm -rf /etc/security/limits.d/cassandra.conf
-  - sudo apt-get install libjna-java
   - sudo dpkg -i cassandra_${CASSANDRA_VERSION}_all.deb
   - npm install
   - until nc -z localhost 9160; do sleep 1; done
