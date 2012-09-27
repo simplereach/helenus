@@ -8,7 +8,7 @@ env:
   - CASSANDRA_VERSION=1.1.5
 
 before_install:
-  - sudo dpkg -r --purge cassandra
+  - sudo dpkg --purge cassandra
   - sudo apt-get install libjna-java
   - sudo apt-get install python-support
   - sudo rm -rf /var/log/cassandra
