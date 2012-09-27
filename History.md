@@ -168,3 +168,12 @@
 ==================
 
   * Fixed issue with deserialization of ReversedType in CQL [ @devdazed #67 ]
+
+0.5.8 / 2012-9-27
+==================
+
+  * Exposed Consistency Levels [ @calvinfo #73 ]
+  * Adding callback on nodes unavailable exception [ @calvinfo #72 ]
+  * Added hostPoolSize on ConnectionPool [ @hpainter #70 ]
+  * Fixed issue with interpolating array parameters [ @devdazed #68 ]
+
