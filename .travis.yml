@@ -14,6 +14,7 @@ before_install:
 
 install:
   - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_${CASSANDRA_VERSION}_all.deb
+  - sudo apt-get install libjna-java
   - sudo dpkg -i cassandra_${CASSANDRA_VERSION}_all.deb
   - npm install
   - until nc -z localhost 9160; do sleep 1; done
