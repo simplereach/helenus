@@ -93,7 +93,7 @@ If you do not want to use CQL, you can make calls using the thrift driver
 
         //get what we just put in
         //the driver will return a Helenus.Row object just like CQL
-        cf.get('foo', function(err, row){
+        cf.get('foo', {consistency:Helenus.ConsistencyLevel.ONE} function(err, row){
           if(err){
             throw(err);
           }
@@ -201,6 +201,15 @@ Columns are returned as objects with the following structure:
     ttl: 123456        //The ttl (in milliseconds) for the columns
   }
 ```
+
+## ConsistencyLevel
+
+Helenus supports using a custom consistency level. By default, when using the thrift client reads and writes will both use `QUORUM`. When using the thrift driver, you simply pass a custom level in the options:
+
+```javascript
+cf.insert(key, values, {consistency : Helenus.ConsistencyLevel.ANY}, callback);
+```
+
 
 ## Contributors
 

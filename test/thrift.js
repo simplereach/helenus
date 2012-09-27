@@ -168,6 +168,14 @@ module.exports = {
     });
   },
 
+  'test standard cf.insert with custom CL':function(test, assert){
+    cf_standard.insert(config.standard_row_key, config.standard_insert_values,
+                      { consistency : Helenus.ConsistencyLevel.ANY }, function(err, results){
+      assert.ifError(err);
+      test.finish();
+    });
+  },
+
   'test standard cf.insert into composite cf':function(test, assert){
     var values = [
       new Helenus.Column([12345678912345, new Date(1326400762701)], 'some value')
@@ -229,6 +237,19 @@ module.exports = {
       assert.ifError(err);
       assert.ok(row instanceof Helenus.Row);
       assert.ok(row.count === 1);
+      assert.ok(row.key === config.standard_row_key);
+      assert.ok(row.get('one').value === 'a');
+
+      test.finish();
+    });
+  },
+
+  'test standard cf.get with custom CL':function(test, assert){
+    cf_standard.get(config.standard_row_key,
+                    { consistency : Helenus.ConsistencyLevel.ONE }, function(err, row){
+
+      assert.ifError(err);
+      assert.ok(row instanceof Helenus.Row);
       assert.ok(row.key === config.standard_row_key);
       assert.ok(row.get('one').value === 'a');
 
