@@ -1,0 +1,6 @@
+{
+  "hosts"      : ["unknown"],
+  "user"       : "test",
+  "password"   : "test1233",
+  "timeout"    : 3000
+}
