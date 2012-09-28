@@ -60,6 +60,7 @@ module.exports = {
         assert.isDefined(err);
         badConn.cql(config['create_ks#cql'], function(err, res){
            assert.isDefined(err);
+           badConn.close();
            test.finish();
          });
      });
