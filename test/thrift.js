@@ -47,6 +47,7 @@ module.exports = {
           assert.isDefined(err);
           badConn.dropKeyspace(config.keyspace, function(err){
             assert.isDefined(err);
+            badConn.close();
             test.finish();
           });
        });
