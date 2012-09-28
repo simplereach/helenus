@@ -12,6 +12,7 @@ before_install:
   - sudo apt-get install python-support
   - sudo rm -rf /etc/security/limits.d/cassandra.conf
   - sudo rm -rf /etc/init.d/cassandra
+  - sudo rm -rf /etc/cassandra/cassandra-env.sh
   - sudo rm -rf /var/log/cassandra
   - sudo rm -rf /var/lib/cassandra
 
