@@ -1,5 +1,5 @@
 /**
- * Runs tests defined in thrift.js, but with ConnectionPool 
+ * Runs tests defined in thrift.js, but with ConnectionPool
  * option hostPoolSize set to 5.
  */
 var config = require('./helpers/thrift'),
