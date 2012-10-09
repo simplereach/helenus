@@ -4,7 +4,7 @@ node_js:
   - 0.8
 
 env:
-  - CASSANDRA_VERSION=1.0.11
+  - CASSANDRA_VERSION=1.0.12
   - CASSANDRA_VERSION=1.1.5
 
 before_install:
