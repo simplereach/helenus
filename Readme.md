@@ -5,6 +5,9 @@
   Currently the driver has full CQL support and a growing support for thrift (non-cql) commands.
   If you would like to contribute, please contact Russ Bradberry &lt;rbradberry@simplereach.com&gt;
 
+  If you have any questions regarding the driver, please visit our [google group](https://groups.google.com/forum/?fromgroups#!forum/helenus)
+
+
 ### Build Status
 
   [![Build Status](https://secure.travis-ci.org/simplereach/helenus.png)](http://travis-ci.org/simplereach/helenus)
@@ -39,7 +42,7 @@
       });
 
   //if you don't listen for error, it will bubble up to `process.uncaughtException`
-  //pools act just like connection objects, so you dont have to worry about api
+  //pools act just like connection objects, so you don't have to worry about api
   //differences when using either the pool or the connection
   pool.on('error', function(err){
     console.error(err.name, err.message);
