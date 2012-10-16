@@ -45,8 +45,10 @@
   "integers_update#cql"       : "UPDATE integers set longnumber = ?, varnumber = ? where number = ?",
   "integers_update#vals1"     : [25, 36, 1],
   "integers_update#vals2"     : [-25, -36, -1],  
+  "integers_update#vals3"     : [-25, -8388607, -2],
   "integers_select1#cql"      : "SELECT * FROM integers where number = 1",
   "integers_select2#cql"      : "SELECT * FROM integers where number = -1",
+  "integers_select3#cql"      : "SELECT * FROM integers where number = -2",
   
 
   "prepare#cql"   : "SELECT * FROM ? WHERE KEY = ?",
