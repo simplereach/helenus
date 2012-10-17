@@ -11,7 +11,7 @@ env:
 
 matrix:
   allow_failures:
-    - env: CASSANDRA_VERSION:1.2.0beta1
+    - env: CASSANDRA_VERSION=1.2.0beta1
     - node_js: 0.9
 
 before_install:
