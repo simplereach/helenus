@@ -37,5 +37,6 @@ after_script:
 
 notifications:
   email: false
-  campfire: false
+  campfire:
+    secure: "24WluBFSwNgmXL+ulZrwEQojuHdCbTQZ5mdLTo5gOsm6j8h6AIjU/U+ubHcu\nNaEufjkCuGwr4LWTInFEjwe+kq6SqiXCstJ8BHu/eM1IYwKbHO9U23WEemVF\n6vWHoNVHWdQeUTLBZRaqYMp07c32q5Xsn5LREXeO6I8f42l0yac="
 
