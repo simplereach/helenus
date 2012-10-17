@@ -2,10 +2,17 @@ language: node_js
 node_js:
   - 0.6
   - 0.8
+  - 0.9
 
 env:
   - CASSANDRA_VERSION=1.0.12
-  - CASSANDRA_VERSION=1.1.5
+  - CASSANDRA_VERSION=1.1.6
+  - CASSANDRA_VERSION=1.2.0beta1
+
+matrix:
+  allow_failures:
+    - env: CASSANDRA_VERSION:1.2.0beta1
+    - node_js: 0.9
 
 before_install:
   - sudo apt-get install libjna-java
@@ -31,3 +38,4 @@ after_script:
 notifications:
   email: false
   campfire: false
+
