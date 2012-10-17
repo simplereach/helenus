@@ -162,7 +162,7 @@
 0.5.6 / 2012-08-03
 ==================
 
-  * Fixed issue with serializatoin of start / end in range queries [ @devdazed ]
+  * Fixed issue with serialization of start / end in range queries [ @devdazed ]
 
 0.5.7 / 2012-08-26
 ==================
@@ -176,4 +176,10 @@
   * Adding callback on nodes unavailable exception [ @calvinfo #72 ]
   * Added hostPoolSize on ConnectionPool [ @hpainter #70 ]
   * Fixed issue with interpolating array parameters [ @devdazed #68 ]
+
+0.5.9 / 2012-10-17
+==================
+
+  * Added fully functional composite column slices [ @devdazed #82 ]
+
 
