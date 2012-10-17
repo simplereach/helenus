@@ -229,6 +229,8 @@ module.exports = {
       assert.ifError(err);
       assert.ok(row instanceof Helenus.Row);
       assert.ok(row.get([12345678912345, new Date(1326400762701)]).value === 'some value');
+
+
       test.finish();
     });
   },
@@ -242,6 +244,64 @@ module.exports = {
       assert.ok(row.get('one').value === 'a');
 
       test.finish();
+    });
+  },
+
+  'test standard cf with composite column slice':function(test, assert){
+    var values = [
+        new Helenus.Column([1, new Date(1)], 'a'),
+        new Helenus.Column([2, new Date(2)], 'b'),
+        new Helenus.Column([3, new Date(3)], 'c'),
+        new Helenus.Column([4, new Date(4)], 'd'),
+        new Helenus.Column([5, new Date(5)], 'e'),
+        new Helenus.Column([6, new Date(6)], 'f'),
+        new Helenus.Column([7, new Date(7)], 'g')
+      ],
+      key = [ 'comp_range_1', new Helenus.UUID('e491d6ac-b124-4795-9ab3-c8a0cf92615c') ];
+
+    cf_composite.insert(key, values, function(err){
+      assert.ifError(err);
+      var options = {
+        start: [3],
+        end: [5]
+      };
+
+      cf_composite.get(key, options, function(err, row){
+        assert.ifError(err);
+        assert.ok(row.count === 3);
+        assert.ok(row[0].name[0] === 3);
+        assert.ok(row[1].name[0] === 4);
+        assert.ok(row[2].name[0] === 5);
+        test.finish();
+      });
+    });
+  },
+
+  'test standard cf with exclusive composite column slice':function(test, assert){
+    var values = [
+        new Helenus.Column([1, new Date(1)], 'a'),
+        new Helenus.Column([2, new Date(2)], 'b'),
+        new Helenus.Column([3, new Date(3)], 'c'),
+        new Helenus.Column([4, new Date(4)], 'd'),
+        new Helenus.Column([5, new Date(5)], 'e'),
+        new Helenus.Column([6, new Date(6)], 'f'),
+        new Helenus.Column([7, new Date(7)], 'g')
+      ],
+      key = [ 'comp_range_1', new Helenus.UUID('e491d6ac-b124-4795-9ab3-c8a0cf92615c') ];
+
+    cf_composite.insert(key, values, function(err){
+      assert.ifError(err);
+      var options = {
+        start: [[3, false]],
+        end: [[5, false]]
+      };
+
+      cf_composite.get(key, options, function(err, row){
+        assert.ifError(err);
+        assert.ok(row.count === 1);
+        assert.ok(row[0].name[0] === 4);
+        test.finish();
+      });
     });
   },
 
