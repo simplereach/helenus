@@ -1,4 +1,4 @@
-{
+module.exports = {
   "keyspace"     : "helenus_test_keyspace",
   "cf_standard"  : "cf_standard_test",
   "cf_standard_composite"  : "cf_standard_composite_test",
@@ -29,7 +29,10 @@
   "cf_standard_composite_options"   : {
     "key_validation_class"     : "CompositeType(UTF8Type, UUIDType)",
     "comparator_type"          : "CompositeType(LongType, DateType)",
-    "default_validation_class" : "UTF8Type"
+    "default_validation_class" : "UTF8Type",
+    "columns": [
+      { "name": [123, new Date(2012,9,1)], "validation_class" : "BytesType"}
+    ]
   },
   "cf_supercolumn_options" : {
     "column_type" : "Super",

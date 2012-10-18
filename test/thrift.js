@@ -183,6 +183,8 @@ module.exports = {
     ],
     key = [ 'åbcd', new Helenus.UUID('e491d6ac-b124-4795-9ab3-c8a0cf92615c') ];
 
+    cf_composite.setColumnValidator(values[0].name, 'UTF8Type');
+
     cf_composite.insert(key, values, function(err, results){
       assert.ifError(err);
       test.finish();
