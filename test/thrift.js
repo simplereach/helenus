@@ -249,6 +249,17 @@ module.exports = {
     });
   },
 
+  'test standard cf.get count':function(test, assert){
+    cf_standard.count(config.standard_row_key, config.standard_get_options, function(err, val){
+      assert.ifError(err);
+      assert.ok(typeof val === 'number');
+      assert.ok(val === 1);
+
+      test.finish();
+    });
+  },
+
+
   'test standard cf with composite column slice':function(test, assert){
     var values = [
         new Helenus.Column([1, new Date(1)], 'a'),

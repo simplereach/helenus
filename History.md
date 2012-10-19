@@ -186,6 +186,7 @@
 ==================
 
   * Fixed issue with composite column meta column marshalling [ @devdazed ]
-  * Exposed setColumnValidator to the user [ @devdazed #
+  * Exposed setColumnValidator to the user [ @devdazed #3 ]
+  * Added support for column counts to Thrift API [ @devdazed #26 ]
 
 
