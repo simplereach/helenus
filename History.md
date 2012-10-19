@@ -182,4 +182,10 @@
 
   * Added fully functional composite column slices [ @devdazed #82 ]
 
+0.6.0 / 2012-10-19
+==================
+
+  * Fixed issue with composite column meta column marshalling [ @devdazed ]
+  * Exposed setColumnValidator to the user [ @devdazed #
+
 
