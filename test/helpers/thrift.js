@@ -29,10 +29,7 @@ module.exports = {
   "cf_standard_composite_options"   : {
     "key_validation_class"     : "CompositeType(UTF8Type, UUIDType)",
     "comparator_type"          : "CompositeType(LongType, DateType)",
-    "default_validation_class" : "UTF8Type",
-    "columns": [
-      { "name": [123, new Date(2012,9,1)], "validation_class" : "BytesType"}
-    ]
+    "default_validation_class" : "UTF8Type"
   },
   "cf_supercolumn_options" : {
     "column_type" : "Super",
