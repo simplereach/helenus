@@ -27,6 +27,19 @@ module.exports = {
     });
   },
 
+  'test pool.destroy without keyspace':function(test, assert){
+    conn = new Helenus.ConnectionPool(system);
+    conn.on('close', function () {
+      test.finish();
+    });
+    assert.doesNotThrow(function(){
+      conn.connect(function(err, keyspace){
+        assert.ifError(err);
+        conn.destroy();
+      });
+    });
+  },
+
   'test pool.connect with keyspace':function(test, assert){
     system.keyspace = 'system';
     conn = new Helenus.ConnectionPool(system);
@@ -695,6 +708,19 @@ module.exports = {
     });
     assert.doesNotThrow(function(){
       conn.close();
+    });
+  },
+
+  'test pool.destroy':function(test, assert){
+    conn = new Helenus.ConnectionPool(system);
+    conn.on('close', function(){
+      test.finish();
+    });
+    assert.doesNotThrow(function() {
+      conn.connect(function (err, keyspace) {
+        assert.ifError(err);
+        conn.destroy();
+      });
     });
   },
 
