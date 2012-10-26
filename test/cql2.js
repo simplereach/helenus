@@ -25,6 +25,17 @@ module.exports = {
     });
   },
 
+  'test connection.destroy':function(test, assert){
+    var destroyedConn = new Helenus.ConnectionPool(poolConfig);
+    destroyedConn.on('close', function () {
+        test.finish();
+    });
+    destroyedConn.connect(function(err){
+      assert.ifError(err);
+      destroyedConn.destroy();
+    });
+  },
+
   'test a bad connection will return an error':function(test, assert){
      var badConn = new Helenus.ConnectionPool(badConfig);
      // Add error handler to avoid uncaught exception.

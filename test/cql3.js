@@ -66,6 +66,17 @@ module.exports = {
      });
   },
 
+  'test connection.destroy':function(test, assert){
+    var destroyedConn = new Helenus.ConnectionPool(poolConfig);
+    destroyedConn.on('close', function () {
+        test.finish();
+    });
+    destroyedConn.connect(function(err){
+      assert.ifError(err);
+      destroyedConn.destroy();
+    });
+  },
+
   'test cql create keyspace':testResultless(config['create_ks#cql']),
   'test cql use keyspace':testResultless(config['use#cql']),
 
