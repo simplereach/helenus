@@ -182,9 +182,11 @@
 
   * Added fully functional composite column slices [ @devdazed #82 ]
 
-0.6.0 / 2012-10-19
+0.6.0 / 2012-10-26
 ==================
 
   * Fixed issue with composite column meta column marshalling [ @devdazed ]
   * Exposed setColumnValidator to the user [ @devdazed #3 ]
   * Added support for column counts to Thrift API [ @devdazed #26 ]
+  * Fixed boolean quoting issue in CQL2/3 [ @kzadorozhny #83 ]
+  * Added support for negative integers in CQL2/3 [ @pieterbos ]
