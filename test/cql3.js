@@ -221,6 +221,35 @@ module.exports = {
     assert.strictEqual(res[0].get('body').value, 'body text 1');
     assert.strictEqual(res[0].get('posted_by').value, 'author1');
   }),
+  
+  'test cql integers CF create column family':testResultless(config['integers_create_cf#cql']),
+  'test cql integers CF update 1':testResultless(config['integers_update#cql'], config['integers_update#vals1']),
+  'test cql integers CF update 2':testResultless(config['integers_update#cql'], config['integers_update#vals2']),
+  'test cql integers CF update 3':testResultless(config['integers_update#cql'], config['integers_update#vals3']),
+  'test cql integers CF select positive numbers':testCql(config['integers_select1#cql'], function(test, assert, err, res){
+    assert.strictEqual(res.length, 1);
+    assert.ok(res[0] instanceof Helenus.Row);
+    assert.strictEqual(res[0].length, 3);
+    assert.strictEqual(res[0].get('number').value, 1);
+    assert.strictEqual(res[0].get('longnumber').value, 25);
+    assert.strictEqual(res[0].get('varnumber').value, 36);
+  }),
+  'test cql integers CF select negative numbers':testCql(config['integers_select2#cql'], function(test, assert, err, res){
+    assert.strictEqual(res.length, 1);
+    assert.ok(res[0] instanceof Helenus.Row);
+    assert.strictEqual(res[0].length, 3);
+    assert.strictEqual(res[0].get('number').value, -1);
+    assert.strictEqual(res[0].get('longnumber').value, -25);
+    assert.strictEqual(res[0].get('varnumber').value, -36);
+  }),
+  'test cql integers CF select negative numbers with 3 byte varint':testCql(config['integers_select3#cql'], function(test, assert, err, res){
+    assert.strictEqual(res.length, 1);
+    assert.ok(res[0] instanceof Helenus.Row);
+    assert.strictEqual(res[0].length, 3);
+    assert.strictEqual(res[0].get('number').value, -2);
+    assert.strictEqual(res[0].get('longnumber').value, -25);
+    assert.strictEqual(res[0].get('varnumber').value, -8388607);//test a 3 byte-long variable integer
+  }),
 
   'test cql drop keyspace':testResultless(config['drop_ks#cql']),
 
