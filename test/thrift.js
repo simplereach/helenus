@@ -1,7 +1,7 @@
 var config = require('./helpers/thrift'),
     system = require('./helpers/connection'),
     badSystem = require('./helpers/bad_connection'),
-    Helenus, conn, ks, cf_standard, row_standard, cf_composite, cf_counter;
+    Helenus, conn, ks, cf_standard, row_standard, cf_composite, cf_counter, cf_reversed;
 
 module.exports = {
   'setUp':function(test, assert){
@@ -93,6 +93,13 @@ module.exports = {
 
   'test keyspace.createCounterFamily':function(test, assert){
     ks.createColumnFamily(config.cf_counter, config.cf_counter_options, function(err){
+      assert.ifError(err);
+      test.finish();
+    });
+  },
+
+  'test keyspace.createColumFamily reversed':function(test, assert){
+    ks.createColumnFamily(config.cf_reversed, config.cf_reversed_options, function(err){
       assert.ifError(err);
       test.finish();
     });

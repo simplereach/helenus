@@ -4,6 +4,7 @@ module.exports = {
   "cf_standard_composite"  : "cf_standard_composite_test",
   "cf_supercolumn"  : "cf_supercolumn_test",
   "cf_counter"   : "cf_counter_test",
+  "cf_reversed"   : "cf_reversed_test",
   "cf_invalid"   : "cf_invalid_test",
   "cf_error"     : "<!`~;/?}]|\\-",
   "cf_standard_options"   : {
@@ -42,6 +43,11 @@ module.exports = {
     "default_validation_class" : "CounterColumnType",
     "key_validation_class" : "UTF8Type",
     "comparator_type" : "UTF8Type"
+  },
+  "cf_reversed_options": {
+    "key_validation_class" : "UTF8Type",
+    "default_validation_class" : "UTF8Type",
+    "comparator_type" : "TimeUUIDType(reversed=true)"
   },
   "standard_row_key" : "standard_row_1",
   "standard_insert_values" : {
