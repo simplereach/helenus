@@ -190,3 +190,9 @@
   * Added support for column counts to Thrift API [ @devdazed #26 ]
   * Fixed boolean quoting issue in CQL2/3 [ @kzadorozhny #83 ]
   * Added support for negative integers in CQL2/3 [ @pieterbos ]
+
+0.6.1 / 2012-12-11
+==================
+
+  * Added ability to override method that chooses a host from the pool [ @devdazed ]
+  * Fix handling of reversed CFs for thrift users. [ @psanford  #88 ]
