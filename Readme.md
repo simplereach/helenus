@@ -41,6 +41,9 @@
         //cqlVersion : '3.0.0' // specify this if you're using Cassandra 1.1 and want to use CQL 3
       });
 
+  //optionally you can supply the 'getHost' parameter to the connection pool options which will
+  // allow you to override the default random host decision
+
   //if you don't listen for error, it will bubble up to `process.uncaughtException`
   //pools act just like connection objects, so you don't have to worry about api
   //differences when using either the pool or the connection
