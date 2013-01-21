@@ -4,3 +4,5 @@ node_modules
 lib-cov/
 *.iml
 .idea
+
+test/cql3.js

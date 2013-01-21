@@ -5,11 +5,11 @@ gen-nodejs:
 
 cassandra_types.js: gen-nodejs
 	cp gen-nodejs/cassandra_types.js .
-	patch -p1 < patches/cassandra_types.patch
+	#patch -p1 < patches/cassandra_types.patch
 
 Cassandra.js: gen-nodejs
 	cp gen-nodejs/Cassandra.js .
-	patch -p1 < patches/Cassandra.patch
+	#patch -p1 < patches/Cassandra.patch
 
 clean_compile:
 	rm -rf gen-nodejs
