@@ -1,5 +1,5 @@
 {
-  "create_ks#cql" : "CREATE KEYSPACE helenus_cql3_test WITH strategy_class=SimpleStrategy AND strategy_options:replication_factor=1",
+  "create_ks#cql" : "CREATE KEYSPACE helenus_cql3_test WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };",
   "use#cql"       : "USE helenus_cql3_test",
   "drop_ks#cql"   : "DROP KEYSPACE helenus_cql3_test",
 
