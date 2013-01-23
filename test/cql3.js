@@ -1,7 +1,8 @@
 var poolConfig = require('./helpers/connection'),
     badConfig = require('./helpers/bad_connection'), Helenus, conn,
     config = require('./helpers/cql3'),
-    canSelectCqlVersion = require('./helpers/can_select_cql_version');
+    canSelectCqlVersion = require('./helpers/can_select_cql_version'),
+    createKeySpace;
 
 // CQL3 introduces 4 different types of ColumnFamilies, see:
 // https://issues.apache.org/jira/secure/attachment/12511286/create_cf_syntaxes.txt
@@ -11,6 +12,29 @@ function testCql(){
   var tests = args.pop();
 
   return function(test, assert){
+    args.push(function(err, res){
+      assert.ifError(err);
+      tests(test, assert, err, res);
+      test.finish();
+    });
+
+    conn.cql.apply(conn, args);
+  };
+}
+
+function testCreateKeyspace(){
+  var args = Array.prototype.slice.call(arguments);
+  var tests = function(test, assert, err, res) {
+    assert.ok(res === undefined);
+  };
+
+  return function(test, assert){
+    if(conn.clients[0].version[0] === '19' && conn.clients[0].version[1] < '34'){
+      args.push(config['create_ks#cql_v1']);
+    } else {
+      args.push(config['create_ks#cql']);
+    }
+
     args.push(function(err, res){
       assert.ifError(err);
       tests(test, assert, err, res);
@@ -58,7 +82,8 @@ module.exports = {
      badConn.on('error', function (err) { assert.isDefined(err); });
      badConn.connect(function(err) {
         assert.isDefined(err);
-        badConn.cql(config['create_ks#cql'], function(err, res){
+
+        badConn.cql(createKeySpace, function(err, res){
            assert.isDefined(err);
            badConn.close();
            test.finish();
@@ -66,7 +91,7 @@ module.exports = {
      });
   },
 
-  'test cql create keyspace':testResultless(config['create_ks#cql']),
+  'test cql create keyspace':testCreateKeyspace(),
   'test cql use keyspace':testResultless(config['use#cql']),
 
   'test cql static CF create column family':testResultless(config['static_create_cf#cql']),
