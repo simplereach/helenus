@@ -196,3 +196,11 @@
 
   * Added ability to override method that chooses a host from the pool [ @devdazed ]
   * Fix handling of reversed CFs for thrift users. [ @psanford  #88 ]
+
+0.6.2 / 2013-01-23
+==================
+
+  * Added support for CQL3 in v1.2.0 [ @chris-rock #92 ]
+  * Fixed CQL 3 in v 0.1.x [ @devdazed #93 ]
+
+
