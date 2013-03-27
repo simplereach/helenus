@@ -3,7 +3,7 @@ var config = require('./helpers/thrift'),
     badSystem = require('./helpers/bad_connection'),
     EventEmitter = require('events').EventEmitter,
     Helenus, conn, ks, cf_standard, row_standard, cf_composite, cf_counter,
-    cf_reversed, cf_composite_nested_reversed;
+    cf_reversed, cf_composite_nested_reversed, cf_range;
 
 module.exports = {
   'setUp':function(test, assert){
@@ -649,9 +649,8 @@ module.exports = {
     test.finish();
   },
 
-  'test get_range all keys': function(test, assert) {
+  'test cf_range insert': function(test, assert) {
     var emitter = new EventEmitter();
-    var cf_range;
     var row_count = 150; // 150 > default count of 100
     ks.createColumnFamily(config.cf_range, config.cf_range_options, function(err){
       assert.ifError(err);
@@ -675,22 +674,52 @@ module.exports = {
           assert.ifError(err);
           pending--;
           if (pending == 0) {
-            emitter.emit('inserts done');
+            test.finish();
           }
         });
       }
     });
+  },
 
-    emitter.on('inserts done', function() {
-      var range_stream = cf_range.getRange();
-      var rows = [];
-      range_stream.on('data', function(row) {
-        rows.push(row);
-      });
-      range_stream.on('end', function() {
-        assert.ok( row_count == rows.length );
-        test.finish();
-      });
+  'test cf.getRange all keys': function(test, assert) {
+    var range_stream = cf_range.getRange();
+    var rows = [];
+    range_stream.on('data', function(row) {
+      rows.push(row);
+    });
+    range_stream.on('end', function() {
+      assert.ok( 150 == rows.length );
+      test.finish();
+    });
+  },
+
+  'test cf.getRange limit count > bufferSize': function(test, assert) {
+    var range_stream = cf_range.getRange({
+      start: '',
+      rowCount: 110
+    });
+    var rows = [];
+    range_stream.on('data', function(row) {
+      rows.push(row);
+    });
+    range_stream.on('end', function() {
+      assert.ok( 110 == rows.length );
+      test.finish();
+    });
+  },
+
+  'test cf.getRange limit count < bufferSize': function(test, assert) {
+    var range_stream = cf_range.getRange({
+      start: '',
+      rowCount: 10
+    });
+    var rows = [];
+    range_stream.on('data', function(row) {
+      rows.push(row);
+    });
+    range_stream.on('end', function() {
+      assert.ok( 10 == rows.length );
+      test.finish();
     });
   },
 
