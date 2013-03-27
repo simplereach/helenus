@@ -6,6 +6,7 @@ module.exports = {
   "cf_counter"   : "cf_counter_test",
   "cf_reversed"   : "cf_reversed_test",
   "cf_composite_nested_reversed"   : "cf_composite_nested_reversed_test",
+  "cf_range"   : "cf_range_test",
   "cf_invalid"   : "cf_invalid_test",
   "cf_error"     : "<!`~;/?}]|\\-",
   "cf_standard_options"   : {
@@ -54,6 +55,11 @@ module.exports = {
     "key_validation_class" : "UTF8Type",
     "default_validation_class" : "UTF8Type",
     "comparator_type" : "CompositeType(TimeUUIDType(reversed=true),UTF8Type)"
+  },
+  "cf_range_options": {
+    "key_validation_class" : "UTF8Type",
+    "default_validation_class" : "UTF8Type",
+    "comparator_type" : "UTF8Type"
   },
   "standard_row_key" : "standard_row_1",
   "standard_insert_values" : {

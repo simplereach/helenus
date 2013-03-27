@@ -1,6 +1,7 @@
 var config = require('./helpers/thrift'),
     system = require('./helpers/connection'),
     badSystem = require('./helpers/bad_connection'),
+    EventEmitter = require('events').EventEmitter,
     Helenus, conn, ks, cf_standard, row_standard, cf_composite, cf_counter,
     cf_reversed, cf_composite_nested_reversed;
 
@@ -646,6 +647,51 @@ module.exports = {
     });
 
     test.finish();
+  },
+
+  'test get_range all keys': function(test, assert) {
+    var emitter = new EventEmitter();
+    var cf_range;
+    var row_count = 150; // 150 > default count of 100
+    ks.createColumnFamily(config.cf_range, config.cf_range_options, function(err){
+      assert.ifError(err);
+      emitter.emit('cf ready');
+    });
+
+    emitter.on('cf ready', function() {
+      ks.get(config.cf_range, function(err, columnFamily){
+        assert.ifError(err);
+        cf_range = columnFamily;
+        emitter.emit('got cf');
+      });
+    });
+
+    emitter.on('got cf', function() {
+      var pending = 0;
+      for (var i = 0; i < row_count; i++) {
+        var row_key = 'range_row_key_' + i;
+        pending++;
+        cf_range.insert(row_key, {"utf8-test": row_key}, function(err, results){
+          assert.ifError(err);
+          pending--;
+          if (pending == 0) {
+            emitter.emit('inserts done');
+          }
+        });
+      }
+    });
+
+    emitter.on('inserts done', function() {
+      var range_stream = cf_range.getRange();
+      var rows = [];
+      range_stream.on('data', function(row) {
+        rows.push(row);
+      });
+      range_stream.on('end', function() {
+        assert.ok( row_count == rows.length );
+        test.finish();
+      });
+    });
   },
 
   'test standard cf remove column':function(test, assert) {
