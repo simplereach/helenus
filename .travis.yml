@@ -17,12 +17,12 @@ before_install:
   - sudo rm -rf /etc/cassandra/
   - sudo rm -rf /var/log/cassandra
   - sudo rm -rf /var/lib/cassandra
-  - sudo /etc/init.d/cassandra stop
-  - sudo /etc/init.d/cassandra start
 
 install:
   - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_${CASSANDRA_VERSION}_all.deb
   - sudo dpkg -i --force-overwrite cassandra_${CASSANDRA_VERSION}_all.deb
+  - sudo service cassandra stop
+  - sudo service cassandra start
   - npm install
   - until nc -z localhost 9160; do sleep 1; done
 
