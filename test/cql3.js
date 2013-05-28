@@ -123,7 +123,7 @@ module.exports = {
   'test cql static counter CF select':testCql(config['static_select_cnt#cql'], function(test, assert, err, res){
       assert.ok(res.length === 1);
       assert.ok(res[0] instanceof Helenus.Row);
-      assert.ok(res[0].get('cnt').value === 10);
+      assert.ok(res[0].get('cnt').value.eq(10));
   }),
 
   'test cql static counter CF incr and select':function(test, assert){
@@ -134,7 +134,7 @@ module.exports = {
         assert.ifError(err);
         assert.ok(res.length === 1);
         assert.ok(res[0] instanceof Helenus.Row);
-        assert.ok(res[0].get('cnt').value === 20);
+        assert.ok(res[0].get('cnt').value.eq(20));
         test.finish();
       });
     });
@@ -147,7 +147,7 @@ module.exports = {
   'test cql static CF count':testCql(config['static_count#cql'], function(test, assert, err, res){
     assert.ok(res.length === 1);
     assert.ok(res[0] instanceof Helenus.Row);
-    assert.ok(res[0].get('count').value === 1);
+    assert.ok(res[0].get('count').value.eq(1));
   }),
 
   'test cql static CF error':function(test, assert){
@@ -163,7 +163,7 @@ module.exports = {
   'test cql static CF count with gzip':testCql(config['static_count#cql'], {gzip:true}, function(test, assert, err, res){
     assert.ok(res.length === 1);
     assert.ok(res[0] instanceof Helenus.Row);
-    assert.ok(res[0].get('count').value === 1);
+    assert.ok(res[0].get('count').value.eq(1));
   }),
 
   'test cql static CF delete':function(test, assert){
@@ -256,7 +256,7 @@ module.exports = {
     assert.ok(res[0] instanceof Helenus.Row);
     assert.strictEqual(res[0].length, 3);
     assert.strictEqual(res[0].get('number').value, 1);
-    assert.strictEqual(res[0].get('longnumber').value, 25);
+    assert.strictEqual(res[0].get('longnumber').value.toNumber(), 25);
     assert.strictEqual(res[0].get('varnumber').value, 36);
   }),
   'test cql integers CF select negative numbers':testCql(config['integers_select2#cql'], function(test, assert, err, res){
@@ -264,7 +264,7 @@ module.exports = {
     assert.ok(res[0] instanceof Helenus.Row);
     assert.strictEqual(res[0].length, 3);
     assert.strictEqual(res[0].get('number').value, -1);
-    assert.strictEqual(res[0].get('longnumber').value, -25);
+    assert.ok(res[0].get('longnumber').value.eq(-25));
     assert.strictEqual(res[0].get('varnumber').value, -36);
   }),
   'test cql integers CF select negative numbers with 3 byte varint':testCql(config['integers_select3#cql'], function(test, assert, err, res){
@@ -272,7 +272,7 @@ module.exports = {
     assert.ok(res[0] instanceof Helenus.Row);
     assert.strictEqual(res[0].length, 3);
     assert.strictEqual(res[0].get('number').value, -2);
-    assert.strictEqual(res[0].get('longnumber').value, -25);
+    assert.ok(res[0].get('longnumber').value.eq(-25));
     assert.strictEqual(res[0].get('varnumber').value, -8388607);//test a 3 byte-long variable integer
   }),
 

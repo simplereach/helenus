@@ -2,7 +2,8 @@ var config = require('./helpers/thrift'),
     system = require('./helpers/connection'),
     badSystem = require('./helpers/bad_connection'),
     Helenus, conn, ks, cf_standard, row_standard, cf_composite, cf_counter,
-    cf_reversed, cf_composite_nested_reversed;
+    cf_reversed, cf_composite_nested_reversed,
+    bignum = require('bignum');
 
 module.exports = {
   'setUp':function(test, assert){
@@ -297,9 +298,9 @@ module.exports = {
       cf_composite.get(key, options, function(err, row){
         assert.ifError(err);
         assert.ok(row.count === 3);
-        assert.ok(row[0].name[0] === 3);
-        assert.ok(row[1].name[0] === 4);
-        assert.ok(row[2].name[0] === 5);
+        assert.ok(row[0].name[0].eq(3));
+        assert.ok(row[1].name[0].eq(4));
+        assert.ok(row[2].name[0].eq(5));
         test.finish();
       });
     });
@@ -327,7 +328,7 @@ module.exports = {
       cf_composite.get(key, options, function(err, row){
         assert.ifError(err);
         assert.ok(row.count === 1);
-        assert.ok(row[0].name[0] === 4);
+        assert.ok(row[0].name[0].eq(4));
         test.finish();
       });
     });
@@ -435,8 +436,8 @@ module.exports = {
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
         var col = row.get('long-test');
-        assert.ok(typeof col.value === 'number');
-        assert.ok(col.value === 123456789012345);
+        assert.ok(col.value instanceof bignum);
+        assert.ok(col.value.eq(123456789012345));
         test.finish();
       });
     });

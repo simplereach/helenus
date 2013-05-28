@@ -5,7 +5,7 @@
   "drop_ks#cql"   : "DROP KEYSPACE helenus_cql3_test",
 
   "static_create_cf#cql"     : "CREATE COLUMNFAMILY cql_test (id text, foo text, PRIMARY KEY (id))",
-  "static_create_cnt_cf#cql" : "CREATE TABLE cql_cnt_test (key varchar PRIMARY KEY, cnt counter)",
+  "static_create_cnt_cf#cql" : "CREATE TABLE cql_cnt_test (key int PRIMARY KEY, cnt counter)",
   "static_drop_cf#cql"       : "DROP COLUMNFAMILY cql_test",
   "static_update#cql"        : "UPDATE cql_test SET foo='bar' WHERE id='foobar'",
   "static_update_cnt#cql"    : "UPDATE cql_cnt_test SET cnt=cnt+10 WHERE key=1",
@@ -23,7 +23,7 @@
   "dynamic_update#vals1"  : ["2012-03-01+0000", 10, "www.example.com"],
   "dynamic_update#vals2"  : ["2012-03-01+0000", 10, "www.foo.com"],
   "dynamic_update#vals3"  : ["2012-03-02+0000", 10, "www.foo.com"],
-  "dynamic_select1#cql"   : "SELECT ts FROM clicks WHERE userid = '10'",
+  "dynamic_select1#cql"   : "SELECT ts FROM clicks WHERE userid = 10",
   "dynamic_select2#cql"   : "SELECT userid, url, ts FROM clicks WHERE userid = 10 AND url = 'www.foo.com'",
 
   "dense_create_cf#cql" : "CREATE TABLE connections (userid int, ip text, port int, ts timestamp, PRIMARY KEY (userid, ip, port)) WITH COMPACT STORAGE",
@@ -31,7 +31,7 @@
   "dense_update#vals1"  : ["2012-03-01+0000", 10, "192.168.1.1", 8080],
   "dense_update#vals2"  : ["2012-03-01+0000", 10, "192.168.1.1", 1337],
   "dense_update#vals3"  : ["2012-03-02+0000", 10, "192.168.1.1", 1337],
-  "dense_select1#cql"   : "SELECT ts, port FROM connections WHERE userid = '10'",
+  "dense_select1#cql"   : "SELECT ts, port FROM connections WHERE userid = 10",
   "dense_select2#cql"   : "SELECT userid, ip, port, ts FROM connections WHERE userid = 10 AND ip = '192.168.1.1' AND port = 1337",
 
   "sparse_create_cf#cql" : "CREATE TABLE timeline (userid int, posted_at timestamp, body text, posted_by text, PRIMARY KEY (userid, posted_at))",
