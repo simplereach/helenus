@@ -21,8 +21,11 @@ before_install:
 install:
   - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_${CASSANDRA_VERSION}_all.deb
   - sudo dpkg -i --force-overwrite cassandra_${CASSANDRA_VERSION}_all.deb
+  - sudo sh -c "echo 'JVM_OPTS=\"$JVM_OPTS -Djava.net.preferIPv4Stack=false\"' >> /usr/local/cassandra/conf/cassandra-env.sh"
+  - sudo service cassandra start
+  - sudo service cassandra status
   - npm install
-  - until nc -z localhost 9160; do sleep 1; done
+
 
 script:
   - make test
