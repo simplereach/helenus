@@ -17,8 +17,8 @@ before_install:
   - sudo rm -rf /etc/cassandra/
   - sudo rm -rf /var/log/cassandra
   - sudo rm -rf /var/lib/cassandra
-  - sudo service cassandra stop
-  - sudo service cassandra start
+  - sudo /etc/init.d/cassandra stop
+  - sudo /etc/init.d/cassandra start
 
 install:
   - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_${CASSANDRA_VERSION}_all.deb
