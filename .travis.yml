@@ -1,17 +1,15 @@
 language: node_js
 node_js:
   - "0.6"
-  - "0.8"
-  - "0.10"
+  #- "0.8"
+  #- "0.10"
 
 env:
-  - CASSANDRA_VERSION=1.0.12
-  - CASSANDRA_VERSION=1.1.12
+  #- CASSANDRA_VERSION=1.0.12
+  #- CASSANDRA_VERSION=1.1.12
   - CASSANDRA_VERSION=1.2.5
 
 before_install:
-  - sudo apt-get install libjna-java
-  - sudo apt-get install python-support
   - sudo rm -rf /etc/security/limits.d/cassandra.conf
   - sudo rm -rf /etc/init.d/cassandra
   - sudo rm -rf /etc/cassandra/
@@ -19,19 +17,21 @@ before_install:
   - sudo rm -rf /var/lib/cassandra
 
 install:
-  - curl -LO http://www.apache.org/dist/cassandra/debian/pool/main/c/cassandra/cassandra_${CASSANDRA_VERSION}_all.deb
-  - sudo dpkg -i --force-overwrite cassandra_${CASSANDRA_VERSION}_all.deb
-  - sudo sh -c "echo 'JVM_OPTS=\"$JVM_OPTS -Djava.net.preferIPv4Stack=false\"' >> /usr/local/cassandra/conf/cassandra-env.sh"
-  - sudo service cassandra start
-  - sudo service cassandra status
+  - sudo apt-get install libjna-java
+  - sudo apt-get install python-support
+  - sudo easy_install pyYaml
+  - sudo easy_install pip
+  - sudo pip install ccm
+  - ccm create test -v v$CASSANDRA_VERSION
+  - ccm populate -n 3
+  - ccm start
   - npm install
-
 
 script:
   - make test
 
 after_script:
-  - sudo service cassandra stop
+  - ccm remove
 
 notifications:
   email: false
