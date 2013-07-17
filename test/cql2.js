@@ -241,7 +241,9 @@ module.exports = {
 
       conn.cql(config['select_uuid#cql'], ["07ad2230-ee44-11e2-91e2-0800200c9a66"], function(err, res){
         assert.ifError(err);
-        console.log(res);
+        assert.ok(res.length === 1);
+        assert.ok(res[0] instanceof Helenus.Row);
+        assert.ok(res[0].key.toString() === "07ad2230-ee44-11e2-91e2-0800200c9a66");
         test.finish();
       });
     });
