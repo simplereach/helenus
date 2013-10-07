@@ -207,12 +207,14 @@ module.exports = {
   },
 
   'test counter cf.incr':function(test, assert){
-    var column = '1234',
-        key = 'åbcd';
+    var key = 'åbcd';
 
-    cf_counter.incr(key, column, 1337, function (err, results){
+    cf_counter.incr(key, {'1234': 1337, 'count2': 2}, function (err, results){
+      assert.ifError(err);
+      cf_counter.incr(key, {'count2': 1}, function (err, results){
         assert.ifError(err);
         test.finish();
+      });
     });
   },
 
@@ -372,12 +374,13 @@ module.exports = {
 
   'test counter cf.get with columns names':function(test, assert){
     var key  = 'åbcd',
-        cols = ['1234'];
+        cols = ['1234', 'count2'];
 
     cf_counter.get(key, {columns : cols}, function(err, row){
       assert.ifError(err);
       assert.ok(row instanceof Helenus.Row);
       assert.ok(row.get('1234').value === 1337);
+      assert.ok(row.get('count2').value === 3);
       test.finish();
     });
   },
