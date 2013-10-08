@@ -204,3 +204,11 @@
   * Fixed CQL 3 in v 0.1.x [ @devdazed #93 ]
 
 
+0.6.3 / 2013-10-08
+==================
+
+ * Support for multiple increments at once [ @natemueller #117 ]
+ * Fix for collection deserializing [ @industral #96 ]
+ * Fix for CQL3 UUID escaping [ @industral #98 ]
+ * Deserialize the key [ @wwwy3y3 #111 ]
+ * Support latest Node [ @JohnMcLear #116 ]
