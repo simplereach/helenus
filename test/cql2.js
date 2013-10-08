@@ -148,7 +148,7 @@ module.exports = {
       assert.ifError(err);
       assert.ok(res.length === 1);
       assert.ok(res[0] instanceof Helenus.Row);
-      assert.ok(res[0].get('foo').value === 10);
+      assert.ok(res[0].get('foo').value.eq(10));
       test.finish();
     });
   },
@@ -160,7 +160,7 @@ module.exports = {
         assert.ifError(err);
         assert.ok(res.length === 1);
         assert.ok(res[0] instanceof Helenus.Row);
-        assert.ok(res[0].get('foo').value === 20);
+        assert.ok(res[0].get('foo').value.eq(20));
         test.finish();
       });
     });
@@ -184,7 +184,7 @@ module.exports = {
       assert.ifError(err);
       assert.ok(res.length === 1);
       assert.ok(res[0] instanceof Helenus.Row);
-      assert.ok(res[0].get('count').value === 1);
+      assert.ok(res[0].get('count').value.eq(1));
       test.finish();
     });
   },
@@ -204,7 +204,7 @@ module.exports = {
       assert.ifError(err);
       assert.ok(res.length === 1);
       assert.ok(res[0] instanceof Helenus.Row);
-      assert.ok(res[0].get('count').value === 1);
+      assert.ok(res[0].get('count').value.eq(1));
       test.finish();
     });
   },
