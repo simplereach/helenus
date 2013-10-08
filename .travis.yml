@@ -22,12 +22,12 @@ install:
   - ccm populate -n 1
   - ccm start
   - npm install
-  - ccm stop
 
 script:
   - make test
 
 after_script:
+  - ccm stop
   - ccm remove
 
 notifications:
