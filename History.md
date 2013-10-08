@@ -212,3 +212,8 @@
  * Fix for CQL3 UUID escaping [ @industral #98 ]
  * Deserialize the key [ @wwwy3y3 #111 ]
  * Support latest Node [ @JohnMcLear #116 ]
+ * Add callback to close method and emit connect [ @devdazed #114 ]
+ * remove requirement to set CQL version explicitly [ @tristanls #109 ]
+ * Fix for UUID Serializers [ @beatlevic #97 ]
+ * Add support for TimestampType to marshall [ @devdazed ]
+ * Fixed Travis tests [ @devdazed ]
