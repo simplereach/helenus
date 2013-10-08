@@ -1,11 +1,9 @@
 language: node_js
 node_js:
-  - "0.6"
   - "0.8"
   - "0.10"
 
 env:
-  - CASSANDRA_VERSION=1.0.12
   - CASSANDRA_VERSION=1.1.12
   - CASSANDRA_VERSION=1.2.10
   - CASSANDRA_VERSION=2.0.1
