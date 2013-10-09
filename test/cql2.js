@@ -95,6 +95,17 @@ module.exports = {
     });
   },
 
+  'test cql update with boolean value':function(test, assert){
+    conn.cql(config['update_uuid#cql'], [true, 'bb85f040-30c3-11e3-aa6e-0800200c9a66'], function(err, res){
+      assert.ifError(err);
+      conn.cql(config['select_uuid#cql'], ['bb85f040-30c3-11e3-aa6e-0800200c9a66'], function(err, res){
+        assert.ifError(err);
+        assert.ok(res[0].get('body').value === 'true');
+        test.finish();
+      });
+    });
+  },
+
   'test cql update reversed':function(test, assert){
     conn.cql(config['update_reversed#cql'], function(err, res){
       assert.ifError(err);
