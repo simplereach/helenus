@@ -217,3 +217,8 @@
  * Fix for UUID Serializers [ @beatlevic #97 ]
  * Add support for TimestampType to marshall [ @devdazed ]
  * Fixed Travis tests [ @devdazed ]
+
+0.6.4 / 2013-10-09
+==================
+
+ * Fix regression in boolean support for CQL [ @simong #119]
