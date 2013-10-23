@@ -206,6 +206,43 @@ module.exports = {
     });
   },
 
+  'test cf.insert default microsecond timestamp':function(test, assert){
+    //try to tease out same-ms collision with 50 attempts
+    var finished = 0, ok = true;
+    var callback = function() {
+      finished++;
+      if (finished % 2 == 0) {
+        cf_standard.get(config.standard_row_key, function(err, row){
+          assert.ifError(err);
+
+          ok = ok && (row.get("one").value === "a");
+
+          if (finished == 100) {
+            assert.ok(ok);
+            assert.ifError(err);
+            test.finish();
+          } else {
+            setTimeout(try_race, 0);
+          }
+        });
+      }
+    };
+
+    var try_race = function() {
+      cf_standard.insert(config.standard_row_key, {"one": "b"}, function(err, results){
+        assert.ifError(err);
+        callback();
+      });
+
+      cf_standard.insert(config.standard_row_key, {"one": "a"}, function(err, results){
+        assert.ifError(err);
+        callback();
+      });
+    };
+
+    try_race();
+  },
+
   'test counter cf.incr':function(test, assert){
     var key = 'åbcd';
 

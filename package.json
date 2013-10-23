@@ -15,6 +15,7 @@
   , "dependencies": {
       "helenus-thrift": "0.7.3"
     , "node-uuid": "1.3.3"
+    , "microtime": "0.4.0"
     }
   , "devDependencies": {
       "whiskey": "git://github.com/cloudkick/whiskey.git#b3c5bc23e30c95e46083bc7628c2557c1c15ec95"
