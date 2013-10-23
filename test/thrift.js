@@ -699,6 +699,43 @@ module.exports = {
     });
   },
 
+  'test standard cf remove default microsecond timestamp':function(test, assert) {
+    //try to tease out same-ms collision with 50 attempts
+    var finished = 0, ok = true;
+    var callback = function() {
+      finished++;
+      if (finished % 2 == 0) {
+        cf_standard.get(config.standard_row_key, function(err, row){
+          assert.ifError(err);
+
+          ok = ok && (row.count === 3);
+
+          if (finished == 100) {
+            assert.ok(ok);
+            assert.ifError(err);
+            test.finish();
+          } else {
+            setTimeout(try_race, 0);
+          }
+        });
+      }
+    };
+
+    var try_race = function() {
+      cf_standard.insert(config.standard_row_key, {"one": "a"}, function(err, results){
+        assert.ifError(err);
+        callback();
+      });
+
+      cf_standard.remove(config.standard_row_key, "one", function(err, results){
+        assert.ifError(err);
+        callback();
+      });
+    };
+
+    try_race();
+  },
+
   'test composite cf remove column':function(test, assert) {
     var key = [ 'åbcd', new Helenus.UUID('e491d6ac-b124-4795-9ab3-c8a0cf92615c') ],
         col = [12345678912345, new Date(1326400762701)];
