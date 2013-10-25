@@ -1,4 +1,3 @@
-
 0.0.1 / 2011-12-22
 ==================
 
@@ -222,3 +221,10 @@
 ==================
 
  * Fix regression in boolean support for CQL [ @simong #119]
+
+0.6.5 / 2013-10-09
+==================
+
+ * Add microsecond precision with a graceful fallback [ @muirmanders #123 ]
+ 
+ 
