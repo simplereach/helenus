@@ -226,5 +226,9 @@
 ==================
 
  * Add microsecond precision with a graceful fallback [ @muirmanders #123 ]
- 
- 
+
+
+0.6.6 / 2013-10-28
+==================
+
+ * Don't assume that just because it looks like a UUID, it is a UUID [ @azweb76 #122 ]
