@@ -1,8 +1,8 @@
 {
-  "create_ks#cql" : "CREATE KEYSPACE helenus_cql3_test WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };",
-  "create_ks#cql_v1" : "CREATE KEYSPACE helenus_cql3_test WITH strategy_class=SimpleStrategy AND strategy_options:replication_factor=1",
-  "use#cql"       : "USE helenus_cql3_test",
-  "drop_ks#cql"   : "DROP KEYSPACE helenus_cql3_test",
+  "create_ks#cql"     : "CREATE KEYSPACE helenus_cql3_test WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };",
+  "create_ks#cql_v1"  : "CREATE KEYSPACE helenus_cql3_test WITH strategy_class=SimpleStrategy AND strategy_options:replication_factor=3",
+  "use#cql"           : "USE helenus_cql3_test",
+  "drop_ks#cql"       : "DROP KEYSPACE helenus_cql3_test",
 
   "static_create_cf#cql"     : "CREATE COLUMNFAMILY cql_test (id text, foo text, PRIMARY KEY (id))",
   "static_create_cnt_cf#cql" : "CREATE TABLE cql_cnt_test (key varchar PRIMARY KEY, cnt counter)",

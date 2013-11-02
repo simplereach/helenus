@@ -7,6 +7,19 @@ var poolConfig = require('./helpers/connection'),
 // CQL3 introduces 4 different types of ColumnFamilies, see:
 // https://issues.apache.org/jira/secure/attachment/12511286/create_cf_syntaxes.txt
 
+function testCqlFail() {
+  var args = Array.prototype.slice.call(arguments);
+
+  return function(test, assert){
+    args.push(function(err, res){
+      assert.isDefined(err);
+      test.finish();
+    });
+
+    conn.cql.apply(conn, args);
+  };
+}
+
 function testCql(){
   var args = Array.prototype.slice.call(arguments);
   var tests = args.pop();
@@ -113,6 +126,10 @@ module.exports = {
     assert.ok(res[0] instanceof Helenus.Row);
     assert.ok(res[0].get('foo').value === 'bar');
   }),
+
+  // using consistency quorum should fail if query-level consistency is working, as we test against a single node
+  // with RF=3
+  'test cql static CF select with consistency': testCqlFail(config['static_select#cql'], {'consistencyLevel': 2}),
 
   'test cql static CF select *':testCql(config['static_select*#cql'], function(test, assert, err, res){
     assert.ok(res.length === 1);
