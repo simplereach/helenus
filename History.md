@@ -232,3 +232,8 @@
 ==================
 
  * Don't assume that just because it looks like a UUID, it is a UUID [ @azweb76 #122 ]
+
+0.6.7 / 2013-11-04
+==================
+
+ * Add support for tunable consistency on a per-query basis for CQL [ @mrvisser #130 ]
