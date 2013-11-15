@@ -51,10 +51,12 @@
   "integers_select2#cql"      : "SELECT * FROM integers where number = -1",
   "integers_select3#cql"      : "SELECT * FROM integers where number = -2",
   
-  "timestamp_create"       : "CREATE TABLE timestamps (old timestamp, current timestamp, future timestamp, PRIMARY KEY (old))",
-  "timestamp_update#cql"   : "UPDATE timestamps SET current = ?, future = ? WHERE old = ?",
-  "timestamp_update#vals"  : [null, "2100-01-01", "1969-07-20"],
-  "timestamp_invalid#cql"  : "UPDATE timestamps SET current = ? WHERE old = ?",
+  "timestamp_create"       : "CREATE TABLE timestamps (ts1 timestamp, ts2 timestamp, PRIMARY KEY (ts1))",
+  "timestamp_update#cql"   : "UPDATE timestamps SET ts2 = ? WHERE ts1 = ?",
+  "timestamp_update#vals1" : [null, null],
+  "timestamp_update#vals2" : [null, "2100-01-01"],
+  "timestamp_update#vals3" : [null, "1969-07-20"],
+  "timestamp_invalid#cql"  : "UPDATE timestamps SET ts2 = ? ts1 old = ?",
   "timestamp_invalid#vals" : [null, "THIS ISNT A DATE"],
 
   "prepare#cql"   : "SELECT * FROM ? WHERE KEY = ?",

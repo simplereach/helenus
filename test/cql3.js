@@ -302,7 +302,9 @@ module.exports = {
   }),
 
   'test cql timestamp create table':testResultless(config['timestamp_create']),
-  'test cql timestamp update':testResultless(config['timestamp_update#cql'], makeDates(config['timestamp_update#vals'])),
+  'test cql timestamp update1':testResultless(config['timestamp_update#cql'], makeDates(config['timestamp_update#vals1'])),
+  'test cql timestamp update2':testResultless(config['timestamp_update#cql'], makeDates(config['timestamp_update#vals2'])),
+  'test cql timestamp update3':testResultless(config['timestamp_update#cql'], makeDates(config['timestamp_update#vals3'])),
   'test cql timestamp invalid date': function(test, assert) {
     assert.throws(function(){
       conn.cql(config['timestamp_invalid#cql'], makeDates(config['timestamp_invalid#vals']))
