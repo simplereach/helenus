@@ -67,6 +67,14 @@ function testResultless(){
   return testCql.apply(testCql, args);
 }
 
+function makeDates(dates_array){
+  var ret = [], i = 0, len = dates_array.length;
+  for(i;i<len;i++){
+    ret.push(new Date(dates_array[i]));
+  }
+  return ret;
+}
+
 module.exports = {
   'setUp':function(test, assert){
     Helenus = require('helenus');
@@ -292,6 +300,17 @@ module.exports = {
     assert.strictEqual(res[0].get('longnumber').value, -25);
     assert.strictEqual(res[0].get('varnumber').value, -8388607);//test a 3 byte-long variable integer
   }),
+
+  'test cql timestamp create table':testResultless(config['timestamp_create']),
+  'test cql timestamp update1':testResultless(config['timestamp_update#cql'], makeDates(config['timestamp_update#vals1'])),
+  'test cql timestamp update2':testResultless(config['timestamp_update#cql'], makeDates(config['timestamp_update#vals2'])),
+  'test cql timestamp update3':testResultless(config['timestamp_update#cql'], makeDates(config['timestamp_update#vals3'])),
+  'test cql timestamp invalid date': function(test, assert) {
+    assert.throws(function(){
+      conn.cql(config['timestamp_invalid#cql'], makeDates(config['timestamp_invalid#vals']))
+    }, Error)
+    test.finish();
+  },
 
   'test cql drop keyspace':testResultless(config['drop_ks#cql']),
 
