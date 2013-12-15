@@ -242,3 +242,6 @@
 ==================
 
  * Fixed issues with Deserialization of collection types
+ * README Updates [ @Rudeg #132 ]
+ * Add Date Type Support [ @tim-dev #131 ]
+ 
