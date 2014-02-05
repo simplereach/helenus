@@ -237,3 +237,11 @@
 ==================
 
  * Add support for tunable consistency on a per-query basis for CQL [ @mrvisser #130 ]
+
+ 0.6.8 / 2013-12-15
+==================
+
+ * Fixed issues with Deserialization of collection types
+ * README Updates [ @Rudeg #132 ]
+ * Add Date Type Support [ @tim-dev #131 ]
+ 

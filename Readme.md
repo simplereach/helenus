@@ -99,7 +99,7 @@ If you do not want to use CQL, you can make calls using the thrift driver
 
         //get what we just put in
         //the driver will return a helenus.Row object just like CQL
-        cf.get('foo', {consistency:helenus.ConsistencyLevel.ONE} function(err, row){
+        cf.get('foo', {consistency:helenus.ConsistencyLevel.ONE}, function(err, row){
           if(err){
             throw(err);
           }
