@@ -5,8 +5,8 @@ node_js:
 
 env:
   - CASSANDRA_VERSION=1.1.12
-  - CASSANDRA_VERSION=1.2.12
-  - CASSANDRA_VERSION=2.0.3
+  - CASSANDRA_VERSION=1.2.14
+  - CASSANDRA_VERSION=2.0.4
 
 before_install:
   - sudo apt-get install libjna-java
