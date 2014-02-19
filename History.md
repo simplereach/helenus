@@ -1,4 +1,3 @@
-
 0.0.1 / 2011-12-22
 ==================
 
@@ -204,3 +203,45 @@
   * Fixed CQL 3 in v 0.1.x [ @devdazed #93 ]
 
 
+0.6.3 / 2013-10-08
+==================
+
+ * Support for multiple increments at once [ @natemueller #117 ]
+ * Fix for collection deserializing [ @industral #96 ]
+ * Fix for CQL3 UUID escaping [ @industral #98 ]
+ * Deserialize the key [ @wwwy3y3 #111 ]
+ * Support latest Node [ @JohnMcLear #116 ]
+ * Add callback to close method and emit connect [ @devdazed #114 ]
+ * remove requirement to set CQL version explicitly [ @tristanls #109 ]
+ * Fix for UUID Serializers [ @beatlevic #97 ]
+ * Add support for TimestampType to marshall [ @devdazed ]
+ * Fixed Travis tests [ @devdazed ]
+
+0.6.4 / 2013-10-09
+==================
+
+ * Fix regression in boolean support for CQL [ @simong #119]
+
+0.6.5 / 2013-10-09
+==================
+
+ * Add microsecond precision with a graceful fallback [ @muirmanders #123 ]
+
+
+0.6.6 / 2013-10-28
+==================
+
+ * Don't assume that just because it looks like a UUID, it is a UUID [ @azweb76 #122 ]
+
+0.6.7 / 2013-11-04
+==================
+
+ * Add support for tunable consistency on a per-query basis for CQL [ @mrvisser #130 ]
+
+ 0.6.8 / 2013-12-15
+==================
+
+ * Fixed issues with Deserialization of collection types
+ * README Updates [ @Rudeg #132 ]
+ * Add Date Type Support [ @tim-dev #131 ]
+ 

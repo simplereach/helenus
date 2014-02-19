@@ -7,6 +7,19 @@ var poolConfig = require('./helpers/connection'),
 // CQL3 introduces 4 different types of ColumnFamilies, see:
 // https://issues.apache.org/jira/secure/attachment/12511286/create_cf_syntaxes.txt
 
+function testCqlFail() {
+  var args = Array.prototype.slice.call(arguments);
+
+  return function(test, assert){
+    args.push(function(err, res){
+      assert.isDefined(err);
+      test.finish();
+    });
+
+    conn.cql.apply(conn, args);
+  };
+}
+
 function testCql(){
   var args = Array.prototype.slice.call(arguments);
   var tests = args.pop();
@@ -52,6 +65,14 @@ function testResultless(){
     assert.ok(res === undefined);
   });
   return testCql.apply(testCql, args);
+}
+
+function makeDates(dates_array){
+  var ret = [], i = 0, len = dates_array.length;
+  for(i;i<len;i++){
+    ret.push(new Date(dates_array[i]));
+  }
+  return ret;
 }
 
 module.exports = {
@@ -113,6 +134,10 @@ module.exports = {
     assert.ok(res[0] instanceof Helenus.Row);
     assert.ok(res[0].get('foo').value === 'bar');
   }),
+
+  // using consistency quorum should fail if query-level consistency is working, as we test against a single node
+  // with RF=3
+  'test cql static CF select with consistency': testCqlFail(config['static_select#cql'], {'consistencyLevel': 2}),
 
   'test cql static CF select *':testCql(config['static_select*#cql'], function(test, assert, err, res){
     assert.ok(res.length === 1);
@@ -275,6 +300,17 @@ module.exports = {
     assert.strictEqual(res[0].get('longnumber').value, -25);
     assert.strictEqual(res[0].get('varnumber').value, -8388607);//test a 3 byte-long variable integer
   }),
+
+  'test cql timestamp create table':testResultless(config['timestamp_create']),
+  'test cql timestamp update1':testResultless(config['timestamp_update#cql'], makeDates(config['timestamp_update#vals1'])),
+  'test cql timestamp update2':testResultless(config['timestamp_update#cql'], makeDates(config['timestamp_update#vals2'])),
+  'test cql timestamp update3':testResultless(config['timestamp_update#cql'], makeDates(config['timestamp_update#vals3'])),
+  'test cql timestamp invalid date': function(test, assert) {
+    assert.throws(function(){
+      conn.cql(config['timestamp_invalid#cql'], makeDates(config['timestamp_invalid#vals']))
+    }, Error)
+    test.finish();
+  },
 
   'test cql drop keyspace':testResultless(config['drop_ks#cql']),
 

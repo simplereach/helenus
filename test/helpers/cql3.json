@@ -1,17 +1,17 @@
 {
-  "create_ks#cql" : "CREATE KEYSPACE helenus_cql3_test WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };",
-  "create_ks#cql_v1" : "CREATE KEYSPACE helenus_cql3_test WITH strategy_class=SimpleStrategy AND strategy_options:replication_factor=1",
-  "use#cql"       : "USE helenus_cql3_test",
-  "drop_ks#cql"   : "DROP KEYSPACE helenus_cql3_test",
+  "create_ks#cql"     : "CREATE KEYSPACE helenus_cql3_test WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };",
+  "create_ks#cql_v1"  : "CREATE KEYSPACE helenus_cql3_test WITH strategy_class=SimpleStrategy AND strategy_options:replication_factor=3",
+  "use#cql"           : "USE helenus_cql3_test",
+  "drop_ks#cql"       : "DROP KEYSPACE helenus_cql3_test",
 
   "static_create_cf#cql"     : "CREATE COLUMNFAMILY cql_test (id text, foo text, PRIMARY KEY (id))",
   "static_create_cnt_cf#cql" : "CREATE TABLE cql_cnt_test (key varchar PRIMARY KEY, cnt counter)",
   "static_drop_cf#cql"       : "DROP COLUMNFAMILY cql_test",
   "static_update#cql"        : "UPDATE cql_test SET foo='bar' WHERE id='foobar'",
-  "static_update_cnt#cql"    : "UPDATE cql_cnt_test SET cnt=cnt+10 WHERE key=1",
+  "static_update_cnt#cql"    : "UPDATE cql_cnt_test SET cnt=cnt+10 WHERE key='1'",
   "static_select#cql"        : "SELECT foo FROM cql_test WHERE id='foobar'",
   "static_select*#cql"       : "SELECT * FROM cql_test WHERE id='foobar'",
-  "static_select_cnt#cql"    : "SELECT cnt FROM cql_cnt_test WHERE key=1",
+  "static_select_cnt#cql"    : "SELECT cnt FROM cql_cnt_test WHERE key='1'",
   "static_count#cql"         : "SELECT COUNT(1) FROM cql_test WHERE id='foobar'",
   "static_countstar#cql"     : "SELECT COUNT(*) FROM cql_test WHERE id='foobar'",
   "static_delete#cql"        : "DELETE FROM cql_test WHERE id='foobar'",
@@ -23,7 +23,7 @@
   "dynamic_update#vals1"  : ["2012-03-01+0000", 10, "www.example.com"],
   "dynamic_update#vals2"  : ["2012-03-01+0000", 10, "www.foo.com"],
   "dynamic_update#vals3"  : ["2012-03-02+0000", 10, "www.foo.com"],
-  "dynamic_select1#cql"   : "SELECT ts FROM clicks WHERE userid = '10'",
+  "dynamic_select1#cql"   : "SELECT ts FROM clicks WHERE userid = 10",
   "dynamic_select2#cql"   : "SELECT userid, url, ts FROM clicks WHERE userid = 10 AND url = 'www.foo.com'",
 
   "dense_create_cf#cql" : "CREATE TABLE connections (userid int, ip text, port int, ts timestamp, PRIMARY KEY (userid, ip, port)) WITH COMPACT STORAGE",
@@ -31,7 +31,7 @@
   "dense_update#vals1"  : ["2012-03-01+0000", 10, "192.168.1.1", 8080],
   "dense_update#vals2"  : ["2012-03-01+0000", 10, "192.168.1.1", 1337],
   "dense_update#vals3"  : ["2012-03-02+0000", 10, "192.168.1.1", 1337],
-  "dense_select1#cql"   : "SELECT ts, port FROM connections WHERE userid = '10'",
+  "dense_select1#cql"   : "SELECT ts, port FROM connections WHERE userid = 10",
   "dense_select2#cql"   : "SELECT userid, ip, port, ts FROM connections WHERE userid = 10 AND ip = '192.168.1.1' AND port = 1337",
 
   "sparse_create_cf#cql" : "CREATE TABLE timeline (userid int, posted_at timestamp, body text, posted_by text, PRIMARY KEY (userid, posted_at))",
@@ -51,6 +51,13 @@
   "integers_select2#cql"      : "SELECT * FROM integers where number = -1",
   "integers_select3#cql"      : "SELECT * FROM integers where number = -2",
   
+  "timestamp_create"       : "CREATE TABLE timestamps (ts1 timestamp, ts2 timestamp, PRIMARY KEY (ts1))",
+  "timestamp_update#cql"   : "UPDATE timestamps SET ts2 = ? WHERE ts1 = ?",
+  "timestamp_update#vals1" : [null, null],
+  "timestamp_update#vals2" : [null, "2100-01-01"],
+  "timestamp_update#vals3" : [null, "1969-07-20"],
+  "timestamp_invalid#cql"  : "UPDATE timestamps SET ts2 = ? ts1 old = ?",
+  "timestamp_invalid#vals" : [null, "THIS ISNT A DATE"],
 
   "prepare#cql"   : "SELECT * FROM ? WHERE KEY = ?",
   "error#cql"     : "SOME INVALID CQL"

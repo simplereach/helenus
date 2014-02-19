@@ -79,11 +79,30 @@ module.exports = {
      });
   },
 
+  'test cql create uuid column family':function(test, assert){
+     conn.cql(config['create_uuid_cf#cql'], function (err, res){
+       assert.ifError(err);
+       assert.ok(res === undefined);
+       test.finish();
+     });
+  },
+
   'test cql update':function(test, assert){
     conn.cql(config['update#cql'], function(err, res){
       assert.ifError(err);
       assert.ok(res === undefined);
       test.finish();
+    });
+  },
+
+  'test cql update with boolean value':function(test, assert){
+    conn.cql(config['update_uuid#cql'], [true, 'bb85f040-30c3-11e3-aa6e-0800200c9a66'], function(err, res){
+      assert.ifError(err);
+      conn.cql(config['select_uuid#cql'], ['bb85f040-30c3-11e3-aa6e-0800200c9a66'], function(err, res){
+        assert.ifError(err);
+        assert.ok(res[0].get('body').value === 'true');
+        test.finish();
+      });
     });
   },
 
@@ -221,6 +240,21 @@ module.exports = {
         assert.ok(res.length === 1);
         assert.ok(res[0] instanceof Helenus.Row);
         assert.ok(res[0].count === 0);
+        test.finish();
+      });
+    });
+  },
+
+  'test cql uuid key decode':function(test, assert){
+    conn.cql(config['update_uuid#cql'], ["body", "07ad2230-ee44-11e2-91e2-0800200c9a66"],function(err, res){
+      assert.ifError(err);
+      assert.ok(res === undefined);
+
+      conn.cql(config['select_uuid#cql'], ["07ad2230-ee44-11e2-91e2-0800200c9a66"], function(err, res){
+        assert.ifError(err);
+        assert.ok(res.length === 1);
+        assert.ok(res[0] instanceof Helenus.Row);
+        assert.ok(res[0].key.toString() === "07ad2230-ee44-11e2-91e2-0800200c9a66");
         test.finish();
       });
     });

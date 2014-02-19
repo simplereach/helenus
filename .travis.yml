@@ -1,29 +1,23 @@
 language: node_js
 node_js:
-  - "0.6"
-  #- "0.8"
-  #- "0.10"
+  - "0.8"
+  - "0.10"
 
 env:
-  #- CASSANDRA_VERSION=1.0.12
-  #- CASSANDRA_VERSION=1.1.12
-  - CASSANDRA_VERSION=1.2.5
+  - CASSANDRA_VERSION=1.1.12
+  - CASSANDRA_VERSION=1.2.14
+  - CASSANDRA_VERSION=2.0.4
 
 before_install:
-  - sudo rm -rf /etc/security/limits.d/cassandra.conf
-  - sudo rm -rf /etc/init.d/cassandra
-  - sudo rm -rf /etc/cassandra/
-  - sudo rm -rf /var/log/cassandra
-  - sudo rm -rf /var/lib/cassandra
-
-install:
   - sudo apt-get install libjna-java
   - sudo apt-get install python-support
   - sudo easy_install pyYaml
   - sudo easy_install pip
   - sudo pip install ccm
+
+install:
   - ccm create test -v $CASSANDRA_VERSION
-  - ccm populate -n 3
+  - ccm populate -n 1
   - ccm start
   - npm install
 
@@ -31,6 +25,7 @@ script:
   - make test
 
 after_script:
+  - ccm stop
   - ccm remove
 
 notifications:

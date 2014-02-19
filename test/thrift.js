@@ -4,6 +4,12 @@ var config = require('./helpers/thrift'),
     Helenus, conn, ks, cf_standard, row_standard, cf_composite, cf_counter,
     cf_reversed, cf_composite_nested_reversed;
 
+var has_microtime = false;
+try {
+  require('microtime');
+  has_microtime = true;
+} catch(e) { }
+
 module.exports = {
   'setUp':function(test, assert){
     Helenus = require('helenus');
@@ -43,15 +49,15 @@ module.exports = {
     // Add error handler to avoid uncaught exception.
     badConn.on('error', function (err) { assert.isDefined(err); });
     badConn.connect(function(err, keyspace) {
-       assert.isDefined(err);
-       badConn.createKeyspace(config.keyspace, function(err){
+      assert.isDefined(err);
+      badConn.createKeyspace(config.keyspace, function(err){
+        assert.isDefined(err);
+        badConn.dropKeyspace(config.keyspace, function(err){
           assert.isDefined(err);
-          badConn.dropKeyspace(config.keyspace, function(err){
-            assert.isDefined(err);
-            badConn.close();
-            test.finish();
-          });
-       });
+          badConn.close();
+          test.finish();
+        });
+      });
     });
   },
 
@@ -206,13 +212,57 @@ module.exports = {
     });
   },
 
-  'test counter cf.incr':function(test, assert){
-    var column = '1234',
-        key = 'åbcd';
+  'test cf.insert default microsecond timestamp':function(test, assert){
+    if (!has_microtime) {
+      test.finish();
+      return;
+    }
 
-    cf_counter.incr(key, column, 1337, function (err, results){
+    //try to tease out same-ms collision with 50 attempts
+    var finished = 0, ok = true;
+    var callback = function() {
+      finished++;
+      if (finished % 2 == 0) {
+        cf_standard.get(config.standard_row_key, function(err, row){
+          assert.ifError(err);
+
+          ok = ok && (row.get("one").value === "a");
+
+          if (finished == 100) {
+            assert.ok(ok);
+            assert.ifError(err);
+            test.finish();
+          } else {
+            setTimeout(try_race, 0);
+          }
+        });
+      }
+    };
+
+    var try_race = function() {
+      cf_standard.insert(config.standard_row_key, {"one": "b"}, function(err, results){
+        assert.ifError(err);
+        callback();
+      });
+
+      cf_standard.insert(config.standard_row_key, {"one": "a"}, function(err, results){
+        assert.ifError(err);
+        callback();
+      });
+    };
+
+    try_race();
+  },
+
+  'test counter cf.incr':function(test, assert){
+    var key = 'åbcd';
+
+    cf_counter.incr(key, {'1234': 1337, 'count2': 2}, function (err, results){
+      assert.ifError(err);
+      cf_counter.incr(key, {'count2': 1}, function (err, results){
         assert.ifError(err);
         test.finish();
+      });
     });
   },
 
@@ -372,12 +422,13 @@ module.exports = {
 
   'test counter cf.get with columns names':function(test, assert){
     var key  = 'åbcd',
-        cols = ['1234'];
+        cols = ['1234', 'count2'];
 
     cf_counter.get(key, {columns : cols}, function(err, row){
       assert.ifError(err);
       assert.ok(row instanceof Helenus.Row);
       assert.ok(row.get('1234').value === 1337);
+      assert.ok(row.get('count2').value === 3);
       test.finish();
     });
   },
@@ -654,9 +705,51 @@ module.exports = {
       cf_standard.get(config.standard_row_key, function(err, row){
         assert.ifError(err);
         assert.ok(row.count === 3);
+        test.finish();
       });
-      test.finish();
     });
+  },
+
+  'test standard cf remove default microsecond timestamp':function(test, assert) {
+    if (!has_microtime) {
+      test.finish();
+      return;
+    }
+
+    //try to tease out same-ms collision with 50 attempts
+    var finished = 0, ok = true;
+    var callback = function() {
+      finished++;
+      if (finished % 2 == 0) {
+        cf_standard.get(config.standard_row_key, function(err, row){
+          assert.ifError(err);
+
+          ok = ok && (row.count === 3);
+
+          if (finished == 100) {
+            assert.ok(ok);
+            assert.ifError(err);
+            test.finish();
+          } else {
+            setTimeout(try_race, 0);
+          }
+        });
+      }
+    };
+
+    var try_race = function() {
+      cf_standard.insert(config.standard_row_key, {"one": "a"}, function(err, results){
+        assert.ifError(err);
+        callback();
+      });
+
+      cf_standard.remove(config.standard_row_key, "one", function(err, results){
+        assert.ifError(err);
+        callback();
+      });
+    };
+
+    try_race();
   },
 
   'test composite cf remove column':function(test, assert) {
@@ -667,8 +760,8 @@ module.exports = {
       cf_standard.get(key, function(err, row){
         assert.ifError(err);
         assert.ok(row.count === 0);
+        test.finish();
       });
-      test.finish();
     });
   },
 
@@ -678,8 +771,8 @@ module.exports = {
       cf_standard.get(config.standard_row_key, function(err, row){
         assert.ifError(err);
         assert.ok(row.count === 0);
+        test.finish();
       });
-      test.finish();
     });
   },
 
