@@ -238,10 +238,17 @@
 
  * Add support for tunable consistency on a per-query basis for CQL [ @mrvisser #130 ]
 
- 0.6.8 / 2013-12-15
+0.6.8 / 2013-12-15
 ==================
 
  * Fixed issues with Deserialization of collection types
  * README Updates [ @Rudeg #132 ]
  * Add Date Type Support [ @tim-dev #131 ]
- 
+
+
+0.6.9 / 2014-03-20
+==================
+
+ * Fixes deserialize issue with collection types [ @Oleg12 #139]
+ * Bump helenus-thrift version [ @devdazed ]
+ * Adds a read-timeout wrapper around the thrift connection [ @devdazed ]
