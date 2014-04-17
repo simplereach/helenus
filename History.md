@@ -252,3 +252,9 @@
  * Fixes deserialize issue with collection types [ @Oleg12 #139]
  * Bump helenus-thrift version [ @devdazed ]
  * Adds a read-timeout wrapper around the thrift connection [ @devdazed ]
+
+0.6.10 / 2014-04-17
+===================
+
+ * Adds deserialization support for Decimal types [ @BGawenda #140 ]
+

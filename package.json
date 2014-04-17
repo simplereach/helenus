@@ -1,6 +1,6 @@
 {
     "name": "helenus"
-  , "version": "0.6.9"
+  , "version": "0.6.10"
   , "description": "NodeJS Bindings for Cassandra"
   , "keywords": ["cassandra"]
   , "author": "Russell Bradberry <rbradberry@gmail.com>"
