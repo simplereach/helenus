@@ -1,7 +1,8 @@
 # Helenus
 
 
-### This driver uses the old Thrift protocol, if you are using Cassandra 1.2 or higher and you are using CQL, please consider using [node-cassandra-cql](https://github.com/jorgebay/node-cassandra-cql)
+### This driver uses the old Thrift protocol, if you are using Cassandra 1.2 or higher and you are using CQL, please consider using [node-cassandra-cql](https://github.com/jorgebay/node-cassandra-cql). While I will continue to fix bugs with this driver, feature development is frozen as many new features coming out will not be supported by Thrift.
+
 
   NodeJS Bindings for Cassandra
 
