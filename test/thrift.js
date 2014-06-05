@@ -493,6 +493,54 @@ module.exports = {
     });
   },
 
+  'test standard cf with LongType 32bit-signed':function(test, assert){
+    var key = config.standard_row_key + '-long',
+        opts = { 'long-test' : -707 };
+
+    cf_standard.insert(key, opts, function(err){
+      assert.ifError(err);
+      cf_standard.get(key, function(err, row){
+        assert.ifError(err);
+        var col = row.get('long-test');
+        assert.ok(typeof col.value === 'number');
+        assert.ok(col.value === -707 );
+        test.finish();
+      });
+    });
+  },
+
+  'test standard cf with LongType 64bit-signed':function(test, assert){
+    var key = config.standard_row_key + '-long',
+        opts = { 'long-test' : -8589934592 };
+
+    cf_standard.insert(key, opts, function(err){
+      assert.ifError(err);
+      cf_standard.get(key, function(err, row){
+        assert.ifError(err);
+        var col = row.get('long-test');
+        assert.ok(typeof col.value === 'number');
+        assert.ok(col.value === -8589934592 );
+        test.finish();
+      });
+    });
+  },
+
+  'test standard cf with LongType out of range error':function(test, assert){
+    // this number happens to be representable so we can insert it,
+    // but it is > 2**53 which should trigger our check when reading
+    var key = config.standard_row_key + '-long',
+        opts = { 'long-test' : 1152921504606847000 };
+
+    cf_standard.insert(key, opts, function(err){
+      assert.ifError(err);
+      cf_standard.get(key, function(err, row){
+        assert.ok(err);
+        assert.ok(err.message.match(/long-test.*out of range/));
+        test.finish();
+      });
+    });
+  },
+
   'test standard cf with IntegerType':function(test, assert){
     var key = config.standard_row_key + '-integer',
         opts = { 'integer-test' : 1234 };
@@ -504,6 +552,22 @@ module.exports = {
         var col = row.get('integer-test');
         assert.ok(typeof col.value === 'number');
         assert.ok(col.value === 1234);
+        test.finish();
+      });
+    });
+  },
+
+  'test standard cf with IntegerType 32bit-signed':function(test, assert){
+    var key = config.standard_row_key + '-integer',
+        opts = { 'integer-test' : -1234 };
+
+    cf_standard.insert(key, opts, function(err){
+      assert.ifError(err);
+      cf_standard.get(key, function(err, row){
+        assert.ifError(err);
+        var col = row.get('integer-test');
+        assert.ok(typeof col.value === 'number');
+        assert.ok(col.value === -1234);
         test.finish();
       });
     });
