@@ -134,7 +134,7 @@ function escapeCQL(val) {
   }
 
   if (typeof val === 'object' && typeof val.hex) {
-    return JSON.stringify(val).replace(/\"/g, "\'");
+    return val.toString();
   }
 
   val = val.replace(/\'/img, '\'\'');
