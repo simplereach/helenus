@@ -663,6 +663,21 @@ module.exports = {
     test.finish();
   },
 
+  'test row.nameSlice with UTF8 data':function(test, assert){
+    var key = config.standard_row_key + '-utf8-nameSlice',
+        opts = { 'utf8-test' : 'åbcd' };
+
+    cf_standard.insert(key, opts, function(err){
+      assert.ifError(err);
+      cf_standard.get(key, function(err, row){
+        assert.ifError(err);
+        var nameSlicedRow = row.nameSlice('a', 'z');
+        assert.ok(nameSlicedRow.get('utf8-test').value === 'åbcd');
+        test.finish();
+      });
+    });
+  },
+
   'test row.slice':function(test, assert){
     var row = row_standard.slice(1, 3);
     assert.ok(row instanceof Helenus.Row);
@@ -671,6 +686,21 @@ module.exports = {
     assert.ok(row.get('one').value === 'a');
     assert.ok(row.get('three').value === 'c');
     test.finish();
+  },
+
+  'test row.slice with UTF8 data':function(test, assert){
+    var key = config.standard_row_key + '-utf8-slice',
+        opts = { 'utf8-test' : 'åbcd' };
+
+    cf_standard.insert(key, opts, function(err){
+      assert.ifError(err);
+      cf_standard.get(key, function(err, row){
+        assert.ifError(err);
+        var slicedRow = row.slice(0, 10);
+        assert.ok(slicedRow.get('utf8-test').value === 'åbcd');
+        test.finish();
+      });
+    });
   },
 
   'test row.toString and row.inspect':function(test, assert){
